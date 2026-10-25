@@ -1,0 +1,76 @@
+# -*- coding: utf-8 -*-
+import re
+from urllib.parse import quote
+
+from odoo import fields, models
+
+
+class StockWarehouse(models.Model):
+    _inherit = 'stock.warehouse'
+
+    bbt_published = fields.Boolean(
+        string='Mostrar en sitio web',
+        default=False,
+        help='Si está activo, el almacén aparece en la página /sucursales y en el formulario de contacto.',
+    )
+    bbt_type = fields.Selection(
+        selection=[('sucursal', 'Sucursal'), ('cedis', 'Centro de Distribución')],
+        string='Tipo en sitio web',
+        default='sucursal',
+        required=True,
+    )
+    bbt_public_name = fields.Char(
+        string='Nombre público',
+        help='Nombre que verá el cliente (ej. "Sucursal Centro"). Si se deja vacío se usa el nombre del almacén.',
+    )
+    bbt_sequence = fields.Integer(string='Orden en sitio web', default=10)
+    bbt_hours = fields.Text(
+        string='Horario de atención',
+        help='Un renglón por bloque, ej.:\nLunes a viernes: 8:00 a 18:00\nSábado: 8:00 a 14:00',
+    )
+    bbt_image = fields.Image(string='Foto de fachada', max_width=1920, max_height=1920)
+    bbt_maps_url = fields.Char(
+        string='Enlace de Google Maps',
+        help='Opcional. Si se deja vacío, el botón "Cómo llegar" usa las coordenadas o la dirección del contacto del almacén.',
+    )
+
+    def _bbt_phone_link(self, phone):
+        return re.sub(r'[^\d+]', '', phone or '')
+
+    def _bbt_directions_url(self):
+        self.ensure_one()
+        if self.bbt_maps_url:
+            return self.bbt_maps_url
+        partner = self.partner_id
+        if partner.partner_latitude and partner.partner_longitude:
+            destination = '%s,%s' % (partner.partner_latitude, partner.partner_longitude)
+        else:
+            parts = [partner.street, partner.street2, partner.city, partner.state_id.name, partner.country_id.name]
+            destination = ', '.join(p for p in parts if p)
+        if not destination:
+            return False
+        return 'https://www.google.com/maps/dir/?api=1&destination=%s' % quote(destination)
+
+    def _bbt_website_card(self):
+        """Datos ya preparados para la plantilla pública (se llama con sudo)."""
+        self.ensure_one()
+        partner = self.partner_id
+        street = ', '.join(p for p in [partner.street, partner.street2] if p)
+        zip_city = ' '.join(p for p in [partner.zip, partner.city] if p)
+        city_line = ', '.join(p for p in [zip_city, partner.state_id.name] if p)
+        return {
+            'id': self.id,
+            'name': self.bbt_public_name or self.name,
+            'type': self.bbt_type,
+            'city': (partner.city or '').strip() or 'Otras ubicaciones',
+            'street': street,
+            'city_line': city_line,
+            'phone': partner.phone or '',
+            'phone_link': self._bbt_phone_link(partner.phone),
+            'email': partner.email or '',
+            'hours': self.bbt_hours or '',
+            'image_url': ('/sucursales/%s/foto' % self.id) if self.bbt_image
+            else '/website_babatsa/static/src/img/ph/fachada.svg',
+            'directions_url': self._bbt_directions_url(),
+            'contact_url': '/contacto?sucursal=%s' % self.id,
+        }

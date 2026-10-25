@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Editores / sistema
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+~$*
+
+# Manual de identidad: 336 MB, excede el límite de 100 MB de GitHub
+MANUAL DE IDENTIDAD_BABATSA.pdf

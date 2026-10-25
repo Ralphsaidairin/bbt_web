@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="contacto_page" name="Babatsa: Contacto">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'contacto'"/>
+            <t t-set="additional_title">Contacto</t>
+            <div id="wrap">
+                <section class="bbt bbt-sec">
+                    <div class="container">
+                        <div class="row g-5">
+                            <div class="col-lg-5">
+                                <p class="bbt-eyebrow">Contacto</p>
+                                <h1 class="bbt-h2">¿No sabes con quién <em>comunicarte?</em></h1>
+                                <p class="bbt-lead mt-3">Escríbenos y canalizamos tu mensaje a la sucursal o área correcta.</p>
+                                <ul class="bbt-contact-list">
+                                    <li>Cotizaciones y pedidos especiales</li>
+                                    <li>Asesoría para elegir el producto adecuado</li>
+                                    <li>Servicio técnico y garantías</li>
+                                    <li>Atención a empresas y proveedores</li>
+                                </ul>
+                                <div class="mt-4"><a class="bbt-link" href="/sucursales">¿Prefieres ir en persona? Encuentra tu sucursal →</a></div>
+                            </div>
+                            <div class="col-lg-7">
+                                <form class="bbt-form" action="/contacto/enviar" method="post" novalidate="novalidate">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <div class="bbt-hp" aria-hidden="true">
+                                        <label>No llenar este campo <input type="text" name="website_url" tabindex="-1" autocomplete="off"/></label>
+                                    </div>
+                                    <div t-if="errors" class="bbt-alert" role="alert">Revisa los campos marcados en rojo.</div>
+                                    <div class="bbt-form-grid">
+                                        <div t-att-class="'bbt-field bbt-field--error' if 'nombre' in errors else 'bbt-field'">
+                                            <label for="bbt_nombre">Nombre *</label>
+                                            <input id="bbt_nombre" type="text" name="nombre" autocomplete="name" required="required" t-att-value="form.get('nombre')"/>
+                                            <span t-if="'nombre' in errors" class="bbt-field-msg">Escribe tu nombre.</span>
+                                        </div>
+                                        <div class="bbt-field">
+                                            <label for="bbt_empresa">Empresa <small>(opcional)</small></label>
+                                            <input id="bbt_empresa" type="text" name="empresa" autocomplete="organization" t-att-value="form.get('empresa')"/>
+                                        </div>
+                                        <div class="bbt-field">
+                                            <label for="bbt_ciudad">Ciudad</label>
+                                            <input id="bbt_ciudad" type="text" name="ciudad" autocomplete="address-level2" t-att-value="form.get('ciudad')"/>
+                                        </div>
+                                        <div t-att-class="'bbt-field bbt-field--error' if 'telefono' in errors else 'bbt-field'">
+                                            <label for="bbt_telefono">Teléfono</label>
+                                            <input id="bbt_telefono" type="tel" name="telefono" autocomplete="tel" t-att-value="form.get('telefono')"/>
+                                        </div>
+                                        <div t-att-class="'bbt-field bbt-field--full bbt-field--error' if 'email' in errors else 'bbt-field bbt-field--full'">
+                                            <label for="bbt_email">Correo electrónico</label>
+                                            <input id="bbt_email" type="email" name="email" autocomplete="email" t-att-value="form.get('email')"/>
+                                            <span t-if="'medio' in errors" class="bbt-field-msg">Déjanos un teléfono o un correo para poder responderte.</span>
+                                            <span t-elif="'email' in errors" class="bbt-field-msg">Revisa el formato del correo.</span>
+                                        </div>
+                                        <div t-att-class="'bbt-field bbt-field--error' if 'motivo' in errors else 'bbt-field'">
+                                            <label for="bbt_motivo">Motivo de contacto *</label>
+                                            <select id="bbt_motivo" name="motivo" required="required">
+                                                <option value="">Selecciona una opción</option>
+                                                <t t-foreach="motivos" t-as="m">
+                                                    <option t-att-value="m" t-att-selected="'selected' if m == form.get('motivo') else None" t-esc="m"/>
+                                                </t>
+                                            </select>
+                                            <span t-if="'motivo' in errors" class="bbt-field-msg">Elige un motivo.</span>
+                                        </div>
+                                        <div class="bbt-field">
+                                            <label for="bbt_sucursal">Sucursal de interés <small>(opcional)</small></label>
+                                            <select id="bbt_sucursal" name="sucursal">
+                                                <option value="">Cualquiera / no sé</option>
+                                                <t t-foreach="sucursales" t-as="s">
+                                                    <option t-att-value="s['id']" t-att-selected="'selected' if s['id'] == form.get('sucursal') else None" t-esc="s['name']"/>
+                                                </t>
+                                            </select>
+                                        </div>
+                                        <div t-att-class="'bbt-field bbt-field--full bbt-field--error' if 'mensaje' in errors else 'bbt-field bbt-field--full'">
+                                            <label for="bbt_mensaje">Mensaje *</label>
+                                            <textarea id="bbt_mensaje" name="mensaje" required="required" placeholder="Cuéntanos qué necesitas: producto, número de parte, cantidad o aplicación." t-esc="form.get('mensaje')"/>
+                                            <span t-if="'mensaje' in errors" class="bbt-field-msg">Escribe tu mensaje.</span>
+                                        </div>
+                                    </div>
+                                    <div class="bbt-form-foot">
+                                        <p class="bbt-form-note">Al enviar aceptas nuestro <a href="/aviso-de-privacidad">aviso de privacidad</a>.</p>
+                                        <button type="submit" class="bbt-btn bbt-btn--blue">Enviar mensaje</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="oe_structure" id="oe_structure_bbt_contacto_bottom"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="contacto_gracias" name="Babatsa: Contacto enviado">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Mensaje enviado</t>
+            <div id="wrap">
+                <section class="bbt bbt-sec">
+                    <div class="container">
+                        <div class="bbt-thanks">
+                            <div class="bbt-check" aria-hidden="true">
+                                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                            </div>
+                            <h1 class="bbt-h2">Recibimos tu <em>mensaje</em></h1>
+                            <p class="bbt-lead">Un asesor de Babatsa se pondrá en contacto contigo lo antes posible.</p>
+                            <a class="bbt-btn bbt-btn--yellow" href="/">Volver al inicio</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

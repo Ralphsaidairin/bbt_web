@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_babatsa_brand_user,babatsa.brand usuario,model_babatsa_brand,base.group_user,1,0,0,0
+access_babatsa_brand_designer,babatsa.brand diseñador web,model_babatsa_brand,website.group_website_designer,1,1,1,1
+access_babatsa_brand_line_user,babatsa.brand.line usuario,model_babatsa_brand_line,base.group_user,1,0,0,0
+access_babatsa_brand_line_designer,babatsa.brand.line diseñador web,model_babatsa_brand_line,website.group_website_designer,1,1,1,1

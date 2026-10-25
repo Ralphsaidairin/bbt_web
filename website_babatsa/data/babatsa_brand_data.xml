@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Datos iniciales. noupdate: las ediciones de mercadotecnia no se pierden al actualizar el módulo. -->
+    <record id="line_rodamientos" model="babatsa.brand.line">
+        <field name="name">Rodamientos</field>
+        <field name="code">rodamientos</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="line_transmision" model="babatsa.brand.line">
+        <field name="name">Transmisión de potencia</field>
+        <field name="code">transmision</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="line_hidraulica" model="babatsa.brand.line">
+        <field name="name">Hidráulica y transmisión de fluidos</field>
+        <field name="code">hidraulica</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="line_tornilleria" model="babatsa.brand.line">
+        <field name="name">Tornillería, fijación y sujeción</field>
+        <field name="code">tornilleria</field>
+        <field name="sequence">40</field>
+    </record>
+    <record id="line_herramientas" model="babatsa.brand.line">
+        <field name="name">Herramientas, maquinaria y equipo</field>
+        <field name="code">herramientas</field>
+        <field name="sequence">50</field>
+    </record>
+    <record id="line_lubricacion" model="babatsa.brand.line">
+        <field name="name">Lubricación, filtración y químicos</field>
+        <field name="code">lubricacion</field>
+        <field name="sequence">60</field>
+    </record>
+    <record id="line_abrasivos" model="babatsa.brand.line">
+        <field name="name">Abrasivos, corte y soldadura</field>
+        <field name="code">abrasivos</field>
+        <field name="sequence">70</field>
+    </record>
+    <record id="line_ferreteria" model="babatsa.brand.line">
+        <field name="name">Ferretería y seguridad</field>
+        <field name="code">ferreteria</field>
+        <field name="sequence">80</field>
+    </record>
+    <record id="brand_skf" model="babatsa.brand">
+        <field name="name">SKF</field>
+        <field name="tier">principal</field>
+        <field name="sequence">10</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_rodamientos')])]"/>
+        <field name="has_program" eval="True"/>
+    </record>
+    <record id="brand_parker" model="babatsa.brand">
+        <field name="name">Parker</field>
+        <field name="tier">principal</field>
+        <field name="sequence">20</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_hidraulica')])]"/>
+        <field name="has_program" eval="True"/>
+    </record>
+    <record id="brand_gonher" model="babatsa.brand">
+        <field name="name">Gonher</field>
+        <field name="tier">principal</field>
+        <field name="sequence">30</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_lubricacion')])]"/>
+    </record>
+    <record id="brand_timken" model="babatsa.brand">
+        <field name="name">Timken</field>
+        <field name="tier">principal</field>
+        <field name="sequence">40</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_rodamientos')])]"/>
+    </record>
+    <record id="brand_urrea" model="babatsa.brand">
+        <field name="name">Urrea</field>
+        <field name="tier">principal</field>
+        <field name="sequence">50</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_herramientas')])]"/>
+        <field name="is_service_center" eval="True"/>
+    </record>
+    <record id="brand_honda" model="babatsa.brand">
+        <field name="name">Honda</field>
+        <field name="tier">principal</field>
+        <field name="sequence">60</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_herramientas')])]"/>
+    </record>
+    <record id="brand_makita" model="babatsa.brand">
+        <field name="name">Makita</field>
+        <field name="tier">principal</field>
+        <field name="sequence">70</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_herramientas')])]"/>
+        <field name="is_service_center" eval="True"/>
+    </record>
+    <record id="brand_gates" model="babatsa.brand">
+        <field name="name">Gates</field>
+        <field name="tier">principal</field>
+        <field name="sequence">80</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_transmision')])]"/>
+    </record>
+    <record id="brand_karcher" model="babatsa.brand">
+        <field name="name">Kärcher</field>
+        <field name="tier">principal</field>
+        <field name="sequence">90</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_herramientas')])]"/>
+    </record>
+    <record id="brand_mikels" model="babatsa.brand">
+        <field name="name">Mikels</field>
+        <field name="tier">principal</field>
+        <field name="sequence">100</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_herramientas')])]"/>
+        <field name="is_service_center" eval="True"/>
+    </record>
+    <record id="brand_evans" model="babatsa.brand">
+        <field name="name">Evans</field>
+        <field name="tier">principal</field>
+        <field name="sequence">110</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_herramientas')])]"/>
+        <field name="is_service_center" eval="True"/>
+    </record>
+    <record id="brand_quaker_state" model="babatsa.brand">
+        <field name="name">Quaker State</field>
+        <field name="tier">principal</field>
+        <field name="sequence">120</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_lubricacion')])]"/>
+    </record>
+    <record id="brand_austromex" model="babatsa.brand">
+        <field name="name">Austromex</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">130</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_abrasivos')])]"/>
+    </record>
+    <record id="brand_wd_40" model="babatsa.brand">
+        <field name="name">WD-40</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">140</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_lubricacion')])]"/>
+    </record>
+    <record id="brand_sika" model="babatsa.brand">
+        <field name="name">Sika</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">150</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_lubricacion')])]"/>
+    </record>
+    <record id="brand_loctite" model="babatsa.brand">
+        <field name="name">Loctite</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">160</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_lubricacion')])]"/>
+    </record>
+    <record id="brand_martin_sprocket" model="babatsa.brand">
+        <field name="name">Martin Sprocket</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">170</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_transmision')])]"/>
+    </record>
+    <record id="brand_vazel" model="babatsa.brand">
+        <field name="name">Vazel</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">180</field>
+    </record>
+    <record id="brand_master_lock" model="babatsa.brand">
+        <field name="name">Master Lock</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">190</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_ferreteria')])]"/>
+    </record>
+    <record id="brand_igloo" model="babatsa.brand">
+        <field name="name">Igloo</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">200</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_ferreteria')])]"/>
+    </record>
+    <record id="brand_infra" model="babatsa.brand">
+        <field name="name">Infra</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">210</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_abrasivos')])]"/>
+    </record>
+    <record id="brand_ingersoll" model="babatsa.brand">
+        <field name="name">Ingersoll</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">220</field>
+    </record>
+    <record id="brand_mytek" model="babatsa.brand">
+        <field name="name">Mytek</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">230</field>
+    </record>
+    <record id="brand_dixon" model="babatsa.brand">
+        <field name="name">Dixon</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">240</field>
+    </record>
+    <record id="brand_byp" model="babatsa.brand">
+        <field name="name">BYP</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">250</field>
+    </record>
+    <record id="brand_kelly" model="babatsa.brand">
+        <field name="name">Kelly</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">260</field>
+    </record>
+    <record id="brand_margrey" model="babatsa.brand">
+        <field name="name">Margrey</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">270</field>
+    </record>
+    <record id="brand_victorinox" model="babatsa.brand">
+        <field name="name">Victorinox</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">280</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_ferreteria')])]"/>
+    </record>
+    <record id="brand_esculumex" model="babatsa.brand">
+        <field name="name">Esculumex</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">290</field>
+    </record>
+    <record id="brand_jyrsa" model="babatsa.brand">
+        <field name="name">Jyrsa</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">300</field>
+    </record>
+    <record id="brand_irwin" model="babatsa.brand">
+        <field name="name">Irwin</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">310</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_herramientas')])]"/>
+    </record>
+    <record id="brand_santul" model="babatsa.brand">
+        <field name="name">Santul</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">320</field>
+    </record>
+    <record id="brand_sanelec" model="babatsa.brand">
+        <field name="name">Sanelec</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">330</field>
+    </record>
+    <record id="brand_pegatanke" model="babatsa.brand">
+        <field name="name">Pegatanke</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">340</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_lubricacion')])]"/>
+    </record>
+    <record id="brand_perfect" model="babatsa.brand">
+        <field name="name">Perfect</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">350</field>
+    </record>
+    <record id="brand_resistol" model="babatsa.brand">
+        <field name="name">Resistol</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">360</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_lubricacion')])]"/>
+    </record>
+    <record id="brand_mapresa" model="babatsa.brand">
+        <field name="name">Mapresa</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">370</field>
+    </record>
+    <record id="brand_pensilvania" model="babatsa.brand">
+        <field name="name">Pensilvania</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">380</field>
+    </record>
+    <record id="brand_ninsa" model="babatsa.brand">
+        <field name="name">Ninsa</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">390</field>
+    </record>
+    <record id="brand_tf" model="babatsa.brand">
+        <field name="name">TF</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">400</field>
+    </record>
+    <record id="brand_itc" model="babatsa.brand">
+        <field name="name">ITC</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">410</field>
+        <field name="is_service_center" eval="True"/>
+    </record>
+    <record id="brand_mobil" model="babatsa.brand">
+        <field name="name">Mobil</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">420</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_lubricacion')])]"/>
+    </record>
+    <record id="brand_roshfrans" model="babatsa.brand">
+        <field name="name">Roshfrans</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">430</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_lubricacion')])]"/>
+    </record>
+    <record id="brand_bardahl" model="babatsa.brand">
+        <field name="name">Bardahl</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">440</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_lubricacion')])]"/>
+    </record>
+    <record id="brand_ecom" model="babatsa.brand">
+        <field name="name">Ecom</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">450</field>
+    </record>
+    <record id="brand_devcon" model="babatsa.brand">
+        <field name="name">Devcon</field>
+        <field name="tier">especializada</field>
+        <field name="sequence">460</field>
+        <field name="line_ids" eval="[(6, 0, [ref('line_lubricacion')])]"/>
+    </record>
+</odoo>

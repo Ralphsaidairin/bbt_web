@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sucursales_page" name="Babatsa: Sucursales">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'sucursales'"/>
+            <t t-set="additional_title">Sucursales</t>
+            <div id="wrap">
+                <section class="bbt bbt-sec bbt-branches bbt-branches--page">
+                    <div class="container">
+                        <div class="row align-items-center g-4">
+                            <div class="col-lg-6">
+                                <p class="bbt-eyebrow">Sucursales</p>
+                                <h1 class="bbt-h2">Cerca de ti, <em>donde lo necesitas</em></h1>
+                                <p class="bbt-lead mt-3">Nuestra red de sucursales y Centro de Distribución nos permite atender clientes locales y foráneos, dando seguimiento a sus requerimientos.</p>
+                                <div class="bbt-stats">
+                                    <div class="bbt-stat"><strong>1968</strong><span>Desde</span></div>
+                                    <div class="bbt-stat" t-if="count_sucursales"><strong t-esc="count_sucursales"/><span>Sucursales</span></div>
+                                    <div class="bbt-stat" t-if="count_cedis"><strong t-esc="count_cedis"/><span t-if="count_cedis == 1">Centro de Distribución</span><span t-else="">Centros de Distribución</span></div>
+                                </div>
+                                <p class="bbt-routes"><b>→</b> Atención más allá de nuestras sucursales: pregunta por nuestras rutas.</p>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="bbt-map"><img src="/website_babatsa/static/src/img/ph/mapa.svg" alt="Mapa de sucursales Babatsa en el noroeste de México"/></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bbt bbt-sec">
+                    <div class="container">
+                        <t t-if="groups">
+                            <nav class="bbt-city-nav" aria-label="Ciudades">
+                                <t t-foreach="groups" t-as="g">
+                                    <a t-att-href="'#' + g['slug']" t-esc="g['city']"/>
+                                </t>
+                            </nav>
+                            <t t-foreach="groups" t-as="g">
+                                <div class="bbt-city" t-att-id="g['slug']">
+                                    <h2 class="bbt-city-title" t-esc="g['city']"/>
+                                    <div class="bbt-branch-grid">
+                                        <t t-foreach="g['items']" t-as="s">
+                                            <article class="bbt-branch">
+                                                <img t-att-src="s['image_url']" t-att-alt="'Fachada de ' + s['name']" loading="lazy"/>
+                                                <div class="bbt-branch-body">
+                                                    <span t-if="s['type'] == 'cedis'" class="bbt-badge">Centro de Distribución</span>
+                                                    <h3 t-esc="s['name']"/>
+                                                    <ul class="bbt-branch-info">
+                                                        <li t-if="s['street'] or s['city_line']">
+                                                            <t t-esc="s['street']"/><br t-if="s['street'] and s['city_line']"/><t t-esc="s['city_line']"/>
+                                                        </li>
+                                                        <li t-if="s['phone']"><a t-att-href="'tel:' + s['phone_link']" t-esc="s['phone']"/></li>
+                                                        <li t-if="s['email']"><a t-att-href="'mailto:' + s['email']" t-esc="s['email']"/></li>
+                                                        <li t-if="s['hours']" class="bbt-hours" t-esc="s['hours']"/>
+                                                    </ul>
+                                                    <div class="bbt-branch-ctas">
+                                                        <a t-if="s['directions_url']" class="bbt-btn bbt-btn--blue bbt-btn--sm" t-att-href="s['directions_url']" target="_blank" rel="noopener">Cómo llegar</a>
+                                                        <a class="bbt-btn bbt-btn--ghost bbt-btn--sm" t-att-href="s['contact_url']">Contactar</a>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </t>
+                                    </div>
+                                </div>
+                            </t>
+                        </t>
+                        <div t-else="" class="bbt-empty">
+                            Estamos actualizando la información de nuestras sucursales. Mientras tanto, <a href="/contacto">escríbenos</a> y te atendemos.
+                        </div>
+                    </div>
+                </section>
+                <div class="oe_structure" id="oe_structure_bbt_sucursales_bottom"/>
+            </div>
+        </t>
+    </template>
+</odoo>

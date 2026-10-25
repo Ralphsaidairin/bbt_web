@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ===================== MARCAS ===================== -->
+    <record id="view_babatsa_brand_list" model="ir.ui.view">
+        <field name="name">babatsa.brand.list</field>
+        <field name="model">babatsa.brand</field>
+        <field name="arch" type="xml">
+            <list string="Marcas">
+                <field name="sequence" widget="handle"/>
+                <field name="logo" widget="image" options="{'size': [60, 40]}" string="Logo"/>
+                <field name="name"/>
+                <field name="tier"/>
+                <field name="line_ids" widget="many2many_tags" optional="show"/>
+                <field name="is_service_center" optional="show"/>
+                <field name="has_program" optional="show"/>
+                <field name="website_published" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_babatsa_brand_form" model="ir.ui.view">
+        <field name="name">babatsa.brand.form</field>
+        <field name="model">babatsa.brand</field>
+        <field name="arch" type="xml">
+            <form string="Marca">
+                <sheet>
+                    <widget name="web_ribbon" title="Archivada" bg_color="text-bg-danger" invisible="active"/>
+                    <field name="logo" widget="image" class="oe_avatar" options="{'preview_image': 'logo'}"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Ej. SKF"/></h1>
+                    </div>
+                    <group>
+                        <group string="Sitio web">
+                            <field name="website_published"/>
+                            <field name="tier" widget="radio"/>
+                            <field name="sequence"/>
+                            <field name="url" widget="url" placeholder="https://"/>
+                            <field name="description"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group string="Clasificación">
+                            <field name="line_ids" widget="many2many_tags"/>
+                            <field name="is_service_center"/>
+                            <field name="has_program"/>
+                        </group>
+                    </group>
+                    <div class="text-muted">
+                        Logo recomendado: PNG o SVG con fondo transparente, versión a color oficial de la marca.
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_babatsa_brand_search" model="ir.ui.view">
+        <field name="name">babatsa.brand.search</field>
+        <field name="model">babatsa.brand</field>
+        <field name="arch" type="xml">
+            <search string="Marcas">
+                <field name="name"/>
+                <field name="line_ids"/>
+                <filter name="principal" string="Principales" domain="[('tier', '=', 'principal')]"/>
+                <filter name="especializada" string="Especializadas" domain="[('tier', '=', 'especializada')]"/>
+                <separator/>
+                <filter name="sin_logo" string="Sin logo" domain="[('logo', '=', False)]"/>
+                <filter name="no_publicada" string="No publicadas" domain="[('website_published', '=', False)]"/>
+                <separator/>
+                <filter name="archived" string="Archivadas" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter name="group_tier" string="Nivel" context="{'group_by': 'tier'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_babatsa_brand" model="ir.actions.act_window">
+        <field name="name">Marcas</field>
+        <field name="res_model">babatsa.brand</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_babatsa_brand_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Agrega la primera marca</p>
+            <p>Las marcas publicadas aparecen en /marcas; las principales también en la página de inicio.</p>
+        </field>
+    </record>
+
+    <!-- ===================== LÍNEAS ===================== -->
+    <record id="view_babatsa_brand_line_list" model="ir.ui.view">
+        <field name="name">babatsa.brand.line.list</field>
+        <field name="model">babatsa.brand.line</field>
+        <field name="arch" type="xml">
+            <list string="Líneas de producto" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_babatsa_brand_line" model="ir.actions.act_window">
+        <field name="name">Líneas de producto</field>
+        <field name="res_model">babatsa.brand.line</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <!-- ===================== MENÚS (Sitio web > Configuración) ===================== -->
+    <menuitem id="menu_babatsa_brand_root" name="Marcas Babatsa"
+              parent="website.menu_website_global_configuration" sequence="60"
+              groups="website.group_website_designer"/>
+    <menuitem id="menu_babatsa_brand" name="Marcas" parent="menu_babatsa_brand_root"
+              action="action_babatsa_brand" sequence="10"/>
+    <menuitem id="menu_babatsa_brand_line" name="Líneas de producto" parent="menu_babatsa_brand_root"
+              action="action_babatsa_brand_line" sequence="20"/>
+</odoo>

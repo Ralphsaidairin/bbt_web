@@ -1,0 +1,38 @@
+// =========================================================
+// BABATSA · Paleta y tipografía para el constructor de Odoo
+// Manual de Identidad: Principal #002475 (Pantone 2147 C), Complementario #0847E9 (Pantone 2387 C)
+// Campaña "Vamos con todo": amarillo #FFBE06
+// Gotham (manual) no es libre → Montserrat como sustituto web
+// =========================================================
+
+$o-color-palettes: map-merge($o-color-palettes, (
+    'babatsa': (
+        'o-color-1': #0847E9, // primario (botones, enlaces)
+        'o-color-2': #FFBE06, // secundario / acento
+        'o-color-3': #F2F5FC, // fondo claro
+        'o-color-4': #FFFFFF, // blanco
+        'o-color-5': #002475, // azul principal de marca (texto oscuro, fondos oscuros)
+    ),
+));
+
+$o-selected-color-palettes-names: append($o-selected-color-palettes-names, 'babatsa');
+
+$o-theme-font-configs: map-merge($o-theme-font-configs, (
+    'Montserrat': (
+        'family': ('Montserrat', sans-serif),
+        'url': 'Montserrat:400,400i,500,600,700,800,800i,900,900i',
+    ),
+));
+
+$o-website-values-palettes: (
+    (
+        'color-palettes-name': 'babatsa',
+        'font': 'Montserrat',
+        'headings-font': 'Montserrat',
+        'navbar-font': 'Montserrat',
+        'buttons-font': 'Montserrat',
+        'btn-border-radius': 10rem,
+        'btn-border-radius-sm': 10rem,
+        'btn-border-radius-lg': 10rem,
+    ),
+);

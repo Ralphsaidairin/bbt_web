@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Página de inicio Babatsa.
+        Las marcas se leen de Sitio web > Configuración > Marcas Babatsa (no se editan aquí).
+        Importante: si la página de inicio ya fue editada antes en el constructor, Odoo guarda
+        una copia específica del sitio y esta herencia no se verá. En ese caso: modo desarrollador >
+        Sitio web > Páginas > Inicio > restablecer la vista, o borrar la copia específica del sitio.
+    -->
+    <template id="bbt_homepage" inherit_id="website.homepage" name="Babatsa: Inicio">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap">
+                <div class="oe_structure" id="oe_structure_bbt_home_top">
+
+        <!-- ===================== BANNER / CARRUSEL (editable) ===================== -->
+        <section class="bbt bbt-hero">
+          <div id="bbtHero" class="carousel slide" data-bs-ride="carousel" data-bs-interval="7000">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#bbtHero" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Mensaje institucional"></button>
+              <button type="button" data-bs-target="#bbtHero" data-bs-slide-to="1" aria-label="Aniversario"></button>
+              <button type="button" data-bs-target="#bbtHero" data-bs-slide-to="2" aria-label="Promoción"></button>
+            </div>
+            <div class="carousel-inner">
+
+              <!-- Slide 1 · Mensaje institucional -->
+              <div class="carousel-item active bbt-slide bbt-slide--brand">
+                <div class="container">
+                  <div class="row align-items-center">
+                    <div class="col-lg-7">
+                      <img class="bbt-vct" src="/website_babatsa/static/src/img/vamos-con-todo-blanco.svg" alt="Vamos con todo"/>
+                      <h1>Más que <span>ferretería</span></h1>
+                      <p class="bbt-sub">Soluciones para industria, agricultura, automotriz, mantenimiento y ferretería general.</p>
+                      <div class="bbt-ctas">
+                        <a class="bbt-btn bbt-btn--yellow" href="/productos">Ver productos</a>
+                        <a class="bbt-btn bbt-btn--ghost-light" href="/sucursales">Encuentra tu sucursal</a>
+                      </div>
+                    </div>
+                    <div class="col-lg-5">
+                      <div class="bbt-photo"><img src="/website_babatsa/static/src/img/ph/mostrador.svg" alt="Equipo de Babatsa atendiendo en mostrador"/></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2 · Aniversario (cambiar o quitar cuando termine la campaña) -->
+              <div class="carousel-item bbt-slide bbt-slide--aniv">
+                <div class="container">
+                  <div class="row align-items-center">
+                    <div class="col-lg-6">
+                      <div class="bbt-aniv-year">1968</div>
+                      <h1 style="margin-top:1rem">Manteniendo en movimiento <span>al noroeste</span></h1>
+                      <p class="bbt-sub">Más de cinco décadas creciendo junto al campo, la industria, los talleres y los negocios de nuestros clientes.</p>
+                      <div class="bbt-ctas">
+                        <a class="bbt-btn bbt-btn--yellow" href="/nosotros">Conoce nuestra historia</a>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="bbt-photo" style="transform:rotate(-1.5deg)"><img src="/website_babatsa/static/src/img/ph/aniversario.svg" alt="Logo de aniversario Babatsa"/></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3 · Promoción vigente -->
+              <div class="carousel-item bbt-slide bbt-slide--promo">
+                <div class="container">
+                  <div class="row align-items-center">
+                    <div class="col-lg-6">
+                      <span class="bbt-tag">Promoción del mes</span>
+                      <h1>[Nombre de la <span>promoción</span>]</h1>
+                      <p class="bbt-sub">[Descripción breve, vigencia y sucursales participantes.]</p>
+                      <div class="bbt-ctas">
+                        <a class="bbt-btn bbt-btn--blue" href="/sucursales">Pregunta en tu sucursal</a>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="bbt-photo"><img src="/website_babatsa/static/src/img/ph/promo.svg" alt="Producto en promoción"/></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#bbtHero" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Anterior</span></button>
+            <button class="carousel-control-next" type="button" data-bs-target="#bbtHero" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Siguiente</span></button>
+          </div>
+        </section>
+
+        <!-- ===================== SECTORES ===================== -->
+        <section class="bbt bbt-sectors">
+          <div class="container">
+            <strong>Atendemos</strong>
+            <ul>
+              <li>Agrícola</li><li>Industrial</li><li>Taller y mantenimiento</li><li>Transporte y flotillas</li><li>Construcción</li><li>Comercio y servicios</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ===================== CATEGORÍAS ===================== -->
+        <section class="bbt bbt-sec">
+          <div class="container">
+            <div class="bbt-head">
+              <div>
+                <p class="bbt-eyebrow">Productos</p>
+                <h2 class="bbt-h2">Todo lo que tu operación <em>necesita</em></h2>
+              </div>
+              <a class="bbt-link" href="/productos">Ver todas las líneas →</a>
+            </div>
+            <div class="bbt-cats">
+              <a class="bbt-cat" href="/productos#ferreteria">
+                <span class="bbt-arrow" aria-hidden="true">→</span>
+                <span class="bbt-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3l7 7-3 3-7-7z"/><path d="M12.5 8.5 3 18l3 3 9.5-9.5"/></svg></span>
+                <h3>Ferretería y mantenimiento general</h3>
+                <p>Candados, cerraduras, escaleras, lámparas, extensiones, cintas y artículos de limpieza.</p>
+              </a>
+              <a class="bbt-cat" href="/productos#transmision">
+                <span class="bbt-arrow" aria-hidden="true">→</span>
+                <span class="bbt-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><circle cx="12" cy="12" r="7.5" stroke-width="3.2" stroke-dasharray="2.6 2.3"/></svg></span>
+                <h3>Refacciones y transmisión de potencia</h3>
+                <p>Baleros, chumaceras, retenes, bandas, poleas, cadenas, catarinas, coples e hidráulica.</p>
+              </a>
+              <a class="bbt-cat" href="/productos#herramientas">
+                <span class="bbt-arrow" aria-hidden="true">→</span>
+                <span class="bbt-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 7.5a4.5 4.5 0 0 1-6.2 4.2L6 20l-2-2 8.3-8.3A4.5 4.5 0 0 1 16.5 3.5L14 6l1 3 3 1z"/></svg></span>
+                <h3>Herramientas y equipo</h3>
+                <p>Herramienta manual, eléctrica, inalámbrica y neumática; compresores, soldadoras, generadores e hidrolavadoras.</p>
+              </a>
+              <a class="bbt-cat" href="/productos#lubricacion">
+                <span class="bbt-arrow" aria-hidden="true">→</span>
+                <span class="bbt-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5" stroke-linecap="round"/></svg></span>
+                <h3>Lubricantes, químicos y mantenimiento</h3>
+                <p>Aceites, grasas, anticongelantes, filtros, selladores, desengrasantes, pegamentos y pinturas.</p>
+              </a>
+              <a class="bbt-cat" href="/productos#seguridad">
+                <span class="bbt-arrow" aria-hidden="true">→</span>
+                <span class="bbt-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17h18"/><path d="M5 17a7 7 0 0 1 14 0"/><path d="M10 10V6h4v4"/></svg></span>
+                <h3>Seguridad</h3>
+                <p>Guantes, lentes, botas, chalecos, cascos, caretas, fajas, señalización y demás EPP.</p>
+              </a>
+              <a class="bbt-cat" href="/productos#abrasivos">
+                <span class="bbt-arrow" aria-hidden="true">→</span>
+                <span class="bbt-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M12 4v3M20 12h-3M12 20v-3M4 12h3"/></svg></span>
+                <h3>Abrasivos y consumibles</h3>
+                <p>Discos, lijas, cepillos, brocas, machuelos, sierras y productos de corte y soldadura.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+                </div>
+                <t t-call="website_babatsa.brand_home_section"/>
+                <div class="oe_structure" id="oe_structure_bbt_home_bottom">
+
+        <!-- ===================== SERVICIOS ===================== -->
+        <section class="bbt bbt-sec">
+          <div class="container">
+            <div class="bbt-serv-grid">
+              <div class="bbt-serv-photo">
+                <img src="/website_babatsa/static/src/img/ph/asesor.svg" alt="Asesor de Babatsa con un cliente"/>
+                <p class="bbt-serv-quote">No solo surtimos lo que necesitas. Te ayudamos a encontrar la mejor solución.</p>
+              </div>
+              <div>
+                <p class="bbt-eyebrow">Servicios</p>
+                <h2 class="bbt-h2">Soluciones que van <em>más allá del producto</em></h2>
+                <p class="bbt-lead" style="margin-top:1rem">Personal capacitado y el respaldo de nuestras marcas para analizar tus necesidades, recomendar soluciones y dar soporte a tus equipos.</p>
+                <div class="bbt-serv-list">
+                  <div class="bbt-serv"><span class="bbt-n">01</span><h3>Asesoría especializada</h3><p>Te orientamos en la selección del producto según tu aplicación, antes y después de la compra.</p></div>
+                  <div class="bbt-serv"><span class="bbt-n">02</span><h3>Centros de servicio</h3><p>Diagnóstico, mantenimiento y reparación de equipos de las marcas participantes.</p></div>
+                  <div class="bbt-serv"><span class="bbt-n">03</span><h3>Análisis y proyectos de mejora</h3><p>Analizamos, identificamos, proponemos y damos seguimiento, con programas junto a marcas líderes.</p></div>
+                  <div class="bbt-serv"><span class="bbt-n">04</span><h3>Garantías y respaldo</h3><p>Orientación y seguimiento de garantías según las políticas de cada fabricante.</p></div>
+                </div>
+                <div style="margin-top:28px"><a class="bbt-btn bbt-btn--blue" href="/servicios">Conoce nuestros servicios</a></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================== SUCURSALES ===================== -->
+        <section class="bbt bbt-sec bbt-branches">
+          <div class="container">
+            <div class="row align-items-center g-4">
+              <div class="col-lg-5">
+                <p class="bbt-eyebrow">Sucursales</p>
+                <h2 class="bbt-h2">Cerca de ti, <em>donde lo necesitas</em></h2>
+                <p class="bbt-lead" style="margin-top:1rem">Nuestra red de sucursales y Centro de Distribución nos permite atender clientes locales y foráneos.</p>
+                <div class="bbt-stats">
+                  <div class="bbt-stat"><strong>1968</strong><span>Desde</span></div>
+                  <div class="bbt-stat"><strong>11</strong><span>Sucursales</span></div>
+                  <div class="bbt-stat"><strong>1</strong><span>Centro de Distribución</span></div>
+                </div>
+                <p class="bbt-routes"><b>→</b> Atención más allá de nuestras sucursales: pregunta por nuestras rutas.</p>
+                <div class="bbt-ctas">
+                  <a class="bbt-btn bbt-btn--yellow" href="/sucursales">Encuentra tu sucursal</a>
+                  <a class="bbt-btn bbt-btn--ghost-light" href="/contacto">Contáctanos</a>
+                </div>
+              </div>
+              <div class="col-lg-7">
+                <div class="bbt-map"><img src="/website_babatsa/static/src/img/ph/mapa.svg" alt="Mapa de sucursales Babatsa en el noroeste de México"/></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

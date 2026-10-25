@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_warehouse_form_bbt_website" model="ir.ui.view">
+        <field name="name">stock.warehouse.form.bbt.website</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Sitio web" name="bbt_website">
+                    <group>
+                        <group string="Publicación">
+                            <field name="bbt_published"/>
+                            <field name="bbt_type"/>
+                            <field name="bbt_public_name" placeholder="Ej. Sucursal Centro"/>
+                            <field name="bbt_sequence"/>
+                            <field name="bbt_maps_url" widget="url" placeholder="https://maps.app.goo.gl/..."/>
+                        </group>
+                        <group string="Foto de fachada">
+                            <field name="bbt_image" widget="image" nolabel="1" colspan="2"/>
+                        </group>
+                    </group>
+                    <group string="Horario de atención">
+                        <field name="bbt_hours" nolabel="1" colspan="2"
+                               placeholder="Lunes a viernes: 8:00 a 18:00&#10;Sábado: 8:00 a 14:00"/>
+                    </group>
+                    <div class="text-muted">
+                        Dirección, teléfono, correo y coordenadas se toman del contacto (Dirección) del almacén.
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_warehouse_tree_bbt_website" model="ir.ui.view">
+        <field name="name">stock.warehouse.list.bbt.website</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="bbt_published" string="En sitio web" optional="show"/>
+                <field name="bbt_type" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
