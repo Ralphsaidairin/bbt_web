@@ -17,16 +17,18 @@ Sitio web corporativo de Babatsa: Inicio, Marcas (modelo propio), Sucursales (de
 2. **Paleta**: Sitio web > Editar > Tema > Colores: elegir la paleta *babatsa*. Fuente: Montserrat.
 3. **Logo del encabezado**: Sitio web > Editar > clic en el logo > subir `static/src/img/logo-color.svg`
    (mínimo 150 px de ancho según el manual).
-4. **Menú**: el módulo agrega *Marcas* (/marcas), *Sucursales* (/sucursales) y *Contacto* (/contacto).
+4. **Menú**: el módulo agrega *Nosotros* (/nosotros), *Marcas* (/marcas), *Sucursales* (/sucursales) y *Contacto* (/contacto).
    Borrar el menú nativo "Contáctenos" (/contactus) y crear una redirección 301 /contactus → /contacto
-   (Sitio web > Configuración > Redirecciones). Faltan Nosotros, Productos y Servicios.
-   Nota: si actualizas desde 19.0.1.0.0, el hook no vuelve a correr; crea el menú Marcas (/marcas) a mano.
-5. **Equipo de ventas para contacto** (opcional): Ajustes > Técnico > Parámetros del sistema,
+   (Sitio web > Configuración > Redirecciones). Faltan Productos y Servicios.
+   Nota: al actualizar el módulo el hook no vuelve a correr; crea a mano los menús nuevos (Marcas, Nosotros).
+5. **Nosotros**: la línea del tiempo tiene hitos con [Año] y [por confirmar]; editarlos en el constructor
+   cuando se tengan los datos reales.
+6. **Equipo de ventas para contacto** (opcional): Ajustes > Técnico > Parámetros del sistema,
    clave `website_babatsa.contact_team_id`, valor = ID del equipo de CRM que recibirá los mensajes.
    Cada mensaje crea un registro en CRM con etiqueta igual al motivo (Cotización, Garantía, Proveedores...).
-6. **Vacantes**: RH publica puestos en Reclutamiento; el pie de página enlaza a /jobs.
-7. **Copyright**: editar la línea de copyright de Odoo debajo del pie: "© Babatsa. Todos los derechos reservados."
-8. **Aviso de privacidad**: crear la página /aviso-de-privacidad con el texto de Contabilidad.
+7. **Vacantes**: RH publica puestos en Reclutamiento; el pie de página enlaza a /jobs.
+8. **Copyright**: editar la línea de copyright de Odoo debajo del pie: "© Babatsa. Todos los derechos reservados."
+9. **Aviso de privacidad**: crear la página /aviso-de-privacidad con el texto de Contabilidad.
 
 ## Marcas (Sitio web > Configuración > Marcas Babatsa)
 - 46 marcas precargadas del documento del sitio (12 principales + 34 especializadas), sin logo.

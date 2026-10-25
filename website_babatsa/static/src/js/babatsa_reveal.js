@@ -8,6 +8,9 @@
     var SINGLE = [
         ".bbt-sec .bbt-eyebrow", ".bbt-sec .bbt-h2", ".bbt-apps .bbt-eyebrow", ".bbt-apps .bbt-h2",
         ".bbt-lead", ".bbt-serv-photo", ".bbt-map", ".bbt-apps-foot", ".bbt-routes", ".bbt-brands-note",
+        ".bbt-about-photo", ".bbt-about-quote", ".bbt-about-vct", ".bbt-about-close .bbt-ctas",
+        // Cada hito aparece al llegar a él, sin retraso escalonado
+        ".bbt-tl-item",
     ].join(",");
     // Contenedores cuyos hijos aparecen uno tras otro
     var GROUPS = ".bbt-apps-grid, .bbt-serv-list, .bbt-stats, .bbt-brands, .bbt-pillars";
@@ -36,12 +39,40 @@
         window.requestAnimationFrame(frame);
     }
 
+    // La línea del tiempo se va llenando conforme se hace scroll
+    function timelineProgress() {
+        var timelines = document.querySelectorAll(".bbt-tl");
+        if (!timelines.length) {
+            return;
+        }
+        var ticking = false;
+        function update() {
+            ticking = false;
+            var anchor = window.innerHeight * 0.6;
+            timelines.forEach(function (tl) {
+                var rect = tl.getBoundingClientRect();
+                var p = Math.max(0, Math.min(1, (anchor - rect.top) / rect.height));
+                tl.style.setProperty("--bbt-tl-p", p.toFixed(3));
+            });
+        }
+        function request() {
+            if (!ticking) {
+                ticking = true;
+                window.requestAnimationFrame(update);
+            }
+        }
+        window.addEventListener("scroll", request, { passive: true });
+        window.addEventListener("resize", request);
+        update();
+    }
+
     function init() {
         var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (reduce || !("IntersectionObserver" in window) || window.frameElement ||
             document.body.classList.contains("editor_enable")) {
             return;
         }
+        timelineProgress();
         var items = [];
         document.querySelectorAll(SINGLE).forEach(function (el) {
             items.push(el);

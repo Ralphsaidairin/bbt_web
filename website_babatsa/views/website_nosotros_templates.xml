@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Página /nosotros (website.page): el texto se edita directo en el constructor.
+        Texto del documento "Página Web Babatsa". En la línea del tiempo solo 1968 y "Hoy" están
+        confirmados; los hitos intermedios llevan [por confirmar] hasta que nos pasen años y datos.
+    -->
+    <template id="nosotros_view" name="Babatsa: Nosotros">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'nosotros'"/>
+            <t t-set="additional_title">Nosotros</t>
+            <div id="wrap">
+
+                <!-- ===================== ENCABEZADO ===================== -->
+                <section class="bbt bbt-sec bbt-about-hero">
+                    <span class="bbt-about-mark" aria-hidden="true">1968</span>
+                    <div class="container">
+                        <p class="bbt-eyebrow">Nosotros</p>
+                        <h1 class="bbt-h2">Manteniendo en movimiento <em>desde 1968</em></h1>
+                        <p class="bbt-lead mt-3">Desde 1968, en Babatsa trabajamos para ofrecer soluciones que mantienen en movimiento al campo, la industria, los talleres y los negocios de nuestros clientes.</p>
+                        <div class="bbt-stats bbt-stats--4">
+                            <div class="bbt-stat"><strong>1968</strong><span>Desde</span></div>
+                            <div class="bbt-stat"><strong>5+</strong><span>Décadas</span></div>
+                            <div class="bbt-stat"><strong>11</strong><span>Sucursales</span></div>
+                            <div class="bbt-stat"><strong>1</strong><span>Centro de Distribución</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===================== QUIÉNES SOMOS ===================== -->
+                <section class="bbt bbt-sec">
+                    <div class="container">
+                        <div class="row align-items-center g-5">
+                            <div class="col-lg-6">
+                                <p class="bbt-eyebrow">Quiénes somos</p>
+                                <h2 class="bbt-h2">Crecemos junto con <em>el noroeste</em></h2>
+                                <p class="bbt-lead mt-3">A lo largo de más de cinco décadas hemos crecido junto con el noroeste de México, ampliando nuestra presencia, nuestras líneas de producto y nuestra experiencia técnica.</p>
+                                <p class="bbt-lead mt-3">Hoy contamos con 11 sucursales y un Centro de Distribución, desde donde ofrecemos productos de marcas líderes en ferretería, herramientas, transmisión de potencia, lubricación, seguridad, mantenimiento y equipo.</p>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="bbt-about-photo"><img src="/website_babatsa/static/src/img/ph/fachada.svg" alt="Fachada de una sucursal Babatsa"/></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===================== LÍNEA DEL TIEMPO ===================== -->
+                <section class="bbt bbt-sec bbt-tl-sec">
+                    <div class="container">
+                        <div class="bbt-center">
+                            <p class="bbt-eyebrow">Nuestra historia</p>
+                            <h2 class="bbt-h2">Más de cinco décadas <em>en movimiento</em></h2>
+                        </div>
+                        <div class="bbt-tl">
+                            <span class="bbt-tl-line" aria-hidden="true"><span class="bbt-tl-fill"/></span>
+                            <ol class="bbt-tl-list">
+                                <li class="bbt-tl-item">
+                                    <span class="bbt-tl-dot" aria-hidden="true"/>
+                                    <div class="bbt-tl-card">
+                                        <span class="bbt-tl-year">1968</span>
+                                        <h3>Nace Babatsa</h3>
+                                        <p>Empezamos a ofrecer soluciones para el campo, la industria, los talleres y los negocios del noroeste de México.</p>
+                                    </div>
+                                </li>
+                                <li class="bbt-tl-item">
+                                    <span class="bbt-tl-dot" aria-hidden="true"/>
+                                    <div class="bbt-tl-card">
+                                        <span class="bbt-tl-year">[Año]</span>
+                                        <h3>Ampliamos nuestra presencia</h3>
+                                        <p>Nuevas sucursales para estar más cerca de nuestros clientes. [Ciudades y año por confirmar]</p>
+                                    </div>
+                                </li>
+                                <li class="bbt-tl-item">
+                                    <span class="bbt-tl-dot" aria-hidden="true"/>
+                                    <div class="bbt-tl-card">
+                                        <span class="bbt-tl-year">[Año]</span>
+                                        <h3>Más líneas y experiencia técnica</h3>
+                                        <p>Ampliamos nuestras líneas de producto y la experiencia de nuestro equipo. [Hito por confirmar]</p>
+                                    </div>
+                                </li>
+                                <li class="bbt-tl-item">
+                                    <span class="bbt-tl-dot" aria-hidden="true"/>
+                                    <div class="bbt-tl-card">
+                                        <span class="bbt-tl-year">[Año]</span>
+                                        <h3>Centro de Distribución Poseidón</h3>
+                                        <p>Nuestro CEDIS nos permite atender a clientes locales y foráneos. [Año por confirmar]</p>
+                                    </div>
+                                </li>
+                                <li class="bbt-tl-item">
+                                    <span class="bbt-tl-dot" aria-hidden="true"/>
+                                    <div class="bbt-tl-card">
+                                        <span class="bbt-tl-year">[Año]</span>
+                                        <h3>Servicio y programas especializados</h3>
+                                        <p>Centros de servicio autorizado y programas junto con marcas líderes. [Año por confirmar]</p>
+                                    </div>
+                                </li>
+                                <li class="bbt-tl-item bbt-tl-item--now">
+                                    <span class="bbt-tl-dot" aria-hidden="true"/>
+                                    <div class="bbt-tl-card">
+                                        <span class="bbt-tl-year">Hoy</span>
+                                        <h3>11 sucursales y un Centro de Distribución</h3>
+                                        <p>Productos de marcas líderes, asesoría especializada y el respaldo de las marcas que representamos.</p>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="oe_structure" id="oe_structure_bbt_nosotros_mid"/>
+
+                <!-- ===================== MÁS QUE PRODUCTOS ===================== -->
+                <section class="bbt bbt-sec">
+                    <div class="container">
+                        <p class="bbt-eyebrow">Lo que nos mueve</p>
+                        <h2 class="bbt-h2">Más que <em>los productos que vendemos</em></h2>
+                        <p class="bbt-lead mt-3">Babatsa es más que los productos que vendemos. Nuestro trabajo también consiste en ayudar a nuestros clientes a encontrar la solución adecuada, mediante asesoría especializada, soporte técnico, centros de servicio y el respaldo de las marcas que representamos.</p>
+                        <ul class="bbt-pillars">
+                            <li>
+                                <span class="bbt-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg></span>
+                                <h3>Asesoría especializada</h3>
+                                <p>Personal capacitado para ayudarte a encontrar la solución adecuada para tu aplicación.</p>
+                            </li>
+                            <li>
+                                <span class="bbt-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 7.5a4.5 4.5 0 0 1-6.2 4.2L6 20l-2-2 8.3-8.3A4.5 4.5 0 0 1 16.5 3.5L14 6l1 3 3 1z"/></svg></span>
+                                <h3>Soporte técnico</h3>
+                                <p>Acompañamiento antes y después de la compra para tus equipos y tu operación.</p>
+                            </li>
+                            <li>
+                                <span class="bbt-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><circle cx="12" cy="12" r="7.5" stroke-width="3.2" stroke-dasharray="2.6 2.3"/></svg></span>
+                                <h3>Centros de servicio</h3>
+                                <p>Diagnóstico, mantenimiento y reparación de equipos de las marcas participantes.</p>
+                            </li>
+                            <li>
+                                <span class="bbt-cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+                                <h3>Respaldo de marcas</h3>
+                                <p>Distribuidores autorizados de marcas líderes, con garantías según cada fabricante.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ===================== CIERRE ===================== -->
+                <section class="bbt bbt-sec bbt-about-close">
+                    <div class="container">
+                        <p class="bbt-about-quote">Seguimos creciendo y evolucionando con el mismo compromiso: estar cerca de nuestros clientes y ayudarles a mantener su operación en movimiento.</p>
+                        <img class="bbt-about-vct" src="/website_babatsa/static/src/img/vamos-con-todo-blanco.svg" alt="Babatsa, vamos con todo"/>
+                        <div class="bbt-ctas">
+                            <a class="bbt-btn bbt-btn--yellow" href="/sucursales">Encuentra tu sucursal</a>
+                            <a class="bbt-btn bbt-btn--ghost-light" href="/contacto">Contáctanos</a>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="oe_structure" id="oe_structure_bbt_nosotros_bottom"/>
+            </div>
+        </t>
+    </template>
+
+    <record id="nosotros_page" model="website.page">
+        <field name="url">/nosotros</field>
+        <field name="is_published" eval="True"/>
+        <field name="view_id" ref="nosotros_view"/>
+        <field name="website_indexed" eval="True"/>
+    </record>
+</odoo>

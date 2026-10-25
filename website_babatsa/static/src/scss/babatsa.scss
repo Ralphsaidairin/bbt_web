@@ -228,6 +228,51 @@
 @media (max-width:991px){ .bbt-brands--main{grid-template-columns:repeat(3,minmax(0,1fr))} .bbt-pillars{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:575px){ .bbt-brands--main{grid-template-columns:repeat(2,minmax(0,1fr))} .bbt-pillars{grid-template-columns:1fr} }
 
+/* NOSOTROS */
+.bbt-center{text-align:center}
+.bbt-center .bbt-lead{margin-left:auto; margin-right:auto}
+.bbt-about-hero{background:var(--bbt-navy); color:#fff; position:relative; overflow:hidden; padding-top:clamp(72px,10vw,128px)}
+.bbt-about-hero .bbt-eyebrow{color:var(--bbt-yellow)}
+.bbt-about-hero .bbt-h2{color:#fff; font-size:clamp(2.4rem,5.4vw,4.4rem); font-style:italic; text-transform:uppercase; max-width:14ch}
+.bbt-about-hero .bbt-h2 em{color:var(--bbt-yellow)}
+.bbt-about-hero .bbt-lead{color:#C9D3EE; font-size:1.12rem}
+.bbt-about-hero .container{position:relative}
+.bbt-about-mark{position:absolute; right:-2vw; bottom:-4vw; font-weight:900; font-style:italic; font-size:clamp(9rem,26vw,24rem); line-height:.8; letter-spacing:-.05em; color:transparent; -webkit-text-stroke:2px rgba(255,190,6,.22); pointer-events:none; user-select:none}
+.bbt-stats--4{grid-template-columns:repeat(4,minmax(0,1fr)); max-width:760px; margin-top:44px}
+.bbt-about-photo{border-radius:20px; overflow:hidden; box-shadow:0 30px 60px -34px rgba(0,10,40,.45)}
+.bbt-about-close{background:var(--bbt-blue-camp); color:#fff; text-align:center}
+.bbt-about-quote{font-weight:800; font-size:clamp(1.35rem,2.6vw,2.1rem); line-height:1.25; max-width:30ch; margin:0 auto !important}
+.bbt-about-vct{width:70%; max-width:320px; margin:36px auto 32px}
+.bbt-about-close .bbt-ctas{display:flex; justify-content:center; flex-wrap:wrap; gap:12px}
+@media (max-width:767px){ .bbt-stats--4{grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 12px} }
+
+/* Línea del tiempo: escritorio alternado, celular a la izquierda.
+   --bbt-tl-p (0 a 1) lo pone babatsa_reveal.js según el scroll; sin JS la línea sale completa. */
+.bbt-tl-sec{background:var(--bbt-soft)}
+.bbt-tl{position:relative; max-width:980px; margin:clamp(40px,6vw,64px) auto 0}
+.bbt-tl-line{position:absolute; top:8px; bottom:8px; left:50%; width:4px; margin-left:-2px; border-radius:4px; background:var(--bbt-line); overflow:hidden}
+.bbt-tl-fill{position:absolute; inset:0; background:linear-gradient(var(--bbt-blue),var(--bbt-yellow)); transform-origin:top; transform:scaleY(var(--bbt-tl-p,1))}
+.bbt .bbt-tl-list{display:flex; flex-direction:column; gap:28px; list-style:none; margin:0; padding:0}
+.bbt-tl-item{position:relative; display:grid; grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr); align-items:center}
+.bbt-tl-dot{grid-column:2; grid-row:1; justify-self:center; width:22px; height:22px; border-radius:50%; background:#fff; border:4px solid var(--bbt-blue); z-index:1; transition:background .3s, border-color .3s}
+.bbt-tl-card{grid-row:1; background:#fff; border-radius:18px; padding:22px 24px; box-shadow:0 1px 2px rgba(11,21,48,.05), 0 10px 28px -12px rgba(11,21,48,.18)}
+.bbt-tl-item:nth-child(odd) .bbt-tl-card{grid-column:1; text-align:right}
+.bbt-tl-item:nth-child(even) .bbt-tl-card{grid-column:3}
+.bbt-tl-year{display:block; font-weight:900; font-style:italic; font-size:clamp(1.8rem,3vw,2.4rem); line-height:1; color:var(--bbt-blue); letter-spacing:-.02em}
+.bbt-tl-card h3{font-weight:800; font-size:1.12rem; color:var(--bbt-navy); margin:.5rem 0 .35rem !important}
+.bbt-tl-card p{color:var(--bbt-muted); font-size:.93rem}
+.bbt-tl-item--now .bbt-tl-card{background:var(--bbt-navy); color:#fff}
+.bbt-tl-item--now .bbt-tl-year{color:var(--bbt-yellow)}
+.bbt-tl-item--now .bbt-tl-card h3{color:#fff}
+.bbt-tl-item--now .bbt-tl-card p{color:#C9D3EE}
+.bbt-tl-item--now .bbt-tl-dot{width:30px; height:30px; background:var(--bbt-yellow); border-color:var(--bbt-navy)}
+@media (max-width:767px){
+  .bbt-tl-line{left:15px}
+  .bbt-tl-item{grid-template-columns:32px minmax(0,1fr); gap:0 14px}
+  .bbt-tl-dot{grid-column:1}
+  .bbt-tl-item:nth-child(odd) .bbt-tl-card, .bbt-tl-item:nth-child(even) .bbt-tl-card{grid-column:2; text-align:left}
+}
+
 /* ===================== ANIMACIÓN =====================
    Se usa `translate`/`scale` (no `transform`) para no pisar los giros y efectos hover existentes. */
 @media (prefers-reduced-motion:no-preference){
@@ -244,6 +289,14 @@
   /* Aparición al hacer scroll (clases puestas por babatsa_reveal.js) */
   .bbt-js .bbt-rv{opacity:0; translate:0 24px; transition:opacity .6s cubic-bezier(.2,.7,.2,1), translate .6s cubic-bezier(.2,.7,.2,1), transform .2s, border-color .2s, box-shadow .2s}
   .bbt-js .bbt-rv.is-in{opacity:1; translate:0 0; transition-delay:var(--bbt-d,0ms), var(--bbt-d,0ms), 0s, 0s, 0s}
+
+  /* Línea del tiempo: la tarjeta entra desde su lado y el punto se enciende */
+  .bbt-js .bbt-tl-item .bbt-tl-card{transition:translate .7s cubic-bezier(.2,.7,.2,1)}
+  .bbt-js .bbt-tl-item:nth-child(odd):not(.is-in) .bbt-tl-card{translate:-32px 0}
+  .bbt-js .bbt-tl-item:nth-child(even):not(.is-in) .bbt-tl-card{translate:32px 0}
+  .bbt-js .bbt-tl-item.is-in .bbt-tl-dot{background:var(--bbt-yellow); border-color:var(--bbt-navy); animation:bbt-dot .5s .15s cubic-bezier(.3,1.6,.5,1) both}
+  @keyframes bbt-dot{from{scale:.3} to{scale:1}}
+  @media (max-width:767px){ .bbt-js .bbt-tl-item:nth-child(even):not(.is-in) .bbt-tl-card{translate:-32px 0} }
 
   /* Íconos: pequeño rebote al pasar el mouse */
   .bbt-app:hover .bbt-app-icon svg{animation:bbt-wiggle .5s ease}

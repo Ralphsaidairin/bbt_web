@@ -5,6 +5,7 @@ from . import controllers
 # Menús que el módulo agrega al menú principal de cada sitio web.
 # (nombre, url, secuencia)
 BBT_MENUS = [
+    ('Nosotros', '/nosotros', 20),
     ('Marcas', '/marcas', 40),
     ('Sucursales', '/sucursales', 60),
     ('Contacto', '/contacto', 70),
