@@ -180,13 +180,11 @@
 .bbt-city-nav{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:40px}
 .bbt-city-nav a{font-weight:700; font-size:.92rem; text-decoration:none !important; color:var(--bbt-navy) !important; border:1.5px solid var(--bbt-line); border-radius:999px; padding:.5rem 1rem}
 .bbt-city-nav a:hover{border-color:var(--bbt-blue); color:var(--bbt-blue) !important}
-.bbt-city{scroll-margin-top:110px}
-.bbt-city + .bbt-city{margin-top:56px}
 .bbt-city-title{font-weight:900; font-style:italic; font-size:1.6rem; color:var(--bbt-navy); padding-bottom:12px; border-bottom:3px solid var(--bbt-yellow); margin-bottom:22px !important}
-.bbt-branch-grid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px}
+.bbt-branch-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px}
 .bbt-branch{background:#fff; border:1px solid var(--bbt-line); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; transition:border-color .2s, box-shadow .2s}
 .bbt-branch:hover{border-color:var(--bbt-blue); box-shadow:0 14px 30px -20px rgba(8,71,233,.45)}
-.bbt-branch > img{width:100%; aspect-ratio:16/9; object-fit:cover}
+.bbt-branch-media{display:block; width:100%; aspect-ratio:16/9; object-fit:cover; border:0; background:var(--bbt-soft)}
 .bbt-branch-body{padding:14px 16px 16px; display:flex; flex-direction:column; gap:8px; flex:1}
 .bbt-branch h3{font-weight:800; font-size:1.02rem; line-height:1.2; color:var(--bbt-navy)}
 .bbt-badge{align-self:flex-start; background:var(--bbt-yellow); color:var(--bbt-navy); font-weight:800; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; padding:.3rem .65rem; border-radius:999px}
@@ -197,7 +195,6 @@
 .bbt-branch-ctas{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto; padding-top:8px}
 .bbt .bbt-branch .bbt-btn--sm{min-height:36px; padding:.45rem .95rem; font-size:.8rem}
 .bbt-empty{background:var(--bbt-soft); border-radius:16px; padding:28px; color:var(--bbt-muted); font-weight:600}
-@media (max-width:1199px){ .bbt-branch-grid{grid-template-columns:repeat(3,minmax(0,1fr))} }
 @media (max-width:991px){ .bbt-branch-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:575px){ .bbt-branch-grid{grid-template-columns:1fr} }
 

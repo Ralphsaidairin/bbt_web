@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import re
-import unicodedata
 
 from markupsafe import Markup, escape
 from werkzeug.exceptions import NotFound
@@ -25,11 +24,6 @@ EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
 FIELDS = ['nombre', 'empresa', 'ciudad', 'telefono', 'email', 'motivo', 'sucursal', 'mensaje']
 
 
-def _slugify(text):
-    text = unicodedata.normalize('NFKD', text or '').encode('ascii', 'ignore').decode('ascii')
-    return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-') or 'ubicacion'
-
-
 class BabatsaWebsite(http.Controller):
 
     # ------------------------------------------------------------------
@@ -41,19 +35,10 @@ class BabatsaWebsite(http.Controller):
 
     @http.route('/sucursales', type='http', auth='public', website=True, sitemap=True)
     def sucursales(self, **kw):
+        # Todas juntas, en el orden de "Orden en sitio web" (la matriz va primero)
         warehouses = self._bbt_published_warehouses()
-        groups = {}
-        for wh in warehouses:
-            card = wh._bbt_website_card()
-            groups.setdefault(card['city'], []).append(card)
-        # Ciudades en el orden de "Orden en sitio web" de su primera sucursal (la matriz va primero)
-        ordered = [
-            {'city': city, 'slug': 'ciudad-' + _slugify(city), 'items': items}
-            for city, items in sorted(
-                groups.items(), key=lambda kv: (min(i['sequence'] for i in kv[1]), kv[0].lower()))
-        ]
         values = {
-            'groups': ordered,
+            'branches': [wh._bbt_website_card() for wh in warehouses],
             'count_sucursales': len(warehouses.filtered(lambda w: w.bbt_type == 'sucursal')),
             'count_cedis': len(warehouses.filtered(lambda w: w.bbt_type == 'cedis')),
         }

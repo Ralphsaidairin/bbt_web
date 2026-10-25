@@ -28,43 +28,33 @@
 
                 <section class="bbt bbt-sec">
                     <div class="container">
-                        <t t-if="groups">
-                            <nav class="bbt-city-nav" aria-label="Ciudades">
-                                <t t-foreach="groups" t-as="g">
-                                    <a t-att-href="'#' + g['slug']" t-esc="g['city']"/>
-                                </t>
-                            </nav>
-                            <t t-foreach="groups" t-as="g">
-                                <div class="bbt-city" t-att-id="g['slug']">
-                                    <h2 class="bbt-city-title" t-esc="g['city']"/>
-                                    <div class="bbt-branch-grid">
-                                        <t t-foreach="g['items']" t-as="s">
-                                            <article class="bbt-branch">
-                                                <img t-att-src="s['image_url']" t-att-alt="'Fachada de ' + s['name']" loading="lazy"/>
-                                                <div class="bbt-branch-body">
-                                                    <span t-if="s['type'] == 'cedis'" class="bbt-badge">Centro de Distribución</span>
-                                                    <h3 t-esc="s['name']"/>
-                                                    <p t-if="s['note']" class="bbt-branch-note" t-esc="s['note']"/>
-                                                    <ul class="bbt-branch-info">
-                                                        <li t-if="s['street'] or s['city_line']">
-                                                            <t t-esc="s['street']"/><br t-if="s['street'] and s['city_line']"/><t t-esc="s['city_line']"/>
-                                                        </li>
-                                                        <li t-if="s['phone']">Tel. <a t-att-href="'tel:' + s['phone_link']" t-esc="s['phone']"/></li>
-                                                        <li t-if="s['mobile']">Cel. <a t-att-href="'tel:' + s['mobile_link']" t-esc="s['mobile']"/></li>
-                                                        <li t-if="s['email']"><a t-att-href="'mailto:' + s['email']" t-esc="s['email']"/></li>
-                                                        <li t-if="s['hours']" class="bbt-hours" t-esc="s['hours']"/>
-                                                    </ul>
-                                                    <div class="bbt-branch-ctas">
-                                                        <a t-if="s['directions_url']" class="bbt-btn bbt-btn--blue bbt-btn--sm" t-att-href="s['directions_url']" target="_blank" rel="noopener">Cómo llegar</a>
-                                                        <a class="bbt-btn bbt-btn--ghost bbt-btn--sm" t-att-href="s['contact_url']">Contactar</a>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                        </t>
+                        <!-- Todas las sucursales juntas; arriba la foto de fachada si la hay, si no un mapa -->
+                        <div t-if="branches" class="bbt-branch-grid">
+                            <article t-foreach="branches" t-as="s" class="bbt-branch">
+                                <img t-if="s['image_url']" class="bbt-branch-media" t-att-src="s['image_url']" t-att-alt="'Fachada de ' + s['name']" loading="lazy"/>
+                                <iframe t-elif="s['map_embed_url']" class="bbt-branch-media" t-att-src="s['map_embed_url']"
+                                        t-att-title="'Mapa de ubicación de ' + s['name']" loading="lazy" referrerpolicy="no-referrer-when-downgrade"/>
+                                <img t-else="" class="bbt-branch-media" src="/website_babatsa/static/src/img/ph/fachada.svg" t-att-alt="'Fachada de ' + s['name']" loading="lazy"/>
+                                <div class="bbt-branch-body">
+                                    <span t-if="s['type'] == 'cedis'" class="bbt-badge">Centro de Distribución</span>
+                                    <h3 t-esc="s['name']"/>
+                                    <p t-if="s['note']" class="bbt-branch-note" t-esc="s['note']"/>
+                                    <ul class="bbt-branch-info">
+                                        <li t-if="s['street'] or s['city_line']">
+                                            <t t-esc="s['street']"/><br t-if="s['street'] and s['city_line']"/><t t-esc="s['city_line']"/>
+                                        </li>
+                                        <li t-if="s['phone']">Tel. <a t-att-href="'tel:' + s['phone_link']" t-esc="s['phone']"/></li>
+                                        <li t-if="s['mobile']">Cel. <a t-att-href="'tel:' + s['mobile_link']" t-esc="s['mobile']"/></li>
+                                        <li t-if="s['email']"><a t-att-href="'mailto:' + s['email']" t-esc="s['email']"/></li>
+                                        <li t-if="s['hours']" class="bbt-hours" t-esc="s['hours']"/>
+                                    </ul>
+                                    <div class="bbt-branch-ctas">
+                                        <a t-if="s['directions_url']" class="bbt-btn bbt-btn--blue bbt-btn--sm" t-att-href="s['directions_url']" target="_blank" rel="noopener">Cómo llegar</a>
+                                        <a class="bbt-btn bbt-btn--ghost bbt-btn--sm" t-att-href="s['contact_url']">Contactar</a>
                                     </div>
                                 </div>
-                            </t>
-                        </t>
+                            </article>
+                        </div>
                         <div t-else="" class="bbt-empty">
                             Estamos actualizando la información de nuestras sucursales. Mientras tanto, <a href="/contacto">escríbenos</a> y te atendemos.
                         </div>

@@ -45,19 +45,31 @@ class StockWarehouse(models.Model):
     def _bbt_phone_link(self, phone):
         return re.sub(r'[^\d+]', '', phone or '')
 
+    def _bbt_location_query(self):
+        """Coordenadas del contacto si las tiene; si no, la dirección escrita."""
+        self.ensure_one()
+        partner = self.partner_id
+        if partner.partner_latitude and partner.partner_longitude:
+            return '%s,%s' % (partner.partner_latitude, partner.partner_longitude)
+        parts = [partner.street, partner.street2, partner.zip, partner.city, partner.state_id.name, partner.country_id.name]
+        return ', '.join(p for p in parts if p)
+
     def _bbt_directions_url(self):
         self.ensure_one()
         if self.bbt_maps_url:
             return self.bbt_maps_url
-        partner = self.partner_id
-        if partner.partner_latitude and partner.partner_longitude:
-            destination = '%s,%s' % (partner.partner_latitude, partner.partner_longitude)
-        else:
-            parts = [partner.street, partner.street2, partner.city, partner.state_id.name, partner.country_id.name]
-            destination = ', '.join(p for p in parts if p)
+        destination = self._bbt_location_query()
         if not destination:
             return False
         return 'https://www.google.com/maps/dir/?api=1&destination=%s' % quote(destination)
+
+    def _bbt_map_embed_url(self):
+        """Mapa pequeño para la tarjeta cuando no hay foto (embebido de Google Maps, sin clave de API)."""
+        self.ensure_one()
+        query = self._bbt_location_query()
+        if not query:
+            return False
+        return 'https://maps.google.com/maps?q=%s&z=16&output=embed' % quote(query)
 
     def _bbt_website_card(self):
         """Datos ya preparados para la plantilla pública (se llama con sudo)."""
@@ -81,8 +93,8 @@ class StockWarehouse(models.Model):
             'sequence': self.bbt_sequence,
             'email': partner.email or '',
             'hours': self.bbt_hours or '',
-            'image_url': ('/sucursales/%s/foto' % self.id) if self.bbt_image
-            else '/website_babatsa/static/src/img/ph/fachada.svg',
+            'image_url': ('/sucursales/%s/foto' % self.id) if self.bbt_image else False,
+            'map_embed_url': self._bbt_map_embed_url(),
             'directions_url': self._bbt_directions_url(),
             'contact_url': '/contacto?sucursal=%s' % self.id,
         }
