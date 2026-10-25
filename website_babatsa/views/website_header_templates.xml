@@ -1,23 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!--
-        Encabezado propio de Babatsa: cápsula flotante que reemplaza al navbar de Odoo.
+        Encabezado propio de Babatsa: reemplaza al navbar de Odoo. Tres estilos, elegidos en
+        Sitio web > Configuración > Ajustes > Estilo de encabezado (campo website.bbt_header_style):
+          - capsula:  cápsula flotante (predeterminado)
+          - doble:    franja de contacto + barra; "Productos" abre un mega menú con las categorías
+          - completo: barra mínima; "Menú" abre una pantalla completa con enlaces grandes
+        Para comparar sin guardar: ?navbar=capsula | doble | completo en cualquier dirección.
         priority 99: se aplica después de las plantillas de encabezado de Odoo y las sustituye completas,
         así que las opciones de encabezado del constructor (plantilla, efectos de scroll) no tienen efecto.
         Los enlaces salen de Sitio web > Configuración > Menús (solo primer nivel, sin submenús).
-        Comportamiento (compactar, ocultar al bajar, panel en celular): static/src/js/babatsa_nav.js
+        Comportamiento: static/src/js/babatsa_nav.js
     -->
     <template id="bbt_header" inherit_id="website.layout" name="Babatsa: Encabezado" priority="99">
         <xpath expr="//header" position="replace">
-            <header t-if="not no_header" id="top" data-anchor="true" class="bbt bbt-nav-wrap">
+            <t t-set="bbt_nav_param" t-value="request.httprequest.args.get('navbar')"/>
+            <t t-set="bbt_style" t-value="bbt_nav_param if bbt_nav_param in ('capsula', 'doble', 'completo') else (website.bbt_header_style or 'capsula')"/>
+            <header t-if="not no_header" id="top" data-anchor="true" t-attf-class="bbt bbt-nav-wrap bbt-nav--#{bbt_style}">
                 <t t-set="bbt_menus" t-value="website.menu_id.child_id.filtered('is_visible')"/>
+
+                <!-- Doble barra: franja de contacto (mismos datos pendientes que el pie de página) -->
+                <div t-if="bbt_style == 'doble'" class="bbt-nav-strip">
+                    <div class="bbt-nav-strip-in">
+                        <ul class="bbt-nav-strip-info">
+                            <li><a href="tel:+520000000000">[Teléfono general]</a></li>
+                            <li><a href="mailto:contacto@babatsa.com.mx">[Correo general]</a></li>
+                        </ul>
+                        <ul class="bbt-nav-strip-links">
+                            <li><a href="/sucursales">Encuentra tu sucursal</a></li>
+                            <li><a href="/jobs">Vacantes</a></li>
+                        </ul>
+                    </div>
+                </div>
+
                 <nav class="bbt-nav" aria-label="Principal">
                     <a href="/" class="bbt-nav-brand">
                         <img src="/website_babatsa/static/src/img/logo-color.svg" alt="Babatsa · Inicio" width="150" height="36"/>
                     </a>
-                    <ul class="bbt-nav-links" t-ignore="true">
+                    <ul t-if="bbt_style != 'completo'" class="bbt-nav-links" t-ignore="true">
                         <li t-foreach="bbt_menus" t-as="m">
-                            <a t-att-href="m._clean_url()"
+                            <button t-if="bbt_style == 'doble' and m.url == '/productos'" type="button"
+                                    t-att-class="'bbt-mega-toggle bbt-on' if m._is_active() else 'bbt-mega-toggle'"
+                                    aria-expanded="false" aria-controls="bbt_mega">
+                                <span t-esc="m.name"/>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                            </button>
+                            <a t-else="" t-att-href="m._clean_url()"
                                t-att-class="'bbt-on' if m._is_active() else None"
                                t-att-aria-current="'page' if m._is_active() else None"
                                t-att-target="'_blank' if m.new_window else None"
@@ -31,14 +59,58 @@
                         <a class="bbt-btn bbt-btn--yellow bbt-nav-cta" href="/contacto?motivo=Cotización">Cotiza</a>
                         <button type="button" class="bbt-nav-toggle" aria-expanded="false" aria-controls="bbt_nav_panel">
                             <span class="bbt-nav-burger" aria-hidden="true"><span/><span/><span/></span>
-                            <span class="visually-hidden">Abrir menú</span>
+                            <span t-if="bbt_style == 'completo'" class="bbt-nav-toggle-label">Menú</span>
+                            <span t-else="" class="visually-hidden">Abrir menú</span>
                         </button>
                     </div>
                 </nav>
 
-                <!-- Panel de celular: sube desde abajo -->
+                <!-- Doble barra: mega menú de Productos -->
+                <div t-if="bbt_style == 'doble'" id="bbt_mega" class="bbt-mega">
+                    <div class="bbt-mega-in">
+                        <div class="bbt-mega-head">
+                            <p class="bbt-eyebrow">Categorías de productos</p>
+                            <a class="bbt-link" href="/productos">Ver todas las líneas <span aria-hidden="true">→</span></a>
+                        </div>
+                        <div class="bbt-apps-grid bbt-mega-grid">
+                            <t t-call="website_babatsa.category_tiles"/>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="bbt-nav-backdrop" hidden="hidden"/>
-                <div id="bbt_nav_panel" class="bbt-nav-panel" role="dialog" aria-modal="true" aria-label="Menú" hidden="hidden">
+
+                <!-- Pantalla completa -->
+                <div t-if="bbt_style == 'completo'" id="bbt_nav_panel" class="bbt-nav-panel bbt-nav-full" role="dialog" aria-modal="true" aria-label="Menú" hidden="hidden">
+                    <div class="bbt-nav-full-in">
+                        <ol class="bbt-nav-full-links" t-ignore="true">
+                            <li t-foreach="bbt_menus" t-as="m" t-attf-style="--i:#{m_index}">
+                                <a t-att-href="m._clean_url()"
+                                   t-att-class="'bbt-on' if m._is_active() else None"
+                                   t-att-aria-current="'page' if m._is_active() else None"
+                                   t-att-target="'_blank' if m.new_window else None">
+                                    <span class="bbt-nav-full-n" t-esc="'%02d' % (m_index + 1)"/>
+                                    <span t-esc="m.name"/>
+                                </a>
+                            </li>
+                        </ol>
+                        <aside class="bbt-nav-full-aside">
+                            <img class="bbt-nav-full-vct" src="/website_babatsa/static/src/img/vamos-con-todo-blanco.svg" alt="Vamos con todo"/>
+                            <h4>Contacto</h4>
+                            <ul>
+                                <li><a href="tel:+520000000000">[Teléfono general]</a></li>
+                                <li><a href="mailto:contacto@babatsa.com.mx">[Correo general]</a></li>
+                                <li><a href="/jobs">Vacantes</a></li>
+                            </ul>
+                            <div class="bbt-nav-full-ctas">
+                                <a class="bbt-btn bbt-btn--yellow" href="/contacto?motivo=Cotización">Solicita una cotización</a>
+                                <a class="bbt-btn bbt-btn--ghost-light" href="/sucursales">Encuentra tu sucursal</a>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+                <div t-else="" id="bbt_nav_panel" class="bbt-nav-panel" role="dialog" aria-modal="true" aria-label="Menú" hidden="hidden">
+                    <!-- Cápsula y doble barra: panel de celular que sube desde abajo -->
                     <span class="bbt-nav-grip" aria-hidden="true"/>
                     <ul class="bbt-nav-panel-links" t-ignore="true">
                         <li t-foreach="bbt_menus" t-as="m">

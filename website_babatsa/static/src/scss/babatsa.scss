@@ -289,8 +289,76 @@ html.bbt-nav-lock{overflow:hidden}
   .bbt-nav-toggle{display:grid}
 }
 @media (max-width:420px){ .bbt-nav-cta{display:none} .bbt-nav-wrap{padding:10px 10px 0} }
-@media (min-width:992px){ .bbt-nav-panel, .bbt-nav-backdrop{display:none !important} }
+@media (min-width:992px){ .bbt-nav-wrap:not(.bbt-nav--completo) .bbt-nav-panel, .bbt-nav-wrap:not(.bbt-nav--completo) .bbt-nav-backdrop{display:none !important} }
 @media (prefers-reduced-motion:reduce){ .bbt-nav-wrap, .bbt-nav, .bbt-nav-panel, .bbt-nav-backdrop{transition:none} }
+
+/* ===================== ENCABEZADO · DOBLE BARRA + MEGA MENÚ ===================== */
+.bbt-nav--doble{padding:0}
+.bbt-nav--doble.is-scrolled{padding-top:0}
+.bbt-nav-strip{background:var(--bbt-navy); color:#C9D3EE; font-size:.8rem; font-weight:600; overflow:hidden; max-height:38px; transition:max-height .3s}
+.bbt-nav--doble.is-scrolled .bbt-nav-strip{max-height:0}
+.bbt-nav-strip-in{max-width:1240px; height:38px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:16px}
+.bbt .bbt-nav-strip ul{display:flex; gap:22px}
+.bbt-nav-strip a{color:#C9D3EE !important; text-decoration:none !important}
+.bbt-nav-strip a:hover{color:var(--bbt-yellow) !important}
+.bbt-nav-strip-links a{color:var(--bbt-yellow) !important}
+.bbt-nav--doble .bbt-nav{max-width:none; border-radius:0; border:0; border-bottom:1px solid var(--bbt-line); background:#fff; -webkit-backdrop-filter:none; backdrop-filter:none; box-shadow:none; padding:12px clamp(16px,4vw,48px)}
+.bbt-nav--doble.is-scrolled .bbt-nav{max-width:none; padding-top:8px; padding-bottom:8px; box-shadow:0 10px 30px -18px rgba(0,20,70,.45)}
+.bbt-nav--doble .bbt-nav-links a, .bbt-mega-toggle{border-radius:10px}
+.bbt-mega-toggle{position:relative; display:flex; align-items:center; gap:4px; padding:10px 14px; border:0; background:none; font:700 .92rem var(--bbt-font); color:var(--bbt-navy); cursor:pointer; transition:background .2s, color .2s}
+.bbt-mega-toggle svg{width:16px; height:16px; transition:transform .25s}
+.bbt-mega-toggle:hover, .bbt-nav-wrap.is-mega .bbt-mega-toggle{background:var(--bbt-soft)}
+.bbt-mega-toggle.bbt-on{color:var(--bbt-blue)}
+.bbt-nav-wrap.is-mega .bbt-mega-toggle svg{transform:rotate(180deg)}
+.bbt-mega{position:absolute; left:0; right:0; top:100%; background:#fff; border-bottom:1px solid var(--bbt-line); box-shadow:0 30px 50px -30px rgba(0,20,70,.45); visibility:hidden; opacity:0; translate:0 -10px; transition:opacity .25s, translate .25s, visibility 0s .25s}
+.bbt-nav-wrap.is-mega .bbt-mega{visibility:visible; opacity:1; translate:0 0; transition:opacity .25s, translate .25s}
+.bbt-mega-in{max-width:1240px; margin:0 auto; padding:28px clamp(16px,4vw,48px) 36px}
+.bbt-mega-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:24px}
+.bbt-mega-grid{max-width:none}
+.bbt-nav-wrap.is-mega .bbt-mega .bbt-app{animation:bbt-mega-in .4s both}
+.bbt-nav-wrap.is-mega .bbt-mega .bbt-app:nth-child(2){animation-delay:40ms}
+.bbt-nav-wrap.is-mega .bbt-mega .bbt-app:nth-child(3){animation-delay:80ms}
+.bbt-nav-wrap.is-mega .bbt-mega .bbt-app:nth-child(4){animation-delay:120ms}
+.bbt-nav-wrap.is-mega .bbt-mega .bbt-app:nth-child(5){animation-delay:160ms}
+.bbt-nav-wrap.is-mega .bbt-mega .bbt-app:nth-child(6){animation-delay:200ms}
+@keyframes bbt-mega-in{from{opacity:0; translate:0 10px} to{opacity:1; translate:0 0}}
+#wrapwrap:has(.bbt-nav--doble) > main{padding-top:112px}
+#wrapwrap.homepage:has(.bbt-nav--doble) > main, #wrapwrap:has(.bbt-nav--doble) > main:has(> #wrap > section.bbt:first-child){padding-top:0}
+@media (max-width:991px){ .bbt-nav-strip, .bbt-mega{display:none} }
+
+/* ===================== ENCABEZADO · PANTALLA COMPLETA ===================== */
+.bbt-nav--completo .bbt-nav{position:relative; z-index:2; max-width:1240px}
+.bbt-nav--completo .bbt-nav-brand{margin-right:auto}
+.bbt-nav--completo .bbt-nav-toggle{display:flex; align-items:center; gap:10px; width:auto; padding:0 20px 0 18px; border-radius:999px; font:800 .92rem var(--bbt-font)}
+.bbt-nav--completo.is-open .bbt-nav{background:rgba(255,255,255,.96)}
+.bbt-nav-full{z-index:1; inset:0; max-height:none; border-radius:0; padding:0; background:var(--bbt-navy); color:#fff; box-shadow:none; translate:none; clip-path:circle(0 at calc(100% - 70px) 44px); transition:clip-path .55s cubic-bezier(.6,0,.2,1)}
+.bbt-nav-wrap.is-open .bbt-nav-full{clip-path:circle(150% at calc(100% - 70px) 44px)}
+.bbt-nav-full-in{max-width:1240px; min-height:100%; margin:0 auto; padding:130px 24px 48px; display:grid; grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); gap:40px; align-items:center}
+.bbt .bbt-nav-full-links{list-style:none; margin:0; padding:0}
+.bbt-nav-full-links a{display:flex; align-items:baseline; gap:18px; padding:4px 0; font-weight:900; font-style:italic; text-transform:uppercase; font-size:clamp(2rem,5.2vw,4.2rem); line-height:1.08; letter-spacing:-.02em; color:#fff !important; text-decoration:none !important; transition:color .2s, translate .25s}
+.bbt-nav-full-links a:hover, .bbt-nav-full-links a.bbt-on{color:var(--bbt-yellow) !important; translate:12px 0}
+.bbt-nav-full-n{font-size:.9rem; font-style:normal; font-weight:700; color:rgba(255,255,255,.5); letter-spacing:.1em; min-width:2ch}
+.bbt-nav-wrap.is-open .bbt-nav-full-links li{animation:bbt-full-in .5s cubic-bezier(.2,.7,.2,1) both; animation-delay:calc(150ms + var(--i) * 55ms)}
+@keyframes bbt-full-in{from{opacity:0; translate:-40px 0} to{opacity:1; translate:0 0}}
+.bbt-nav-full-aside{border-left:1px solid rgba(255,255,255,.15); padding-left:40px; color:#C9D3EE}
+.bbt-nav-full-vct{width:240px; max-width:100%; margin-bottom:36px}
+.bbt-nav-full-aside h4{color:var(--bbt-yellow); font-weight:800; font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; margin-bottom:14px !important}
+.bbt .bbt-nav-full-aside ul{display:grid; gap:10px}
+.bbt-nav-full-aside a{color:#fff !important; text-decoration:none !important; font-weight:600}
+.bbt-nav-full-aside ul a:hover{color:var(--bbt-yellow) !important}
+.bbt-nav-full-ctas{display:grid; gap:10px; margin-top:32px; max-width:300px}
+.bbt-nav-wrap.is-open .bbt-nav-full-aside{animation:bbt-full-in .5s .45s cubic-bezier(.2,.7,.2,1) both}
+.bbt-nav--completo .bbt-nav-backdrop{display:none}
+@media (max-width:991px){
+  .bbt-nav-full-in{grid-template-columns:1fr; align-items:start; padding-top:110px; gap:32px}
+  .bbt-nav-full-aside{border-left:0; padding-left:0; border-top:1px solid rgba(255,255,255,.15); padding-top:28px}
+  .bbt-nav-full-vct{display:none}
+}
+@media (max-width:420px){ .bbt-nav--completo .bbt-nav-toggle-label{display:none} .bbt-nav--completo .bbt-nav-toggle{padding:0; width:44px; justify-content:center} }
+@media (prefers-reduced-motion:reduce){
+  .bbt-nav-full{transition:none}
+  .bbt-nav-wrap.is-open .bbt-nav-full-links li, .bbt-nav-wrap.is-open .bbt-nav-full-aside, .bbt-nav-wrap.is-mega .bbt-mega .bbt-app{animation:none}
+}
 
 /* Derechos reservados van en el pie propio; la barra de Odoo se oculta (no se borra: otras plantillas dependen de ella) */
 .o_footer_copyright{display:none !important}

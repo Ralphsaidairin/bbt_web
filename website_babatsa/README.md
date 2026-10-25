@@ -20,7 +20,10 @@ Sitio web corporativo de Babatsa: Inicio, Marcas (modelo propio), Sucursales (de
    Borrar los menús nativos "Contáctenos" (/contactus) y "Empleos" (/jobs; las vacantes van en el pie) y crear
    una redirección 301 /contactus → /contacto (Sitio web > Configuración > Redirecciones).
    Nota: al actualizar el módulo el hook no vuelve a correr; crea a mano los menús nuevos.
-   El encabezado es propio (cápsula flotante): toma los enlaces de primer nivel de Sitio web > Menús.
+   El encabezado es propio y toma los enlaces de primer nivel de Sitio web > Menús. Tiene 3 estilos
+   (Sitio web > Configuración > Ajustes > Babatsa > Estilo de encabezado): Cápsula flotante, Doble barra con
+   mega menú (Productos abre las categorías) y Menú a pantalla completa. Para comparar sin guardar:
+   agregar ?navbar=capsula, ?navbar=doble o ?navbar=completo a cualquier dirección.
 5. **Nosotros**: la línea del tiempo tiene hitos con [Año] y [por confirmar]; editarlos en el constructor
    cuando se tengan los datos reales.
 6. **Equipo de ventas para contacto** (opcional): Ajustes > Técnico > Parámetros del sistema,

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_bbt" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.website_babatsa</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='website_info_settings']" position="after">
+                <block title="Babatsa" id="bbt_website_settings" invisible="not website_id">
+                    <setting id="bbt_header_style" string="Estilo de encabezado"
+                             help="Diseño del menú principal del sitio. Para comparar sin guardar, agrega ?navbar=capsula, ?navbar=doble o ?navbar=completo a la dirección.">
+                        <field name="website_bbt_header_style" widget="radio"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

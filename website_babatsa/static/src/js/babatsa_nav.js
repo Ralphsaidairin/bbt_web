@@ -1,6 +1,8 @@
-/* Babatsa · encabezado en cápsula.
+/* Babatsa · encabezado propio (cápsula, doble barra o pantalla completa).
    - Se compacta al bajar y se esconde al seguir bajando; reaparece al subir.
-   - En celular, el botón abre un panel que sube desde abajo (Esc, fondo o enlace lo cierran). */
+   - El botón de menú abre el panel: en celular sube desde abajo; en "pantalla completa" cubre todo.
+     Esc, el fondo o un enlace lo cierran.
+   - Doble barra: "Productos" abre el mega menú (clic, Esc o clic afuera lo cierran). */
 (function () {
     "use strict";
 
@@ -47,7 +49,37 @@
         });
         onScroll();
 
-        // ---------- Panel de celular ----------
+        // ---------- Mega menú (doble barra) ----------
+        var megaToggle = header.querySelector(".bbt-mega-toggle");
+        var mega = header.querySelector(".bbt-mega");
+        function setMega(open) {
+            header.classList.toggle("is-mega", open);
+            megaToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        }
+        if (megaToggle && mega) {
+            megaToggle.addEventListener("click", function () {
+                setMega(!header.classList.contains("is-mega"));
+            });
+            document.addEventListener("click", function (ev) {
+                if (header.classList.contains("is-mega") && !megaToggle.contains(ev.target) && !mega.contains(ev.target)) {
+                    setMega(false);
+                }
+            });
+            document.addEventListener("keydown", function (ev) {
+                if (ev.key === "Escape" && header.classList.contains("is-mega")) {
+                    setMega(false);
+                    megaToggle.focus();
+                }
+            });
+            // Al bajar con el mega abierto, se cierra
+            window.addEventListener("scroll", function () {
+                if (header.classList.contains("is-mega") && window.scrollY > 200) {
+                    setMega(false);
+                }
+            }, { passive: true });
+        }
+
+        // ---------- Panel de menú ----------
         if (!toggle || !panel) {
             return;
         }
@@ -71,10 +103,11 @@
             header.classList.remove("is-open");
             toggle.setAttribute("aria-expanded", "false");
             document.documentElement.classList.remove("bbt-nav-lock");
+            // Esperar a que termine la animación de cierre (la de pantalla completa es la más larga)
             closeTimer = window.setTimeout(function () {
                 panel.hidden = true;
                 backdrop.hidden = true;
-            }, 320);
+            }, 580);
             if (returnFocus) {
                 toggle.focus();
             }
@@ -114,9 +147,11 @@
                 }
             }
         });
-        // Si la ventana crece a escritorio con el panel abierto, se cierra
+        // Si la ventana crece a escritorio con el panel de celular abierto, se cierra
+        // (en pantalla completa el panel también existe en escritorio)
+        var isFull = header.classList.contains("bbt-nav--completo");
         window.matchMedia("(min-width: 992px)").addEventListener("change", function (mq) {
-            if (mq.matches && header.classList.contains("is-open")) {
+            if (!isFull && mq.matches && header.classList.contains("is-open")) {
                 close(false);
             }
         });
