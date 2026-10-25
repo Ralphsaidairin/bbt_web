@@ -14,6 +14,8 @@ Sitio web corporativo de Babatsa: Inicio, Marcas (modelo propio), Sucursales (de
    - Nombre público, horario, foto de fachada y, opcional, enlace de Google Maps.
    - Dirección, teléfono y correo salen del **contacto de dirección** del almacén: revisar que estén completos.
    - Si el contacto tiene coordenadas, "Cómo llegar" las usa; si no, usa la dirección escrita.
+   - *Celular (sitio web)* y *Nota en sitio web* (ej. centros de servicio) se capturan en la misma pestaña.
+   - Carga inicial: `scripts/cargar_sucursales.py` (datos de babatsa.net/sucursales; ver uso en el archivo).
 2. **Paleta**: Sitio web > Editar > Tema > Colores: elegir la paleta *babatsa*. Fuente: Montserrat.
 3. **Logo del encabezado**: ya viene en el encabezado propio (`static/src/img/logo-color.svg`); no se sube.
 4. **Menú** (orden del documento): Inicio | Nosotros | Productos | Marcas | Servicios | Sucursales | Contacto.

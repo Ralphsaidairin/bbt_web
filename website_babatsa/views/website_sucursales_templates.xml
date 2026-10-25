@@ -44,11 +44,13 @@
                                                 <div class="bbt-branch-body">
                                                     <span t-if="s['type'] == 'cedis'" class="bbt-badge">Centro de Distribución</span>
                                                     <h3 t-esc="s['name']"/>
+                                                    <p t-if="s['note']" class="bbt-branch-note" t-esc="s['note']"/>
                                                     <ul class="bbt-branch-info">
                                                         <li t-if="s['street'] or s['city_line']">
                                                             <t t-esc="s['street']"/><br t-if="s['street'] and s['city_line']"/><t t-esc="s['city_line']"/>
                                                         </li>
-                                                        <li t-if="s['phone']"><a t-att-href="'tel:' + s['phone_link']" t-esc="s['phone']"/></li>
+                                                        <li t-if="s['phone']">Tel. <a t-att-href="'tel:' + s['phone_link']" t-esc="s['phone']"/></li>
+                                                        <li t-if="s['mobile']">Cel. <a t-att-href="'tel:' + s['mobile_link']" t-esc="s['mobile']"/></li>
                                                         <li t-if="s['email']"><a t-att-href="'mailto:' + s['email']" t-esc="s['email']"/></li>
                                                         <li t-if="s['hours']" class="bbt-hours" t-esc="s['hours']"/>
                                                     </ul>

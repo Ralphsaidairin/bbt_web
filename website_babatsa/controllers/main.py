@@ -46,9 +46,11 @@ class BabatsaWebsite(http.Controller):
         for wh in warehouses:
             card = wh._bbt_website_card()
             groups.setdefault(card['city'], []).append(card)
+        # Ciudades en el orden de "Orden en sitio web" de su primera sucursal (la matriz va primero)
         ordered = [
             {'city': city, 'slug': 'ciudad-' + _slugify(city), 'items': items}
-            for city, items in sorted(groups.items(), key=lambda kv: kv[0].lower())
+            for city, items in sorted(
+                groups.items(), key=lambda kv: (min(i['sequence'] for i in kv[1]), kv[0].lower()))
         ]
         values = {
             'groups': ordered,

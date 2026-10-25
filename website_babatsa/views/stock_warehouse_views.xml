@@ -14,6 +14,8 @@
                             <field name="bbt_public_name" placeholder="Ej. Sucursal Centro"/>
                             <field name="bbt_sequence"/>
                             <field name="bbt_maps_url" widget="url" placeholder="https://maps.app.goo.gl/..."/>
+                            <field name="bbt_mobile" placeholder="668 174 2737"/>
+                            <field name="bbt_note" placeholder="Ej. Centro de servicio Makita, Urrea..."/>
                         </group>
                         <group string="Foto de fachada">
                             <field name="bbt_image" widget="image" nolabel="1" colspan="2"/>
@@ -24,7 +26,8 @@
                                placeholder="Lunes a viernes: 8:00 a 18:00&#10;Sábado: 8:00 a 14:00"/>
                     </group>
                     <div class="text-muted">
-                        Dirección, teléfono, correo y coordenadas se toman del contacto (Dirección) del almacén.
+                        Dirección, teléfono, correo y coordenadas se toman del contacto (Dirección) del almacén;
+                        el celular y la nota, de esta pestaña.
                     </div>
                 </page>
             </xpath>

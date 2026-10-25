@@ -33,6 +33,14 @@ class StockWarehouse(models.Model):
         string='Enlace de Google Maps',
         help='Opcional. Si se deja vacío, el botón "Cómo llegar" usa las coordenadas o la dirección del contacto del almacén.',
     )
+    bbt_mobile = fields.Char(
+        string='Celular (sitio web)',
+        help='Se muestra junto al teléfono del contacto del almacén.',
+    )
+    bbt_note = fields.Char(
+        string='Nota en sitio web',
+        help='Una línea opcional en la tarjeta, ej. "Centro de servicio Makita, Urrea...".',
+    )
 
     def _bbt_phone_link(self, phone):
         return re.sub(r'[^\d+]', '', phone or '')
@@ -67,6 +75,10 @@ class StockWarehouse(models.Model):
             'city_line': city_line,
             'phone': partner.phone or '',
             'phone_link': self._bbt_phone_link(partner.phone),
+            'mobile': self.bbt_mobile or '',
+            'mobile_link': self._bbt_phone_link(self.bbt_mobile),
+            'note': self.bbt_note or '',
+            'sequence': self.bbt_sequence,
             'email': partner.email or '',
             'hours': self.bbt_hours or '',
             'image_url': ('/sucursales/%s/foto' % self.id) if self.bbt_image

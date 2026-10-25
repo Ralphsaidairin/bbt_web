@@ -189,6 +189,7 @@
 .bbt-branch-body{padding:20px 22px 22px; display:flex; flex-direction:column; gap:10px; flex:1}
 .bbt-branch h3{font-weight:800; font-size:1.2rem; color:var(--bbt-navy)}
 .bbt-badge{align-self:flex-start; background:var(--bbt-yellow); color:var(--bbt-navy); font-weight:800; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; padding:.3rem .65rem; border-radius:999px}
+.bbt-branch-note{font-size:.85rem; font-weight:700; color:var(--bbt-navy); background:#FFF4CC; border-left:3px solid var(--bbt-yellow); border-radius:6px; padding:6px 10px; margin:8px 0 12px !important}
 .bbt-branch-info{display:grid; gap:8px; font-size:.93rem; color:var(--bbt-muted)}
 .bbt-branch-info a{color:var(--bbt-blue) !important; font-weight:700; text-decoration:none !important}
 .bbt-hours{white-space:pre-line; background:var(--bbt-soft); border-radius:10px; padding:10px 12px; color:var(--bbt-ink)}
