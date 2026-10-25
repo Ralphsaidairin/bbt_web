@@ -371,6 +371,60 @@ html.bbt-nav-lock{overflow:hidden}
 .bbt-about-hero{padding-top:clamp(140px,14vw,176px) !important}
 .bbt-hero .bbt-slide{padding-top:120px}
 
+/* TIENDA · listado con portada propia (website_shop_templates.xml) */
+#wrapwrap:has(.bbt-shop-hero) > main{padding-top:0}
+.bbt-shop-hero{background:var(--bbt-navy); color:#fff; padding-top:clamp(132px,13vw,168px) !important; padding-bottom:clamp(40px,5vw,56px); position:relative; overflow:hidden}
+.bbt-shop-hero::after{content:""; position:absolute; right:-10%; top:-40%; width:46%; height:180%; background:var(--bbt-blue-camp); transform:skewX(-14deg); opacity:.55; pointer-events:none}
+.bbt-shop-hero .container{position:relative; z-index:1}
+.bbt-shop-hero .bbt-eyebrow{color:var(--bbt-yellow)}
+.bbt-shop-hero .bbt-h2{color:#fff; font-style:italic; text-transform:uppercase; font-size:clamp(2.2rem,4.8vw,3.8rem)}
+.bbt-shop-hero .bbt-h2 em{color:var(--bbt-yellow)}
+.bbt-shop-hero .bbt-lead{color:#C9D3EE; max-width:60ch}
+.bbt-shop-hero .bbt-ctas{display:flex; flex-wrap:wrap; gap:12px; margin-top:24px}
+.bbt-shop-cats{display:flex; flex-wrap:wrap; gap:10px; margin-top:36px}
+@media (max-width:767px){ .bbt-shop-cats{flex-wrap:nowrap; overflow-x:auto; padding-bottom:6px; scrollbar-width:none} }
+.bbt-shop-cat{flex:none; display:flex; align-items:center; gap:10px; padding:8px 16px 8px 8px; border-radius:999px; background:rgba(255,255,255,.08); border:1.5px solid rgba(255,255,255,.14); color:#fff !important; font-weight:700; font-size:.88rem; text-decoration:none !important; transition:background .2s, border-color .2s}
+.bbt-shop-cat:hover{background:rgba(255,255,255,.16)}
+.bbt-shop-cat.bbt-on{background:#fff; border-color:#fff; color:var(--bbt-navy) !important}
+.bbt-shop-cat-icon{width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.12); display:grid; place-items:center}
+.bbt-shop-cat.bbt-on .bbt-shop-cat-icon{background:var(--bbt-soft)}
+.bbt-shop-cat-icon svg{width:24px; height:24px}
+.bbt-shop-cat.bbt-on .bbt-shop-cat-icon rect[fill="#fff"]{fill:var(--bbt-navy)}
+/* El título de Odoo se oculta (la portada ya lo muestra). La tira de categorías y la barra lateral
+   no se ocultan aquí: la plantilla deja de dibujarlas (con display:none su JS congela la página). */
+.bbt-shop .o_wsale_shop_title{display:none !important}
+.bbt-shop #o_wsale_container{padding-top:28px; padding-bottom:72px; font-family:var(--bbt-font)}
+.bbt-shop #o_wsale_products_header{padding-top:0 !important}
+.bbt-shop .o_wsale_products_searchbar_form .form-control, .bbt-shop .o_searchbar_form input{border-radius:999px 0 0 999px}
+/* Tarjetas */
+.bbt-shop .oe_product_cart{background:#fff; border:1.5px solid var(--bbt-line) !important; border-radius:18px !important; overflow:hidden; transition:border-color .2s, box-shadow .2s, translate .2s}
+.bbt-shop .oe_product_cart:hover{border-color:var(--bbt-blue) !important; box-shadow:0 18px 40px -22px rgba(8,71,233,.45); translate:0 -3px}
+.bbt-shop .oe_product_image{background:var(--bbt-soft)}
+.bbt-shop .o_wsale_product_information{padding:14px 16px 16px}
+.bbt-tile-brand{display:block; font-weight:900; font-style:italic; text-transform:uppercase; font-size:.72rem; letter-spacing:.06em; color:var(--bbt-blue); margin-bottom:4px}
+.bbt-shop .o_wsale_products_item_title a{font-weight:800; color:var(--bbt-navy) !important; font-size:.98rem; line-height:1.25}
+.bbt-tile-more{font-weight:800; font-size:.85rem; color:var(--bbt-blue) !important; text-decoration:none !important}
+.bbt-tile-more span{display:inline-block; transition:transform .2s}
+.bbt-shop .oe_product_cart:hover .bbt-tile-more span{transform:translateX(4px)}
+@media (prefers-reduced-motion:reduce){ .bbt-shop .oe_product_cart:hover{translate:none} }
+
+/* TIENDA · ficha del producto */
+.o_wsale_product_page{font-family:var(--bbt-font)}
+#wrapwrap:has(.o_wsale_product_page) > main{padding-top:110px}
+.o_wsale_product_page h1[itemprop="name"], .o_wsale_product_page .o_wsale_product_details_content_section_title h1{font-weight:900; font-style:italic; text-transform:uppercase; color:var(--bbt-navy); letter-spacing:-.01em}
+.o_wsale_product_page #o-carousel-product, .o_wsale_product_page .o_wsale_product_images{border-radius:20px; overflow:hidden; background:var(--bbt-soft)}
+.o_wsale_product_page .breadcrumb a{color:var(--bbt-blue)}
+
+/* TIENDA (modo catálogo) */
+.bbt-pbrand{display:inline-block; margin-bottom:6px; font-weight:900; font-style:italic; text-transform:uppercase; letter-spacing:.02em; font-size:.85rem; color:var(--bbt-blue) !important; text-decoration:none !important}
+.bbt-pbrand:hover{text-decoration:underline !important}
+.bbt-pcta{width:100%; background:var(--bbt-navy); color:#fff; border-radius:18px; padding:22px 24px}
+.bbt-pcta-title{font-weight:900; font-style:italic; font-size:1.25rem; color:var(--bbt-yellow); margin-bottom:6px !important}
+.bbt-pcta-text{color:#C9D3EE; font-size:.95rem; margin-bottom:16px !important}
+.bbt-pcta-btns{display:flex; flex-wrap:wrap; gap:10px}
+.bbt-pcta .bbt-btn--ghost{border-color:rgba(255,255,255,.7); color:#fff !important}
+.bbt-pcta .bbt-btn--ghost:hover{background:#fff; color:var(--bbt-navy) !important}
+
 /* PRODUCTOS */
 .bbt-prod-hero{background:var(--bbt-soft); padding-bottom:clamp(36px,5vw,56px)}
 .bbt-prod-hero .bbt-lead{font-size:1.1rem}

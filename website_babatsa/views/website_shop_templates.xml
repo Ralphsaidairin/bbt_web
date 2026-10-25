@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Tienda (Comercio electrónico de Odoo) adaptada a Babatsa.
+        Modo catálogo (Sitio web > Ajustes > Babatsa > Modo catálogo): models/product.py hace que Odoo
+        oculte precio, cantidad y carrito en la ficha; aquí se ocultan los precios en el listado y el
+        bloque "Contáctanos" de la ficha se cambia por la invitación a sucursal / cotización.
+    -->
+
+    <!-- Listado: marca sobre el nombre, sin precio en modo catálogo, y "Ver producto" -->
+    <template id="bbt_products_item" inherit_id="website_sale.products_item" name="Babatsa: Producto en listado">
+        <xpath expr="//h2[hasclass('o_wsale_products_item_title')]" position="before">
+            <!-- sudo: los visitantes no leen babatsa.brand directamente -->
+            <t t-set="bbt_brand" t-value="product.sudo().bbt_brand_id"/>
+            <span t-if="bbt_brand" class="bbt-tile-brand" t-esc="bbt_brand.name"/>
+        </xpath>
+        <xpath expr="//div[hasclass('product_price')]" position="attributes">
+            <attribute name="t-if">not website.bbt_catalog_mode</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('product_price')]" position="after">
+            <a t-if="website.bbt_catalog_mode" class="bbt-tile-more" t-att-href="product_href">Ver producto <span aria-hidden="true">→</span></a>
+        </xpath>
+    </template>
+
+    <!-- Listado: sin filtro de rango de precio ni orden por precio en modo catálogo -->
+    <template id="bbt_filter_products_price" inherit_id="website_sale.filter_products_price" name="Babatsa: Sin filtro de precio">
+        <xpath expr="//div[@id='o_wsale_price_range_option']" position="attributes">
+            <attribute name="t-if">not website.bbt_catalog_mode</attribute>
+        </xpath>
+    </template>
+    <!-- Listado: portada propia con categorías (reemplaza visualmente el título y la tira de categorías de Odoo) -->
+    <template id="bbt_products" inherit_id="website_sale.products" name="Babatsa: Catálogo">
+        <xpath expr="//t[@t-set='website_sale_sortable']" position="after">
+            <t t-if="website.bbt_catalog_mode" t-set="website_sale_sortable"
+               t-value="[s for s in website_sale_sortable if not s[0].startswith('list_price')]"/>
+        </xpath>
+        <!-- La portada propia sustituye a la tira de categorías de Odoo; en modo catálogo la barra
+             lateral solo tendría el filtro de precio (oculto), así que tampoco se dibuja. -->
+        <xpath expr="//t[@t-set='opt_wsale_categories_top']" position="after">
+            <t t-set="opt_wsale_categories_top" t-value="False"/>
+        </xpath>
+        <xpath expr="//t[@t-set='hasLeftColumn']" position="after">
+            <t t-if="website.bbt_catalog_mode" t-set="hasLeftColumn" t-value="False"/>
+        </xpath>
+        <xpath expr="//div[@id='wrap']" position="attributes">
+            <attribute name="class" add="bbt-shop" separator=" "/>
+        </xpath>
+        <xpath expr="//div[@id='o_wsale_container']" position="before">
+            <t t-set="bbt_shop_categs" t-value="request.env['product.public.category'].sudo().search([('parent_id', '=', False), ('product_tmpl_ids.is_published', '=', True)])"/>
+            <section class="bbt bbt-sec bbt-shop-hero">
+                <div class="container">
+                    <p class="bbt-eyebrow">Catálogo</p>
+                    <h1 t-if="category" class="bbt-h2"><t t-esc="category.name"/></h1>
+                    <h1 t-elif="search" class="bbt-h2">Resultados para <em t-esc="search"/></h1>
+                    <h1 t-else="" class="bbt-h2">Productos que <em>manejamos</em></h1>
+                    <t t-if="website.bbt_catalog_mode">
+                        <p class="bbt-lead mt-3">Estos son algunos de los productos que manejamos, como referencia. Para disponibilidad y precio, visita tu sucursal más cercana o solicita una cotización.</p>
+                        <div class="bbt-ctas">
+                            <a class="bbt-btn bbt-btn--yellow" href="/sucursales">Encuentra tu sucursal</a>
+                            <a class="bbt-btn bbt-btn--ghost-light" href="/contacto?motivo=Cotización">Solicita cotización</a>
+                        </div>
+                    </t>
+                    <nav t-if="bbt_shop_categs" class="bbt-shop-cats" aria-label="Líneas de producto">
+                        <a href="/shop" t-att-class="'bbt-shop-cat bbt-on' if not category else 'bbt-shop-cat'">
+                            <span class="bbt-shop-cat-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="7" width="15" height="15" rx="4" fill="#FFBE06"/><rect x="26" y="7" width="15" height="15" rx="4" fill="#fff"/><rect x="7" y="26" width="15" height="15" rx="4" fill="#fff"/><rect x="26" y="26" width="15" height="15" rx="4" fill="#fff"/></svg></span>
+                            <span>Todos</span>
+                        </a>
+                        <t t-foreach="bbt_shop_categs" t-as="c">
+                            <t t-set="bbt_line" t-value="(c.get_external_id().get(c.id) or '').split('.pcat_')[-1]"/>
+                            <a t-attf-href="/shop/category/#{slug(c)}"
+                               t-att-class="'bbt-shop-cat bbt-on' if category and category.id == c.id else 'bbt-shop-cat'">
+                                <span class="bbt-shop-cat-icon"><t t-call="website_babatsa.line_icon"/></span>
+                                <span t-esc="c.name"/>
+                            </a>
+                        </t>
+                    </nav>
+                </div>
+            </section>
+        </xpath>
+    </template>
+
+    <!-- Ficha: marca debajo del nombre -->
+    <template id="bbt_product_title" inherit_id="website_sale.product_title" name="Babatsa: Marca en ficha">
+        <xpath expr="//h1" position="before">
+            <t t-set="bbt_brand" t-value="product.sudo().bbt_brand_id"/>
+            <a t-if="bbt_brand" class="bbt-pbrand" t-attf-href="/shop?marca=#{bbt_brand.id}" t-esc="bbt_brand.name"/>
+        </xpath>
+    </template>
+
+    <!-- Ficha: invitación a sucursal / cotización en lugar de "Contáctanos" -->
+    <template id="bbt_product_contact" inherit_id="website_sale.product" name="Babatsa: Invitación en ficha">
+        <xpath expr="//div[@id='contact_us_wrapper']" position="replace">
+            <div id="contact_us_wrapper"
+                 t-attf-class="{{'d-flex' if combination_info['prevent_zero_price_sale'] else 'd-none'}}">
+                <div class="bbt bbt-pcta">
+                    <p class="bbt-pcta-title">¿Te interesa este producto?</p>
+                    <p class="bbt-pcta-text">Visítanos en tu sucursal más cercana o solicita una cotización y con gusto te atendemos.</p>
+                    <div class="bbt-pcta-btns">
+                        <a class="bbt-btn bbt-btn--yellow" href="/sucursales">Encuentra tu sucursal</a>
+                        <a class="bbt-btn bbt-btn--ghost" t-attf-href="/contacto?motivo=Cotización&amp;producto=#{product.id}">Solicita cotización</a>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

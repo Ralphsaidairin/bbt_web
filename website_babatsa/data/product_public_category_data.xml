@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Categorías de la tienda = las 8 líneas de la página /productos (nombres del documento).
+         noupdate: mercadotecnia puede editarlas o agregar subcategorías sin que se pierda al actualizar. -->
+    <data noupdate="1">
+        <record id="pcat_rodamientos" model="product.public.category">
+            <field name="name">Rodamientos</field>
+            <field name="sequence">10</field>
+        </record>
+        <record id="pcat_transmision" model="product.public.category">
+            <field name="name">Transmisión de potencia</field>
+            <field name="sequence">20</field>
+        </record>
+        <record id="pcat_hidraulica" model="product.public.category">
+            <field name="name">Hidráulica y transmisión de fluidos</field>
+            <field name="sequence">30</field>
+        </record>
+        <record id="pcat_tornilleria" model="product.public.category">
+            <field name="name">Tornillería, fijación y sujeción</field>
+            <field name="sequence">40</field>
+        </record>
+        <record id="pcat_herramientas" model="product.public.category">
+            <field name="name">Herramientas, maquinaria y equipo</field>
+            <field name="sequence">50</field>
+        </record>
+        <record id="pcat_lubricacion" model="product.public.category">
+            <field name="name">Lubricación, filtración y químicos</field>
+            <field name="sequence">60</field>
+        </record>
+        <record id="pcat_abrasivos" model="product.public.category">
+            <field name="name">Abrasivos, corte y soldadura</field>
+            <field name="sequence">70</field>
+        </record>
+        <record id="pcat_ferreteria" model="product.public.category">
+            <field name="name">Ferretería y seguridad</field>
+            <field name="sequence">80</field>
+        </record>
+    </data>
+</odoo>

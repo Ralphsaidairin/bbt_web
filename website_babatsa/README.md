@@ -33,6 +33,17 @@ Sitio web corporativo de Babatsa: Inicio, Marcas (modelo propio), Sucursales (de
 8. **Copyright**: editar la línea de copyright de Odoo debajo del pie: "© Babatsa. Todos los derechos reservados."
 9. **Aviso de privacidad**: crear la página /aviso-de-privacidad con el texto de Contabilidad.
 
+## Catálogo de productos (Comercio electrónico en modo catálogo)
+- Depende de `website_sale` (instala Ventas y Facturación si no están).
+- **Modo catálogo** (Sitio web > Configuración > Ajustes > Babatsa): la tienda /shop muestra los productos
+  como referencia, sin precios, carrito ni pago; cada ficha invita a "Encuentra tu sucursal" o
+  "Solicita cotización" (prellena el formulario de contacto con el producto). /shop/cart y /shop/checkout
+  redirigen a /shop. Para vender en línea: apagar el modo catálogo.
+- Selección curada: solo aparecen los productos con *Publicado en el sitio web*.
+- En el producto: categoría de tienda (8 líneas, mismos nombres que /productos) y *Marca (sitio web)*.
+- Borrar el menú "Tienda" (/shop) que agrega Odoo: el menú del documento no lo incluye.
+- Diseño propio: portada azul con las líneas de producto, tarjetas con marca y "Ver producto".
+
 ## Marcas (Sitio web > Configuración > Marcas Babatsa)
 - 46 marcas precargadas del documento del sitio (12 principales + 34 especializadas), sin logo.
 - Sin logo se muestra el nombre en tipografía de marca; al subir el logo se reemplaza solo.

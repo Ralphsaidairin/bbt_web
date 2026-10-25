@@ -31,4 +31,18 @@
           <span class="bbt-app-name">Abrasivos y consumibles</span>
         </a>
     </template>
+
+    <!-- Ícono de una de las 8 líneas de producto. Recibe bbt_line = código de la línea
+         (sufijo del xmlid de la categoría de tienda: pcat_<código>). Mismos íconos que /productos. -->
+    <template id="line_icon" name="Babatsa: Ícono de línea de producto">
+        <t t-if="bbt_line == 'rodamientos'"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18" fill="#0847E9"/><circle cx="24" cy="24" r="12" fill="#fff"/><g fill="#FFBE06"><circle cx="24" cy="14.5" r="3.4"/><circle cx="33.5" cy="24" r="3.4"/><circle cx="24" cy="33.5" r="3.4"/><circle cx="14.5" cy="24" r="3.4"/></g><circle cx="24" cy="24" r="4.5" fill="#002475"/></svg></t>
+        <t t-elif="bbt_line == 'transmision'"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="13" width="38" height="22" rx="11" fill="none" stroke="#002475" stroke-width="4"/><circle cx="16" cy="24" r="7.5" fill="#0847E9"/><circle cx="34" cy="24" r="5.5" fill="#FFBE06"/><circle cx="16" cy="24" r="2.6" fill="#fff"/><circle cx="34" cy="24" r="2" fill="#fff"/></svg></t>
+        <t t-elif="bbt_line == 'hidraulica'"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 38c10 0 8-22 20-22" stroke="#0847E9" stroke-width="7" fill="none" stroke-linecap="round"/><rect x="27" y="10" width="10" height="12" rx="2" fill="#002475"/><rect x="36" y="12.5" width="7" height="7" rx="1.5" fill="#FFBE06"/><circle cx="9" cy="38" r="4.5" fill="#FFBE06"/></svg></t>
+        <t t-elif="bbt_line == 'tornilleria'"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 5h20l5 8-5 8H14l-5-8z" fill="#002475"/><rect x="19" y="20" width="10" height="23" rx="2" fill="#0847E9"/><g stroke="#FFBE06" stroke-width="2.5" stroke-linecap="round"><path d="M19 27l10-2.5M19 33l10-2.5M19 39l10-2.5"/></g></svg></t>
+        <t t-elif="bbt_line == 'herramientas'"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 39 33 18" stroke="#0847E9" stroke-width="7" stroke-linecap="round"/><path d="M36 39 15 18" stroke="#FFBE06" stroke-width="7" stroke-linecap="round"/><path d="M28 7a9 9 0 0 1 12 12l-6-1-5-5z" fill="#002475"/><path d="M8 10l6-3 5 5-3 6z" fill="#002475"/></svg></t>
+        <t t-elif="bbt_line == 'lubricacion'"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5s13 14 13 23a13 13 0 0 1-26 0C11 19 24 5 24 5z" fill="#0847E9"/><path d="M24 22s7 7 7 12a7 7 0 0 1-14 0c0-5 7-12 7-12z" fill="#FFBE06"/><path d="M19 33a5 5 0 0 0 5 5" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></t>
+        <t t-elif="bbt_line == 'abrasivos'"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="21" cy="27" r="16" fill="#002475"/><circle cx="21" cy="27" r="10" fill="#0847E9"/><circle cx="21" cy="27" r="3.5" fill="#fff"/><g stroke="#FFBE06" stroke-width="3" stroke-linecap="round"><path d="M37 6l-3 6"/><path d="M43 12l-6 3"/><path d="M42 4l-4 4"/></g></svg></t>
+        <t t-elif="bbt_line == 'ferreteria'"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M9 32a15 15 0 0 1 30 0z" fill="#FFBE06"/><rect x="20" y="13" width="8" height="12" rx="3" fill="#F59E0B"/><rect x="5" y="31" width="38" height="7" rx="3.5" fill="#002475"/></svg></t>
+        <t t-else=""><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="8" width="32" height="32" rx="8" fill="#0847E9"/><rect x="17" y="17" width="14" height="14" rx="3" fill="#FFBE06"/></svg></t>
+    </template>
 </odoo>

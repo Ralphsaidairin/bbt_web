@@ -11,6 +11,10 @@
                              help="Diseño del menú principal del sitio. Para comparar sin guardar, agrega ?navbar=capsula, ?navbar=doble o ?navbar=completo a la dirección.">
                         <field name="website_bbt_header_style" widget="radio"/>
                     </setting>
+                    <setting id="bbt_catalog_mode" string="Modo catálogo"
+                             help="La tienda muestra los productos como referencia: sin precios, carrito ni pago; invita a visitar una sucursal o pedir cotización. Apágalo cuando quieran vender en línea.">
+                        <field name="website_bbt_catalog_mode"/>
+                    </setting>
                 </block>
             </xpath>
         </field>

@@ -6,7 +6,10 @@ from markupsafe import Markup, escape
 from werkzeug.exceptions import NotFound
 
 from odoo import http
+from odoo.fields import Domain
 from odoo.http import request
+from odoo.addons.website_sale.controllers.cart import Cart
+from odoo.addons.website_sale.controllers.main import WebsiteSale
 
 MOTIVOS = [
     'Cotización',
@@ -77,12 +80,18 @@ class BabatsaWebsite(http.Controller):
         }
 
     @http.route('/contacto', type='http', auth='public', website=True, sitemap=True)
-    def contacto(self, sucursal=None, motivo=None, **kw):
+    def contacto(self, sucursal=None, motivo=None, producto=None, **kw):
         form = {}
         if sucursal:
             form['sucursal'] = str(sucursal)
         if motivo in MOTIVOS:
             form['motivo'] = motivo
+        # Desde la ficha de un producto del catálogo: se prellena el mensaje
+        if producto and str(producto).isdigit():
+            product = request.env['product.template'].sudo().browse(int(producto)).exists()
+            if product and product.is_published:
+                ref = ' (%s)' % product.default_code if product.default_code else ''
+                form['mensaje'] = 'Me interesa el producto: %s%s' % (product.name, ref)
         return request.render('website_babatsa.contacto_page', self._bbt_contact_values(form))
 
     @http.route('/contacto/enviar', type='http', auth='public', website=True, methods=['POST'], csrf=True, sitemap=False)
@@ -153,6 +162,47 @@ class BabatsaWebsite(http.Controller):
     @http.route('/contacto/gracias', type='http', auth='public', website=True, sitemap=False)
     def contacto_gracias(self, **kw):
         return request.render('website_babatsa.contacto_gracias')
+
+
+# ----------------------------------------------------------------------
+# Tienda en modo catálogo: sin carrito ni pago (website.bbt_catalog_mode)
+# ----------------------------------------------------------------------
+class BabatsaCart(Cart):
+
+    @http.route()
+    def cart(self, *args, **kwargs):
+        if request.website.bbt_catalog_mode:
+            return request.redirect('/shop')
+        return super().cart(*args, **kwargs)
+
+    @http.route()
+    def add_to_cart(self, *args, **kwargs):
+        if request.website.bbt_catalog_mode:
+            raise NotFound()
+        return super().add_to_cart(*args, **kwargs)
+
+
+class BabatsaWebsiteSale(WebsiteSale):
+
+    @http.route()
+    def shop_checkout(self, *args, **kwargs):
+        if request.website.bbt_catalog_mode:
+            return request.redirect('/shop')
+        return super().shop_checkout(*args, **kwargs)
+
+    @http.route()
+    def shop_payment(self, *args, **kwargs):
+        if request.website.bbt_catalog_mode:
+            return request.redirect('/shop')
+        return super().shop_payment(*args, **kwargs)
+
+    def _get_shop_domain(self, search, category, attribute_value_dict, search_in_description=True):
+        # /shop?marca=<id>: productos de una marca (enlace desde la ficha del producto)
+        domain = super()._get_shop_domain(search, category, attribute_value_dict, search_in_description)
+        marca = request.params.get('marca')
+        if marca and str(marca).isdigit():
+            domain = Domain.AND([domain, [('bbt_brand_id', '=', int(marca))]])
+        return domain
 
 
 class BabatsaBrands(http.Controller):

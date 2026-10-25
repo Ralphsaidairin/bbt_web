@@ -18,6 +18,13 @@ class Website(models.Model):
         required=True,
         help='Diseño del encabezado del sitio. Para comparar sin guardar: agregar ?navbar=doble a la dirección.',
     )
+    bbt_catalog_mode = fields.Boolean(
+        string='Modo catálogo',
+        default=True,
+        help='La tienda muestra los productos como referencia: sin precios, sin carrito ni pago. '
+             'En su lugar invita a visitar una sucursal o pedir cotización. '
+             'Apagarlo cuando se quiera vender en línea.',
+    )
 
 
 class ResConfigSettings(models.TransientModel):
@@ -25,3 +32,5 @@ class ResConfigSettings(models.TransientModel):
 
     website_bbt_header_style = fields.Selection(
         related='website_id.bbt_header_style', readonly=False)
+    website_bbt_catalog_mode = fields.Boolean(
+        related='website_id.bbt_catalog_mode', readonly=False)
