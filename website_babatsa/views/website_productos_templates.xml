@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Página /productos (website.page, editable en el constructor).
+        Líneas y subcategorías tal cual el documento "Página Web Babatsa" (sin catálogo ni carrito por ahora).
+        Solo se corrigieron acentos y mayúsculas: "Transmición" → "Transmisión", "epoxicos" → "Epóxicos".
+        Los id de cada línea son los anclas que usan los accesos de la página de inicio (/productos#...).
+        Íconos provisionales en colores de marca; cambiarlos por los de la agencia cuando lleguen.
+    -->
+    <template id="productos_view" name="Babatsa: Productos">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'productos'"/>
+            <t t-set="additional_title">Productos</t>
+            <div id="wrap">
+
+                <!-- ===================== ENCABEZADO ===================== -->
+                <section class="bbt bbt-sec bbt-prod-hero">
+                    <div class="container">
+                        <p class="bbt-eyebrow">Productos</p>
+                        <h1 class="bbt-h2">Líneas de <em>productos</em></h1>
+                        <p class="bbt-lead mt-3">Más que ferretería, soluciones para industria, agricultura, automotriz, mantenimiento y ferretería general.</p>
+                        <nav class="bbt-city-nav bbt-prod-nav" aria-label="Líneas de producto">
+                            <a href="#rodamientos">Rodamientos</a>
+                            <a href="#transmision">Transmisión de potencia</a>
+                            <a href="#hidraulica">Hidráulica</a>
+                            <a href="#tornilleria">Tornillería</a>
+                            <a href="#herramientas">Herramientas</a>
+                            <a href="#lubricacion">Lubricación y químicos</a>
+                            <a href="#abrasivos">Abrasivos y soldadura</a>
+                            <a href="#ferreteria">Ferretería y seguridad</a>
+                            <a href="#sectores">Por sector</a>
+                        </nav>
+                    </div>
+                </section>
+
+                <!-- ===================== LÍNEAS ===================== -->
+                <section class="bbt bbt-sec bbt-prod-lines">
+                    <div class="container">
+                        <h2 class="bbt-h2">Clasificación principal <em>por tipo de producto</em></h2>
+                        <div class="bbt-lines">
+
+                            <article class="bbt-line" id="rodamientos">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18" fill="#0847E9"/><circle cx="24" cy="24" r="12" fill="#fff"/><g fill="#FFBE06"><circle cx="24" cy="14.5" r="3.4"/><circle cx="33.5" cy="24" r="3.4"/><circle cx="24" cy="33.5" r="3.4"/><circle cx="14.5" cy="24" r="3.4"/></g><circle cx="24" cy="24" r="4.5" fill="#002475"/></svg></span>
+                                <div class="bbt-line-body">
+                                    <h3>Rodamientos</h3>
+                                    <ul class="bbt-chips">
+                                        <li>Baleros</li><li>Chumaceras</li><li>Retenes</li><li>Conos y tazas</li><li>Manguitos</li>
+                                        <li>Collarines</li><li>Crucetas</li><li>Yugos</li><li>Mazas</li><li>Sellos</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="bbt-line" id="transmision">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="13" width="38" height="22" rx="11" fill="none" stroke="#002475" stroke-width="4"/><circle cx="16" cy="24" r="7.5" fill="#0847E9"/><circle cx="34" cy="24" r="5.5" fill="#FFBE06"/><circle cx="16" cy="24" r="2.6" fill="#fff"/><circle cx="34" cy="24" r="2" fill="#fff"/></svg></span>
+                                <div class="bbt-line-body">
+                                    <h3>Transmisión de potencia</h3>
+                                    <ul class="bbt-chips">
+                                        <li>Bandas</li><li>Poleas</li><li>Cadenas</li><li>Sprockets o catarinas</li><li>Coples</li>
+                                        <li>Bujes</li><li>Bandas transportadoras</li><li>Componentes de transmisión</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="bbt-line" id="hidraulica">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 38c10 0 8-22 20-22" stroke="#0847E9" stroke-width="7" fill="none" stroke-linecap="round"/><rect x="27" y="10" width="10" height="12" rx="2" fill="#002475"/><rect x="36" y="12.5" width="7" height="7" rx="1.5" fill="#FFBE06"/><circle cx="9" cy="38" r="4.5" fill="#FFBE06"/></svg></span>
+                                <div class="bbt-line-body">
+                                    <h3>Hidráulica y transmisión de fluidos</h3>
+                                    <ul class="bbt-chips">
+                                        <li>Mangueras</li><li>Conexiones</li><li>Coples</li><li>Válvulas</li><li>Adaptadores</li><li>Motores</li>
+                                        <li>Bombas</li><li>Componentes hidráulicos</li><li>Cilindros telescópicos</li><li>Motores hidráulicos</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="bbt-line" id="tornilleria">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 5h20l5 8-5 8H14l-5-8z" fill="#002475"/><rect x="19" y="20" width="10" height="23" rx="2" fill="#0847E9"/><g stroke="#FFBE06" stroke-width="2.5" stroke-linecap="round"><path d="M19 27l10-2.5M19 33l10-2.5M19 39l10-2.5"/></g></svg></span>
+                                <div class="bbt-line-body">
+                                    <h3>Tornillería, fijación y sujeción</h3>
+                                    <ul class="bbt-chips">
+                                        <li>Tornillos (estándar, milimétricos y finos)</li><li>Tuercas</li><li>Birlos</li><li>Rondanas</li><li>Anclajes</li>
+                                        <li>Espárragos (varilla roscada)</li><li>Tornillería de acero inoxidable</li><li>Tornillería de alta resistencia</li>
+                                        <li>Abrazaderas</li><li>Elementos de fijación</li>
+                                        <li>Opresores, pernos, taquetes, cuñas, chavetas, remaches, cinchos y otros elementos de fijación</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="bbt-line bbt-line--wide" id="herramientas">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 39 33 18" stroke="#0847E9" stroke-width="7" stroke-linecap="round"/><path d="M36 39 15 18" stroke="#FFBE06" stroke-width="7" stroke-linecap="round"/><path d="M28 7a9 9 0 0 1 12 12l-6-1-5-5z" fill="#002475"/><path d="M8 10l6-3 5 5-3 6z" fill="#002475"/></svg></span>
+                                <div class="bbt-line-body">
+                                    <h3>Herramientas, maquinaria y equipo</h3>
+                                    <div class="bbt-line-groups">
+                                        <div class="bbt-line-group">
+                                            <h4>Herramienta manual</h4>
+                                            <ul class="bbt-chips"><li>Llaves</li><li>Pinzas</li><li>Limas</li><li>Matracas</li><li>Dados</li><li>Cinceles</li><li>Herramientas especializadas</li><li>Palas</li></ul>
+                                        </div>
+                                        <div class="bbt-line-group">
+                                            <h4>Herramienta eléctrica e inalámbrica</h4>
+                                            <ul class="bbt-chips"><li>Taladros</li><li>Esmeriladoras</li><li>Sierras</li></ul>
+                                        </div>
+                                        <div class="bbt-line-group">
+                                            <h4>Herramientas neumáticas</h4>
+                                            <ul class="bbt-chips"><li>Llaves de impacto</li></ul>
+                                        </div>
+                                        <div class="bbt-line-group">
+                                            <h4>Equipo automotriz</h4>
+                                            <ul class="bbt-chips"><li>Acumuladores</li><li>Gatos</li><li>Patines</li><li>Torres</li><li>Tuercas y birlos automotrices</li><li>Equipos de servicio</li></ul>
+                                        </div>
+                                        <div class="bbt-line-group">
+                                            <h4>Maquinaria y equipo</h4>
+                                            <ul class="bbt-chips"><li>Compresores</li><li>Soldadoras</li><li>Motobombas</li><li>Equipos de taller</li><li>Generadores</li><li>Hidrolavadoras</li><li>Aspiradoras</li><li>Podadoras</li><li>Cargadores/arrancadores</li><li>Equipos de mantenimiento industrial</li></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="bbt-line bbt-line--wide" id="lubricacion">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5s13 14 13 23a13 13 0 0 1-26 0C11 19 24 5 24 5z" fill="#0847E9"/><path d="M24 22s7 7 7 12a7 7 0 0 1-14 0c0-5 7-12 7-12z" fill="#FFBE06"/><path d="M19 33a5 5 0 0 0 5 5" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></span>
+                                <div class="bbt-line-body">
+                                    <h3>Lubricación, filtración y químicos</h3>
+                                    <div class="bbt-line-groups">
+                                        <div class="bbt-line-group">
+                                            <h4>Lubricación</h4>
+                                            <ul class="bbt-chips"><li>Aceites</li><li>Grasas</li><li>Anticongelantes</li><li>Aditivos</li><li>Lubricantes</li></ul>
+                                        </div>
+                                        <div class="bbt-line-group">
+                                            <h4>Filtración</h4>
+                                            <ul class="bbt-chips"><li>Filtros de aceite</li><li>Aire</li><li>Combustible</li><li>Servicio pesado</li></ul>
+                                        </div>
+                                        <div class="bbt-line-group">
+                                            <h4>Químicos</h4>
+                                            <ul class="bbt-chips"><li>Silicones</li><li>Limpiadores</li><li>Aflojatodos</li><li>Desengrasantes</li><li>Pegamentos</li><li>Antiferrantes</li><li>Productos químicos</li><li>Impermeabilizantes</li><li>Esmaltes y pinturas</li><li>Selladores</li><li>Epóxicos</li></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="bbt-line" id="abrasivos">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="21" cy="27" r="16" fill="#002475"/><circle cx="21" cy="27" r="10" fill="#0847E9"/><circle cx="21" cy="27" r="3.5" fill="#fff"/><g stroke="#FFBE06" stroke-width="3" stroke-linecap="round"><path d="M37 6l-3 6"/><path d="M43 12l-6 3"/><path d="M42 4l-4 4"/></g></svg></span>
+                                <div class="bbt-line-body">
+                                    <h3>Abrasivos, corte y soldadura</h3>
+                                    <ul class="bbt-chips">
+                                        <li>Discos</li><li>Lijas</li><li>Cepillos</li><li>Corte</li><li>Soldadura</li><li>Brocas</li><li>Varillas</li>
+                                        <li>Abrasivos</li><li>Machuelos</li><li>Buriles</li><li>Sierras</li><li>Navajas</li><li>Productos de corte</li>
+                                    </ul>
+                                </div>
+                            </article>
+
+                            <article class="bbt-line" id="ferreteria">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M9 32a15 15 0 0 1 30 0z" fill="#FFBE06"/><rect x="20" y="13" width="8" height="12" rx="3" fill="#F59E0B"/><rect x="5" y="31" width="38" height="7" rx="3.5" fill="#002475"/></svg></span>
+                                <div class="bbt-line-body">
+                                    <h3>Ferretería y seguridad</h3>
+                                    <div class="bbt-line-groups">
+                                        <div class="bbt-line-group">
+                                            <h4>Ferretería</h4>
+                                            <ul class="bbt-chips"><li>Candados</li><li>Cerraduras</li><li>Rodajas</li><li>Escaleras</li><li>Lámparas</li><li>Extensiones</li><li>Termos y hieleras</li><li>Artículos generales</li></ul>
+                                        </div>
+                                        <div class="bbt-line-group" id="seguridad">
+                                            <h4>Seguridad</h4>
+                                            <ul class="bbt-chips"><li>Guantes</li><li>Lentes</li><li>Botas</li><li>Chalecos</li><li>Cascos</li><li>Caretas</li><li>Fajas</li><li>Impermeables</li><li>Señalización y demás EPP</li></ul>
+                                        </div>
+                                        <div class="bbt-line-group">
+                                            <h4>Mantenimiento general</h4>
+                                            <ul class="bbt-chips"><li>Cepillos</li><li>Brochas</li><li>Cintas</li><li>Artículos de limpieza y productos auxiliares</li><li>Cable polipropileno</li><li>Consumibles generales</li></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===================== SOLUCIONES POR SECTOR ===================== -->
+                <section class="bbt bbt-apps" id="sectores">
+                    <div class="container">
+                        <p class="bbt-eyebrow">Soluciones por sector / aplicación</p>
+                        <h2 class="bbt-h2">Atendemos diferentes <em>sectores</em></h2>
+                        <div class="bbt-apps-grid">
+                            <div class="bbt-app">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="35" cy="13" r="7" fill="#FFBE06"/><path d="M24 42V22" stroke="#002475" stroke-width="4" stroke-linecap="round"/><path d="M24 26C14 26 8 20 8 12c10 0 16 6 16 14z" fill="#0847E9"/><path d="M24 32c0-8 6-12 14-12 0 8-6 12-14 12z" fill="#002475"/></svg></span>
+                                <span class="bbt-app-name">Agrícola</span>
+                            </div>
+                            <div class="bbt-app">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="31" y="6" width="7" height="20" fill="#0847E9"/><path d="M5 42V22l11 7v-7l11 7v-7l16 9v18z" fill="#002475"/><g fill="#FFBE06"><rect x="11" y="33" width="5" height="5"/><rect x="21" y="33" width="5" height="5"/><rect x="31" y="33" width="5" height="5"/></g></svg></span>
+                                <span class="bbt-app-name">Industrial</span>
+                            </div>
+                            <div class="bbt-app">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 26l5-11h22l5 11z" fill="#0847E9"/><rect x="5" y="25" width="38" height="11" rx="4" fill="#002475"/><circle cx="13" cy="31" r="3" fill="#FFBE06"/><circle cx="35" cy="31" r="3" fill="#FFBE06"/><rect x="8" y="35" width="7" height="6" rx="2" fill="#002475"/><rect x="33" y="35" width="7" height="6" rx="2" fill="#002475"/></svg></span>
+                                <span class="bbt-app-name">Taller y mantenimiento</span>
+                            </div>
+                            <div class="bbt-app">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="3" y="11" width="27" height="22" rx="2" fill="#0847E9"/><path d="M30 18h8l7 8v7H30z" fill="#002475"/><path d="M33 21h4l4 5h-8z" fill="#fff"/><circle cx="12" cy="36" r="5" fill="#FFBE06"/><circle cx="37" cy="36" r="5" fill="#FFBE06"/></svg></span>
+                                <span class="bbt-app-name">Transporte y flotillas</span>
+                            </div>
+                            <div class="bbt-app">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M20 6h8l9 32H11z" fill="#FFBE06"/><path d="M17.2 16h13.6l1.7 6H15.5zM14.4 26h19.2l1.7 6H12.7z" fill="#002475"/><rect x="6" y="37" width="36" height="6" rx="3" fill="#0847E9"/></svg></span>
+                                <span class="bbt-app-name">Construcción</span>
+                            </div>
+                            <div class="bbt-app">
+                                <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="22" width="32" height="20" fill="#002475"/><rect x="20" y="29" width="8" height="13" fill="#FFBE06"/><path d="M5 9h38l2 11a5 5 0 0 1-9.5 1.5A5 5 0 0 1 26 21.5a5 5 0 0 1-9.5 0A5 5 0 0 1 3 20z" fill="#0847E9"/><path d="M16.5 9h7.5v12.5a5 5 0 0 1-7.5 0zM31.5 9H24v12.5a5 5 0 0 0 7.5 0z" fill="#FFBE06"/></svg></span>
+                                <span class="bbt-app-name">Comercio y servicios</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="oe_structure" id="oe_structure_bbt_productos_mid"/>
+
+                <!-- ===================== CIERRE ===================== -->
+                <section class="bbt bbt-sec bbt-brands-cta">
+                    <div class="container">
+                        <div class="bbt-cta-box">
+                            <div>
+                                <h2 class="bbt-h2">¿Buscas un producto <em>en específico?</em></h2>
+                                <p class="bbt-lead mt-2">Pregúntanos por número de parte, marca o aplicación y te ayudamos a encontrarlo.</p>
+                            </div>
+                            <a class="bbt-btn bbt-btn--yellow" href="/contacto?motivo=Información%20de%20producto">Pregunta por un producto</a>
+                        </div>
+                    </div>
+                </section>
+                <div class="oe_structure" id="oe_structure_bbt_productos_bottom"/>
+            </div>
+        </t>
+    </template>
+
+    <record id="productos_page" model="website.page">
+        <field name="url">/productos</field>
+        <field name="is_published" eval="True"/>
+        <field name="view_id" ref="productos_view"/>
+        <field name="website_indexed" eval="True"/>
+    </record>
+</odoo>

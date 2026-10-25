@@ -15,12 +15,12 @@ Sitio web corporativo de Babatsa: Inicio, Marcas (modelo propio), Sucursales (de
    - Dirección, teléfono y correo salen del **contacto de dirección** del almacén: revisar que estén completos.
    - Si el contacto tiene coordenadas, "Cómo llegar" las usa; si no, usa la dirección escrita.
 2. **Paleta**: Sitio web > Editar > Tema > Colores: elegir la paleta *babatsa*. Fuente: Montserrat.
-3. **Logo del encabezado**: Sitio web > Editar > clic en el logo > subir `static/src/img/logo-color.svg`
-   (mínimo 150 px de ancho según el manual).
-4. **Menú**: el módulo agrega *Nosotros* (/nosotros), *Marcas* (/marcas), *Sucursales* (/sucursales) y *Contacto* (/contacto).
-   Borrar el menú nativo "Contáctenos" (/contactus) y crear una redirección 301 /contactus → /contacto
-   (Sitio web > Configuración > Redirecciones). Faltan Productos y Servicios.
-   Nota: al actualizar el módulo el hook no vuelve a correr; crea a mano los menús nuevos (Marcas, Nosotros).
+3. **Logo del encabezado**: ya viene en el encabezado propio (`static/src/img/logo-color.svg`); no se sube.
+4. **Menú** (orden del documento): Inicio | Nosotros | Productos | Marcas | Servicios | Sucursales | Contacto.
+   Borrar los menús nativos "Contáctenos" (/contactus) y "Empleos" (/jobs; las vacantes van en el pie) y crear
+   una redirección 301 /contactus → /contacto (Sitio web > Configuración > Redirecciones).
+   Nota: al actualizar el módulo el hook no vuelve a correr; crea a mano los menús nuevos.
+   El encabezado es propio (cápsula flotante): toma los enlaces de primer nivel de Sitio web > Menús.
 5. **Nosotros**: la línea del tiempo tiene hitos con [Año] y [por confirmar]; editarlos en el constructor
    cuando se tengan los datos reales.
 6. **Equipo de ventas para contacto** (opcional): Ajustes > Técnico > Parámetros del sistema,

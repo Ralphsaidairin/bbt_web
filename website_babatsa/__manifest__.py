@@ -30,6 +30,8 @@ Sitio web corporativo de Babatsa.
         'views/website_marcas_templates.xml',
         'views/website_home_templates.xml',
         'views/website_nosotros_templates.xml',
+        'views/website_productos_templates.xml',
+        'views/website_servicios_templates.xml',
         'views/website_header_templates.xml',
         'views/website_footer_templates.xml',
         'views/website_sucursales_templates.xml',

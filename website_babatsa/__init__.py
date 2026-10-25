@@ -6,7 +6,9 @@ from . import controllers
 # (nombre, url, secuencia)
 BBT_MENUS = [
     ('Nosotros', '/nosotros', 20),
+    ('Productos', '/productos', 30),
     ('Marcas', '/marcas', 40),
+    ('Servicios', '/servicios', 50),
     ('Sucursales', '/sucursales', 60),
     ('Contacto', '/contacto', 70),
 ]

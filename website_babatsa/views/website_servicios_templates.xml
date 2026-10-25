@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Página /servicios (website.page, editable en el constructor). Textos del documento "Página Web Babatsa".
+        Las marcas de "Programas especializados" y "Centro de servicio autorizado" se leen del modelo
+        Marcas Babatsa (casillas Programa especializado / Centro de servicio autorizado).
+    -->
+    <template id="servicios_view" name="Babatsa: Servicios">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'servicios'"/>
+            <t t-set="additional_title">Servicios</t>
+            <t t-set="bbt_brands" t-value="request.env['babatsa.brand'].sudo().search([('website_published', '=', True)])"/>
+            <t t-set="bbt_program_brands" t-value="bbt_brands.filtered('has_program')"/>
+            <t t-set="bbt_service_brands" t-value="bbt_brands.filtered('is_service_center')"/>
+            <div id="wrap">
+
+                <!-- ===================== ENCABEZADO ===================== -->
+                <section class="bbt bbt-sec bbt-about-hero bbt-svc-hero">
+                    <div class="container">
+                        <p class="bbt-eyebrow">Servicios</p>
+                        <h1 class="bbt-h2">Soluciones que van <em>más allá del producto</em></h1>
+                        <p class="bbt-svc-quote">“No solo surtimos lo que necesitas. Te ayudamos a encontrar la mejor solución.”</p>
+                        <p class="bbt-lead mt-3">En Babatsa no solo te ayudamos a encontrar el producto que necesitas. Contamos con personal capacitado y el respaldo de nuestras marcas para analizar tus necesidades, recomendar soluciones y dar soporte a tus equipos y operación.</p>
+                        <nav class="bbt-city-nav bbt-svc-nav" aria-label="Servicios">
+                            <a href="#asesoria">Asesoría especializada</a>
+                            <a href="#analisis">Análisis y proyectos de mejora</a>
+                            <a href="#centro-servicio">Centro de servicio autorizado</a>
+                            <a href="#cobertura">Cobertura y atención</a>
+                            <a href="#garantias">Garantías y respaldo</a>
+                            <a href="#empresas">Atención a empresas</a>
+                        </nav>
+                    </div>
+                </section>
+
+                <!-- ===================== 1. ASESORÍA ===================== -->
+                <section class="bbt bbt-sec bbt-svc" id="asesoria">
+                    <div class="container">
+                        <div class="row align-items-center g-5">
+                            <div class="col-lg-6">
+                                <span class="bbt-svc-n">01</span>
+                                <h2 class="bbt-h2">Asesoría <em>especializada</em></h2>
+                                <p class="bbt-lead mt-3">Personal capacitado para ayudarte a encontrar la solución adecuada de acuerdo con tu aplicación y necesidades.</p>
+                                <ul class="bbt-checks">
+                                    <li>Orientación en selección de productos.</li>
+                                    <li>Recomendaciones de acuerdo con la aplicación.</li>
+                                    <li>Personal con conocimiento especializado en distintas líneas y marcas.</li>
+                                    <li>Acompañamiento antes y después de la compra.</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="bbt-about-photo"><img src="/website_babatsa/static/src/img/ph/asesor.svg" alt="Asesor de Babatsa con un cliente"/></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===================== 2. ANÁLISIS Y PROYECTOS DE MEJORA ===================== -->
+                <section class="bbt bbt-sec bbt-svc bbt-svc--soft" id="analisis">
+                    <div class="container">
+                        <span class="bbt-svc-n">02</span>
+                        <h2 class="bbt-h2">Análisis y proyectos <em>de mejora</em></h2>
+                        <p class="bbt-lead mt-3 bbt-lead--wide">Contamos con personal especializado y programas en conjunto con marcas líderes para analizar equipos, aplicaciones y condiciones de operación, identificando oportunidades de mejora y desarrollando propuestas enfocadas en desempeño, medición y mantenimiento.</p>
+                        <ol class="bbt-steps">
+                            <li><span class="bbt-step-n">1</span><strong>Analizamos</strong></li>
+                            <li><span class="bbt-step-n">2</span><strong>Identificamos</strong></li>
+                            <li><span class="bbt-step-n">3</span><strong>Proponemos</strong></li>
+                            <li><span class="bbt-step-n">4</span><strong>Damos seguimiento</strong></li>
+                        </ol>
+                        <div class="row g-5 mt-1">
+                            <div class="col-lg-7">
+                                <ul class="bbt-checks bbt-checks--2">
+                                    <li>Análisis de equipos y aplicaciones.</li>
+                                    <li>Evaluación de condiciones de operación.</li>
+                                    <li>Identificación de oportunidades de mejora.</li>
+                                    <li>Propuestas de optimización.</li>
+                                    <li>Medición y diagnóstico.</li>
+                                    <li>Recomendaciones de mantenimiento.</li>
+                                    <li>Desarrollo y seguimiento de proyectos.</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-5" t-if="bbt_program_brands">
+                                <h3 class="bbt-svc-sub">Programas especializados con:</h3>
+                                <div class="bbt-brands bbt-svc-brands">
+                                    <t t-foreach="bbt_program_brands" t-as="brand">
+                                        <t t-set="b" t-value="brand._bbt_website_card()"/>
+                                        <t t-set="tile_class" t-value="'bbt-brand bbt-brand--main'"/>
+                                        <t t-call="website_babatsa.brand_tile"/>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===================== 3. CENTRO DE SERVICIO AUTORIZADO ===================== -->
+                <section class="bbt bbt-sec bbt-svc" id="centro-servicio">
+                    <div class="container">
+                        <div class="row align-items-center g-5">
+                            <div class="col-lg-5">
+                                <span class="bbt-svc-n">03</span>
+                                <h2 class="bbt-h2">Centro de servicio <em>autorizado</em></h2>
+                                <p class="bbt-lead mt-3">Soporte especializado para diagnóstico, mantenimiento y reparación de equipos de las marcas participantes.</p>
+                            </div>
+                            <div class="col-lg-7" t-if="bbt_service_brands">
+                                <div class="bbt-brands bbt-svc-brands bbt-svc-brands--wide">
+                                    <t t-foreach="bbt_service_brands" t-as="brand">
+                                        <t t-set="b" t-value="brand._bbt_website_card()"/>
+                                        <t t-set="tile_class" t-value="'bbt-brand bbt-brand--main'"/>
+                                        <t t-call="website_babatsa.brand_tile"/>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===================== 4. COBERTURA Y ATENCIÓN ===================== -->
+                <section class="bbt bbt-sec bbt-branches" id="cobertura">
+                    <div class="container">
+                        <div class="row align-items-center g-4">
+                            <div class="col-lg-5">
+                                <span class="bbt-svc-n bbt-svc-n--light">04</span>
+                                <p class="bbt-eyebrow">Cobertura y atención</p>
+                                <h2 class="bbt-h2">Cerca de ti, <em>donde lo necesitas</em></h2>
+                                <p class="bbt-lead" style="margin-top:1rem">Nuestra red de sucursales y Centro de Distribución nos permite atender clientes locales y foráneos, dando seguimiento a sus requerimientos y facilitando el suministro de productos y soluciones.</p>
+                                <p class="bbt-routes" style="margin-top:28px"><b>→</b> Atención más allá de nuestras sucursales, pregunta por nuestras rutas.</p>
+                                <div class="bbt-ctas">
+                                    <a class="bbt-btn bbt-btn--yellow" href="/sucursales">Encuentra tu sucursal</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="bbt-map"><img src="/website_babatsa/static/src/img/ph/mapa.svg" alt="Mapa del noroeste y occidente de México con las ciudades donde hay sucursales Babatsa"/></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===================== 5 Y 6. GARANTÍAS · EMPRESAS ===================== -->
+                <section class="bbt bbt-sec bbt-svc">
+                    <div class="container">
+                        <div class="bbt-svc-pair">
+                            <article class="bbt-svc-card" id="garantias">
+                                <span class="bbt-svc-n">05</span>
+                                <h2 class="bbt-h2">Garantías <em>y respaldo</em></h2>
+                                <p class="bbt-lead mt-3">Orientación y seguimiento para garantías de productos adquiridos en Babatsa, de acuerdo con las políticas de cada fabricante.</p>
+                                <a class="bbt-link" href="/contacto?motivo=Garantía">Solicita orientación sobre una garantía <span aria-hidden="true">→</span></a>
+                            </article>
+                            <article class="bbt-svc-card bbt-svc-card--navy" id="empresas">
+                                <span class="bbt-svc-n">06</span>
+                                <h2 class="bbt-h2">Atención <em>a empresas</em></h2>
+                                <p class="bbt-lead mt-3">Cotizaciones, pedidos especiales, abastecimiento y atención a necesidades recurrentes.</p>
+                                <a class="bbt-link" href="/contacto?motivo=Cotización">Solicita una cotización <span aria-hidden="true">→</span></a>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="oe_structure" id="oe_structure_bbt_servicios_bottom"/>
+            </div>
+        </t>
+    </template>
+
+    <record id="servicios_page" model="website.page">
+        <field name="url">/servicios</field>
+        <field name="is_published" eval="True"/>
+        <field name="view_id" ref="servicios_view"/>
+        <field name="website_indexed" eval="True"/>
+    </record>
+</odoo>

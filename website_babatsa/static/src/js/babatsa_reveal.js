@@ -9,11 +9,12 @@
         ".bbt-sec .bbt-eyebrow", ".bbt-sec .bbt-h2", ".bbt-apps .bbt-eyebrow", ".bbt-apps .bbt-h2",
         ".bbt-lead", ".bbt-serv-photo", ".bbt-map", ".bbt-apps-foot", ".bbt-routes", ".bbt-brands-note",
         ".bbt-about-photo", ".bbt-about-quote", ".bbt-about-vct", ".bbt-about-close .bbt-ctas",
-        // Cada hito aparece al llegar a él, sin retraso escalonado
-        ".bbt-tl-item",
+        ".bbt-svc-quote", ".bbt-svc-n", ".bbt-svc-sub",
+        // Cada hito / línea aparece al llegar a él, sin retraso escalonado
+        ".bbt-tl-item", ".bbt-line",
     ].join(",");
     // Contenedores cuyos hijos aparecen uno tras otro
-    var GROUPS = ".bbt-apps-grid, .bbt-serv-list, .bbt-stats, .bbt-brands, .bbt-pillars";
+    var GROUPS = ".bbt-apps-grid, .bbt-serv-list, .bbt-stats, .bbt-brands, .bbt-pillars, .bbt-steps, .bbt-checks, .bbt-svc-pair";
     var STEP = 70; // ms entre hijos
     var MAX_DELAY = 560;
 

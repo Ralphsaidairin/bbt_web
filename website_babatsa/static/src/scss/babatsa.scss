@@ -297,9 +297,78 @@ html.bbt-nav-lock{overflow:hidden}
 
 /* El encabezado flota: las páginas sin portada de color reservan su espacio arriba */
 #wrapwrap > main{padding-top:96px}
-#wrapwrap.homepage > main, #wrapwrap.nosotros > main{padding-top:0}
+/* Páginas propias (primera sección .bbt) e inicio: la portada sube detrás del encabezado */
+#wrapwrap.homepage > main, #wrapwrap > main:has(> #wrap > section.bbt:first-child){padding-top:0}
+#wrap > section.bbt-sec:first-child{padding-top:clamp(132px,13vw,168px)}
 .bbt-about-hero{padding-top:clamp(140px,14vw,176px) !important}
 .bbt-hero .bbt-slide{padding-top:120px}
+
+/* PRODUCTOS */
+.bbt-prod-hero{background:var(--bbt-soft); padding-bottom:clamp(36px,5vw,56px)}
+.bbt-prod-hero .bbt-lead{font-size:1.1rem}
+.bbt-prod-nav{margin:32px 0 0}
+.bbt-prod-nav a{background:#fff}
+.bbt-prod-lines .bbt-h2{margin-bottom:clamp(28px,4vw,44px) !important}
+.bbt-lines{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px}
+.bbt-line{display:flex; gap:20px; align-items:flex-start; padding:26px; border-radius:20px; background:#fff; border:1.5px solid var(--bbt-line); scroll-margin-top:110px; transition:border-color .2s, box-shadow .2s}
+.bbt-line:hover{border-color:var(--bbt-blue); box-shadow:0 14px 34px -18px rgba(8,71,233,.35)}
+.bbt-line:target{border-color:var(--bbt-yellow); box-shadow:0 0 0 4px rgba(255,190,6,.25)}
+.bbt-line--wide{grid-column:1 / -1}
+.bbt-line .bbt-app-icon{flex:none; width:72px; height:72px; background:var(--bbt-soft); box-shadow:none}
+.bbt-line .bbt-app-icon svg{width:44px; height:44px}
+.bbt-line-body{flex:1; min-width:0}
+.bbt-line h3{font-weight:900; font-style:italic; font-size:1.3rem; line-height:1.15; color:var(--bbt-navy); text-transform:uppercase; letter-spacing:-.01em; margin-bottom:14px !important}
+.bbt-line-groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px 24px}
+.bbt-line-group{scroll-margin-top:110px}
+.bbt-line-group h4{font-weight:800; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--bbt-blue); margin:0 0 10px !important}
+.bbt .bbt-chips{display:flex; flex-wrap:wrap; gap:7px}
+.bbt-chips li{font-size:.86rem; font-weight:600; color:var(--bbt-ink); background:var(--bbt-soft); border-radius:999px; padding:.32rem .75rem; line-height:1.3}
+@media (max-width:991px){ .bbt-lines{grid-template-columns:1fr} }
+@media (max-width:575px){ .bbt-line{flex-direction:column; padding:20px} .bbt-line .bbt-app-icon{width:60px; height:60px} }
+
+/* SERVICIOS */
+.bbt-svc-quote{font-weight:800; font-style:italic; font-size:clamp(1.2rem,2.2vw,1.6rem); line-height:1.3; color:var(--bbt-yellow); max-width:36ch; margin-top:1.5rem !important}
+.bbt-svc-nav{margin:36px 0 0}
+.bbt-svc-nav a{color:#fff !important; border-color:rgba(255,255,255,.3)}
+.bbt-svc-nav a:hover{border-color:var(--bbt-yellow); color:var(--bbt-yellow) !important}
+.bbt-svc, .bbt-branches[id]{scroll-margin-top:90px}
+.bbt-svc--soft{background:var(--bbt-soft)}
+.bbt-svc-n{display:block; font-weight:900; font-style:italic; font-size:clamp(2.6rem,5vw,3.6rem); line-height:1; color:transparent; -webkit-text-stroke:2px var(--bbt-blue); margin-bottom:6px}
+.bbt-svc-n--light{-webkit-text-stroke-color:var(--bbt-yellow)}
+.bbt-lead--wide{max-width:72ch}
+.bbt .bbt-checks{display:grid; gap:12px; margin-top:24px}
+.bbt-checks li{position:relative; padding-left:34px; font-weight:600; color:var(--bbt-ink)}
+.bbt-checks li::before{content:""; position:absolute; left:0; top:.1em; width:22px; height:22px; border-radius:50%; background:var(--bbt-yellow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23002475' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 14px no-repeat}
+.bbt-checks--2{grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 24px}
+.bbt-svc-sub{font-weight:800; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--bbt-blue); margin-bottom:14px !important}
+.bbt .bbt-svc-brands{grid-template-columns:repeat(2,minmax(0,1fr))}
+.bbt .bbt-svc-brands--wide{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* Pasos: Analizamos → Identificamos → Proponemos → Damos seguimiento */
+.bbt .bbt-steps{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:36px 0 8px; padding:0; list-style:none; counter-reset:none}
+.bbt-steps li{position:relative; display:flex; align-items:center; gap:12px; background:#fff; border-radius:16px; padding:18px; box-shadow:0 10px 26px -16px rgba(11,21,48,.3)}
+.bbt-steps li:not(:last-child)::after{content:""; position:absolute; right:-14px; top:50%; translate:0 -50%; z-index:1; width:28px; height:28px; border-radius:50%; background:var(--bbt-yellow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23002475' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center / 15px no-repeat}
+.bbt-step-n{flex:none; width:38px; height:38px; border-radius:12px; background:var(--bbt-navy); color:var(--bbt-yellow); font-weight:900; font-style:italic; display:grid; place-items:center}
+.bbt-steps strong{font-weight:800; color:var(--bbt-navy); line-height:1.2}
+.bbt-svc-pair{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px}
+.bbt-svc-card{border-radius:22px; padding:clamp(26px,4vw,44px); background:var(--bbt-soft); display:flex; flex-direction:column; gap:4px; scroll-margin-top:110px}
+.bbt-svc-card .bbt-link{margin-top:auto; padding-top:22px; white-space:normal}
+.bbt-svc-card--navy{background:var(--bbt-navy); color:#fff}
+.bbt-svc-card--navy .bbt-h2{color:#fff}
+.bbt-svc-card--navy .bbt-h2 em{color:var(--bbt-yellow)}
+.bbt-svc-card--navy .bbt-lead{color:#C9D3EE}
+.bbt-svc-card--navy .bbt-link{color:var(--bbt-yellow) !important}
+.bbt-svc-card--navy .bbt-svc-n{-webkit-text-stroke-color:var(--bbt-yellow)}
+@media (max-width:991px){
+  .bbt .bbt-steps{grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px}
+  .bbt-steps li:nth-child(2)::after{display:none}
+  .bbt-svc-pair{grid-template-columns:1fr}
+}
+@media (max-width:575px){
+  .bbt .bbt-steps{grid-template-columns:1fr}
+  .bbt-steps li::after{display:none}
+  .bbt-checks--2{grid-template-columns:1fr}
+  .bbt .bbt-svc-brands--wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 
 /* NOSOTROS */
 .bbt-center{text-align:center}
