@@ -27,12 +27,18 @@
                     </div>
                     <p class="bbt-lead">Productos originales, calidad comprobada y el respaldo de fabricantes reconocidos.</p>
                 </div>
-                <div class="bbt-brands">
-                    <t t-foreach="home_brands" t-as="brand">
-                        <t t-set="b" t-value="brand._bbt_website_card()"/>
-                        <t t-set="tile_class" t-value="'bbt-brand'"/>
-                        <t t-call="website_babatsa.brand_tile"/>
-                    </t>
+                <!-- Carrusel continuo: la lista va dos veces para que el giro no tenga corte;
+                     la copia es inert (ni lector de pantalla ni teclado la recorren). -->
+                <div class="bbt-marquee">
+                    <div class="bbt-marquee-track">
+                        <ul t-foreach="range(2)" t-as="copy" class="bbt-marquee-set" t-att-inert="'inert' if copy else None" t-att-aria-hidden="'true' if copy else None">
+                            <li t-foreach="home_brands" t-as="brand">
+                                <t t-set="b" t-value="brand._bbt_website_card()"/>
+                                <t t-set="tile_class" t-value="'bbt-brand bbt-brand--marquee'"/>
+                                <t t-call="website_babatsa.brand_tile"/>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="bbt-brands-note">
                     <p>Además contamos con una amplia variedad de marcas especializadas para cada aplicación.</p>

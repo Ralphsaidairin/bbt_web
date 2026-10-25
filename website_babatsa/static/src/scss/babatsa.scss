@@ -102,6 +102,20 @@
 .bbt-brands{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:12px}
 .bbt-brand{background:#fff; border-radius:14px; border:1px solid var(--bbt-line); padding:14px; display:grid; place-items:center; aspect-ratio:3/2}
 .bbt-brand img{width:100%; height:100%; object-fit:contain}
+/* Carrusel de marcas en inicio */
+.bbt-marquee{overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.bbt-marquee-track{display:flex; width:max-content; animation:bbt-marquee 45s linear infinite}
+.bbt-marquee:hover .bbt-marquee-track, .bbt-marquee:focus-within .bbt-marquee-track{animation-play-state:paused}
+.bbt .bbt-marquee-set{display:flex; gap:14px; padding-right:14px}
+.bbt-brand--marquee{width:180px}
+@keyframes bbt-marquee{to{transform:translateX(-50%)}}
+@media (max-width:575px){ .bbt-brand--marquee{width:140px} }
+@media (prefers-reduced-motion:reduce){
+  .bbt-marquee{-webkit-mask-image:none; mask-image:none}
+  .bbt-marquee-track{animation:none; width:auto}
+  .bbt .bbt-marquee-set{flex-wrap:wrap; justify-content:center}
+  .bbt-marquee-set[inert]{display:none}
+}
 .bbt-brands-note{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; margin-top:28px}
 .bbt-brands-note p{color:var(--bbt-muted); max-width:60ch}
 @media (max-width:991px){ .bbt-brands{grid-template-columns:repeat(4,minmax(0,1fr))} }
@@ -227,6 +241,65 @@
 .bbt-cta-box .bbt-lead{color:#C9D3EE}
 @media (max-width:991px){ .bbt-brands--main{grid-template-columns:repeat(3,minmax(0,1fr))} .bbt-pillars{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:575px){ .bbt-brands--main{grid-template-columns:repeat(2,minmax(0,1fr))} .bbt-pillars{grid-template-columns:1fr} }
+
+/* ===================== ENCABEZADO · CÁPSULA FLOTANTE ===================== */
+.bbt-nav-wrap{position:fixed; top:0; left:0; right:0; z-index:1030; padding:16px 16px 0; background:transparent; pointer-events:none; transition:translate .35s cubic-bezier(.2,.7,.2,1), padding .3s}
+.bbt-nav-wrap > *{pointer-events:auto}
+.bbt-nav-wrap.is-hidden{translate:0 calc(-100% - 8px)}
+.bbt-nav-wrap.is-scrolled{padding-top:10px}
+.bbt-nav{display:flex; align-items:center; gap:16px; max-width:1240px; margin:0 auto; padding:10px 10px 10px 24px; background:rgba(255,255,255,.92); -webkit-backdrop-filter:saturate(1.6) blur(14px); backdrop-filter:saturate(1.6) blur(14px); border:1px solid rgba(255,255,255,.7); border-radius:999px; box-shadow:0 8px 30px -12px rgba(0,20,70,.35); transition:padding .3s, box-shadow .3s, max-width .3s}
+.bbt-nav-wrap.is-scrolled .bbt-nav{padding-top:6px; padding-bottom:6px; max-width:1160px; box-shadow:0 12px 34px -12px rgba(0,20,70,.45)}
+.bbt-nav-brand{flex:none; display:flex; align-items:center}
+.bbt-nav-brand img{height:36px; width:auto; transition:height .3s}
+.bbt-nav-wrap.is-scrolled .bbt-nav-brand img{height:30px}
+.bbt .bbt-nav-links{display:flex; align-items:center; gap:2px; margin:0 auto}
+.bbt-nav-links a{position:relative; display:block; padding:10px 14px; font-weight:700; font-size:.92rem; color:var(--bbt-navy) !important; text-decoration:none !important; border-radius:999px; transition:background .2s, color .2s}
+.bbt-nav-links a::after{content:""; position:absolute; left:14px; right:14px; bottom:5px; height:3px; border-radius:3px; background:var(--bbt-yellow); transform:scaleX(0); transform-origin:left; transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.bbt-nav-links a:hover{background:var(--bbt-soft)}
+.bbt-nav-links a:hover::after, .bbt-nav-links a.bbt-on::after{transform:scaleX(1)}
+.bbt-nav-links a.bbt-on{color:var(--bbt-blue) !important}
+.bbt-nav-actions{flex:none; display:flex; align-items:center; gap:8px}
+.bbt-nav-cta{min-height:44px; padding:.65rem 1.4rem}
+.bbt-nav-admin{width:40px; height:40px; border-radius:50%; display:grid; place-items:center; color:var(--bbt-muted) !important; transition:background .2s, color .2s}
+.bbt-nav-admin:hover{background:var(--bbt-soft); color:var(--bbt-navy) !important}
+.bbt-nav-admin svg{width:20px; height:20px}
+.bbt-nav-toggle{display:none; width:44px; height:44px; border:0; border-radius:50%; background:var(--bbt-navy); color:#fff; place-items:center; cursor:pointer}
+.bbt-nav-burger{display:grid; gap:4px; width:18px}
+.bbt-nav-burger span{display:block; height:2px; border-radius:2px; background:currentColor; transition:transform .3s, opacity .2s}
+.bbt-nav-wrap.is-open .bbt-nav-burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.bbt-nav-wrap.is-open .bbt-nav-burger span:nth-child(2){opacity:0}
+.bbt-nav-wrap.is-open .bbt-nav-burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* Panel de celular */
+.bbt-nav-backdrop{position:fixed; inset:0; background:rgba(0,16,56,.45); opacity:0; transition:opacity .3s}
+.bbt-nav-panel{position:fixed; left:0; right:0; bottom:0; max-height:86vh; overflow-y:auto; background:#fff; border-radius:24px 24px 0 0; padding:10px 20px calc(24px + env(safe-area-inset-bottom)); box-shadow:0 -20px 50px -20px rgba(0,20,70,.4); translate:0 100%; transition:translate .32s cubic-bezier(.2,.7,.2,1)}
+.bbt-nav-wrap.is-open .bbt-nav-backdrop{opacity:1}
+.bbt-nav-wrap.is-open .bbt-nav-panel{translate:0 0}
+.bbt-nav-grip{display:block; width:44px; height:5px; border-radius:5px; background:var(--bbt-line); margin:4px auto 14px}
+.bbt-nav-panel-links a{display:flex; justify-content:space-between; align-items:center; padding:15px 6px; border-bottom:1px solid var(--bbt-line); font-weight:800; font-size:1.2rem; color:var(--bbt-navy) !important; text-decoration:none !important}
+.bbt-nav-panel-links a.bbt-on{color:var(--bbt-blue) !important}
+.bbt-nav-arrow{color:var(--bbt-blue); transition:transform .2s}
+.bbt-nav-panel-links a:hover .bbt-nav-arrow{transform:translateX(4px)}
+.bbt-nav-panel-foot{display:grid; gap:10px; margin-top:20px}
+html.bbt-nav-lock{overflow:hidden}
+
+@media (max-width:991px){
+  .bbt .bbt-nav-links{display:none}
+  .bbt-nav{padding-left:18px; justify-content:space-between}
+  .bbt-nav-toggle{display:grid}
+}
+@media (max-width:420px){ .bbt-nav-cta{display:none} .bbt-nav-wrap{padding:10px 10px 0} }
+@media (min-width:992px){ .bbt-nav-panel, .bbt-nav-backdrop{display:none !important} }
+@media (prefers-reduced-motion:reduce){ .bbt-nav-wrap, .bbt-nav, .bbt-nav-panel, .bbt-nav-backdrop{transition:none} }
+
+/* Derechos reservados van en el pie propio; la barra de Odoo se oculta (no se borra: otras plantillas dependen de ella) */
+.o_footer_copyright{display:none !important}
+
+/* El encabezado flota: las páginas sin portada de color reservan su espacio arriba */
+#wrapwrap > main{padding-top:96px}
+#wrapwrap.homepage > main, #wrapwrap.nosotros > main{padding-top:0}
+.bbt-about-hero{padding-top:clamp(140px,14vw,176px) !important}
+.bbt-hero .bbt-slide{padding-top:120px}
 
 /* NOSOTROS */
 .bbt-center{text-align:center}

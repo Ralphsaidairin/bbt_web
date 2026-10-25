@@ -2,8 +2,8 @@
 <odoo>
     <!--
         Pie de página Babatsa. Reemplaza el contenido del pie "Default" de Odoo.
-        La línea de copyright de Odoo se mantiene debajo y se edita desde el constructor:
-        escribir "© Babatsa. Todos los derechos reservados."
+        Los derechos reservados van dentro de este pie; la barra de copyright de Odoo se oculta por CSS
+        (no se borra porque varias plantillas de Odoo dependen de ella).
         "Ver vacantes" apunta a /jobs (app Reclutamiento: RH publica y el candidato adjunta su CV).
     -->
     <template id="bbt_footer" inherit_id="website.footer_custom" name="Babatsa: Pie de página">
@@ -45,7 +45,7 @@
                     </div>
                   </div>
                   <div class="bbt-fbottom">
-                    <span>Babatsa · Vamos con todo</span>
+                    <span>© <t t-esc="datetime.date.today().year"/> Babatsa. Todos los derechos reservados.</span>
                     <a href="/aviso-de-privacidad">Aviso de privacidad</a>
                   </div>
                 </div>

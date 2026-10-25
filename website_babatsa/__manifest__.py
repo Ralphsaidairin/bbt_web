@@ -30,6 +30,7 @@ Sitio web corporativo de Babatsa.
         'views/website_marcas_templates.xml',
         'views/website_home_templates.xml',
         'views/website_nosotros_templates.xml',
+        'views/website_header_templates.xml',
         'views/website_footer_templates.xml',
         'views/website_sucursales_templates.xml',
         'views/website_contacto_templates.xml',
@@ -41,6 +42,7 @@ Sitio web corporativo de Babatsa.
         'web.assets_frontend': [
             'website_babatsa/static/src/scss/babatsa.scss',
             'website_babatsa/static/src/js/babatsa_reveal.js',
+            'website_babatsa/static/src/js/babatsa_nav.js',
         ],
     },
     'post_init_hook': 'post_init_hook',

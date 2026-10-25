@@ -91,15 +91,15 @@
         <section class="bbt bbt-apps">
           <div class="container">
             <p class="bbt-eyebrow">Productos</p>
-            <h2 class="bbt-h2">Todo lo que tu operación <em>necesita</em></h2>
+            <h2 class="bbt-h2">Categorías de <em>productos</em></h2>
             <div class="bbt-apps-grid">
               <a class="bbt-app" href="/productos#ferreteria">
                 <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="21" y="16" width="7" height="27" rx="3" fill="#002475"/><path d="M10 9h24a6 6 0 0 1 6 6v3H10z" fill="#FFBE06"/><rect x="10" y="9" width="9" height="12" rx="2" fill="#0847E9"/></svg></span>
-                <span class="bbt-app-name">Ferretería y mantenimiento</span>
+                <span class="bbt-app-name">Ferretería y mantenimiento general</span>
               </a>
               <a class="bbt-app" href="/productos#transmision">
                 <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18" fill="#0847E9"/><circle cx="24" cy="24" r="12" fill="#fff"/><g fill="#FFBE06"><circle cx="24" cy="14.5" r="3.4"/><circle cx="33.5" cy="24" r="3.4"/><circle cx="24" cy="33.5" r="3.4"/><circle cx="14.5" cy="24" r="3.4"/></g><circle cx="24" cy="24" r="4.5" fill="#002475"/></svg></span>
-                <span class="bbt-app-name">Transmisión de potencia</span>
+                <span class="bbt-app-name">Refacciones y transmisión de potencia</span>
               </a>
               <a class="bbt-app" href="/productos#herramientas">
                 <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 39 33 18" stroke="#0847E9" stroke-width="7" stroke-linecap="round"/><path d="M36 39 15 18" stroke="#FFBE06" stroke-width="7" stroke-linecap="round"/><path d="M28 7a9 9 0 0 1 12 12l-6-1-5-5z" fill="#002475"/><path d="M8 10l6-3 5 5-3 6z" fill="#002475"/></svg></span>
@@ -107,7 +107,7 @@
               </a>
               <a class="bbt-app" href="/productos#lubricacion">
                 <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5s13 14 13 23a13 13 0 0 1-26 0C11 19 24 5 24 5z" fill="#0847E9"/><path d="M24 22s7 7 7 12a7 7 0 0 1-14 0c0-5 7-12 7-12z" fill="#FFBE06"/><path d="M19 33a5 5 0 0 0 5 5" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></span>
-                <span class="bbt-app-name">Lubricación y químicos</span>
+                <span class="bbt-app-name">Lubricantes, químicos y mantenimiento</span>
               </a>
               <a class="bbt-app" href="/productos#seguridad">
                 <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M9 32a15 15 0 0 1 30 0z" fill="#FFBE06"/><rect x="20" y="13" width="8" height="12" rx="3" fill="#F59E0B"/><rect x="5" y="31" width="38" height="7" rx="3.5" fill="#002475"/></svg></span>
@@ -115,7 +115,7 @@
               </a>
               <a class="bbt-app" href="/productos#abrasivos">
                 <span class="bbt-app-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="21" cy="27" r="16" fill="#002475"/><circle cx="21" cy="27" r="10" fill="#0847E9"/><circle cx="21" cy="27" r="3.5" fill="#fff"/><g stroke="#FFBE06" stroke-width="3" stroke-linecap="round"><path d="M37 6l-3 6"/><path d="M43 12l-6 3"/><path d="M42 4l-4 4"/></g></svg></span>
-                <span class="bbt-app-name">Abrasivos y corte</span>
+                <span class="bbt-app-name">Abrasivos y consumibles</span>
               </a>
             </div>
 
@@ -173,7 +173,7 @@
                   <div class="bbt-serv"><span class="bbt-n">01</span><h3>Asesoría especializada</h3><p>Te orientamos en la selección del producto según tu aplicación, antes y después de la compra.</p></div>
                   <div class="bbt-serv"><span class="bbt-n">02</span><h3>Centros de servicio</h3><p>Diagnóstico, mantenimiento y reparación de equipos de las marcas participantes.</p></div>
                   <div class="bbt-serv"><span class="bbt-n">03</span><h3>Análisis y proyectos de mejora</h3><p>Analizamos, identificamos, proponemos y damos seguimiento, con programas junto a marcas líderes.</p></div>
-                  <div class="bbt-serv"><span class="bbt-n">04</span><h3>Garantías y respaldo</h3><p>Orientación y seguimiento de garantías según las políticas de cada fabricante.</p></div>
+                  <div class="bbt-serv"><span class="bbt-n">04</span><h3>Garantías y respaldo de marcas</h3><p>Orientación y seguimiento de garantías según las políticas de cada fabricante.</p></div>
                 </div>
                 <div style="margin-top:28px"><a class="bbt-btn bbt-btn--blue" href="/servicios">Conoce nuestros servicios</a></div>
               </div>

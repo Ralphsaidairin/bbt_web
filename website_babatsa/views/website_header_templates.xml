@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Encabezado propio de Babatsa: cápsula flotante que reemplaza al navbar de Odoo.
+        priority 99: se aplica después de las plantillas de encabezado de Odoo y las sustituye completas,
+        así que las opciones de encabezado del constructor (plantilla, efectos de scroll) no tienen efecto.
+        Los enlaces salen de Sitio web > Configuración > Menús (solo primer nivel, sin submenús).
+        Comportamiento (compactar, ocultar al bajar, panel en celular): static/src/js/babatsa_nav.js
+    -->
+    <template id="bbt_header" inherit_id="website.layout" name="Babatsa: Encabezado" priority="99">
+        <xpath expr="//header" position="replace">
+            <header t-if="not no_header" id="top" data-anchor="true" class="bbt bbt-nav-wrap">
+                <t t-set="bbt_menus" t-value="website.menu_id.child_id.filtered('is_visible')"/>
+                <nav class="bbt-nav" aria-label="Principal">
+                    <a href="/" class="bbt-nav-brand">
+                        <img src="/website_babatsa/static/src/img/logo-color.svg" alt="Babatsa · Inicio" width="150" height="36"/>
+                    </a>
+                    <ul class="bbt-nav-links" t-ignore="true">
+                        <li t-foreach="bbt_menus" t-as="m">
+                            <a t-att-href="m._clean_url()"
+                               t-att-class="'bbt-on' if m._is_active() else None"
+                               t-att-aria-current="'page' if m._is_active() else None"
+                               t-att-target="'_blank' if m.new_window else None"
+                               t-esc="m.name"/>
+                        </li>
+                    </ul>
+                    <div class="bbt-nav-actions">
+                        <a t-if="not request.env.user._is_public()" href="/odoo" class="bbt-nav-admin" title="Ir a Odoo" aria-label="Ir a Odoo">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+                        </a>
+                        <a class="bbt-btn bbt-btn--yellow bbt-nav-cta" href="/contacto?motivo=Cotización">Cotiza</a>
+                        <button type="button" class="bbt-nav-toggle" aria-expanded="false" aria-controls="bbt_nav_panel">
+                            <span class="bbt-nav-burger" aria-hidden="true"><span/><span/><span/></span>
+                            <span class="visually-hidden">Abrir menú</span>
+                        </button>
+                    </div>
+                </nav>
+
+                <!-- Panel de celular: sube desde abajo -->
+                <div class="bbt-nav-backdrop" hidden="hidden"/>
+                <div id="bbt_nav_panel" class="bbt-nav-panel" role="dialog" aria-modal="true" aria-label="Menú" hidden="hidden">
+                    <span class="bbt-nav-grip" aria-hidden="true"/>
+                    <ul class="bbt-nav-panel-links" t-ignore="true">
+                        <li t-foreach="bbt_menus" t-as="m">
+                            <a t-att-href="m._clean_url()"
+                               t-att-class="'bbt-on' if m._is_active() else None"
+                               t-att-aria-current="'page' if m._is_active() else None"
+                               t-att-target="'_blank' if m.new_window else None">
+                                <span t-esc="m.name"/><span class="bbt-nav-arrow" aria-hidden="true">→</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="bbt-nav-panel-foot">
+                        <a class="bbt-btn bbt-btn--yellow" href="/contacto?motivo=Cotización">Solicita una cotización</a>
+                        <a class="bbt-btn bbt-btn--ghost" href="/sucursales">Encuentra tu sucursal</a>
+                    </div>
+                </div>
+            </header>
+        </xpath>
+    </template>
+</odoo>
