@@ -39,6 +39,7 @@ Sitio web corporativo de Babatsa.
         ],
         'web.assets_frontend': [
             'website_babatsa/static/src/scss/babatsa.scss',
+            'website_babatsa/static/src/js/babatsa_reveal.js',
         ],
     },
     'post_init_hook': 'post_init_hook',

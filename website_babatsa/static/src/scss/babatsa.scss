@@ -73,26 +73,29 @@
   .bbt-hero .carousel-control-prev,.bbt-hero .carousel-control-next{display:none}
 }
 
-/* SECTORES */
-.bbt-sectors{background:var(--bbt-navy); color:#fff; padding:18px 0}
-.bbt-sectors .container{display:flex; align-items:center; gap:14px 28px; flex-wrap:wrap}
-.bbt-sectors strong{font-weight:800; font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bbt-yellow)}
-.bbt-sectors ul{display:flex; flex-wrap:wrap; gap:8px 22px}
-.bbt-sectors li{font-weight:700; font-size:.95rem; display:flex; align-items:center; gap:10px}
-.bbt-sectors li::before{content:""; width:7px; height:7px; background:var(--bbt-yellow); transform:rotate(45deg)}
-
-/* CATEGORÍAS */
-.bbt-cats{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px}
-.bbt-cat{position:relative; display:flex; flex-direction:column; gap:14px; padding:26px; border-radius:18px; background:var(--bbt-soft); border:1.5px solid transparent; text-decoration:none !important; color:var(--bbt-ink) !important; transition:border-color .2s, background .2s, transform .2s}
-.bbt-cat:hover{border-color:var(--bbt-blue); background:#fff; transform:translateY(-3px)}
+/* ÍCONO EN CUADRO (se usa en /marcas) */
 .bbt-cat-icon{width:56px; height:56px; border-radius:14px; background:var(--bbt-navy); display:grid; place-items:center; color:var(--bbt-yellow)}
 .bbt-cat-icon svg{width:30px; height:30px}
-.bbt-cat h3{font-weight:800; font-size:1.2rem; line-height:1.2; color:var(--bbt-navy)}
-.bbt-cat p{color:var(--bbt-muted); font-size:.93rem}
-.bbt-cat .bbt-arrow{position:absolute; top:24px; right:24px; font-weight:900; color:var(--bbt-blue); transition:transform .2s}
-.bbt-cat:hover .bbt-arrow{transform:translateX(4px)}
-@media (max-width:991px){ .bbt-cats{grid-template-columns:repeat(2,minmax(0,1fr))} }
-@media (max-width:575px){ .bbt-cats{grid-template-columns:1fr} }
+
+/* CATEGORÍAS Y SECTORES · cuadrícula de íconos (estilo odoo.com) */
+.bbt-apps{position:relative; overflow:hidden; background:#fff; padding:clamp(72px,9vw,120px) 0 clamp(56px,7vw,88px); text-align:center}
+.bbt-apps::before{content:""; position:absolute; left:-25%; right:-25%; top:clamp(40px,6vw,80px); bottom:0; background:var(--bbt-soft); border-radius:50% 50% 0 0 / 120px 120px 0 0}
+.bbt-apps .container{position:relative}
+.bbt-apps .bbt-h2{margin-bottom:clamp(36px,5vw,56px)}
+.bbt-apps .bbt-apps-sub{margin:clamp(40px,5vw,56px) 0 28px}
+.bbt-apps-grid{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:36px 16px; max-width:920px; margin:0 auto}
+.bbt-app{display:flex; flex-direction:column; align-items:center; gap:14px; text-decoration:none !important; color:var(--bbt-ink) !important}
+.bbt-app-icon{width:84px; height:84px; border-radius:12px; background:#fff; display:grid; place-items:center; box-shadow:0 1px 2px rgba(11,21,48,.06), 0 6px 16px rgba(11,21,48,.08); transition:transform .2s ease, box-shadow .2s ease}
+.bbt-app-icon svg{width:52px; height:52px}
+.bbt-app-name{font-weight:600; font-size:.92rem; line-height:1.25}
+.bbt-app:hover .bbt-app-icon{transform:translateY(-4px); box-shadow:0 2px 4px rgba(11,21,48,.06), 0 12px 24px rgba(8,71,233,.16)}
+.bbt-app:hover .bbt-app-name{color:var(--bbt-blue)}
+.bbt-app:focus-visible{outline:none}
+.bbt-app:focus-visible .bbt-app-icon{outline:3px solid var(--bbt-blue); outline-offset:3px}
+.bbt-apps-foot{margin-top:clamp(40px,5vw,56px); display:flex; justify-content:flex-end; max-width:920px; margin-left:auto; margin-right:auto}
+@media (prefers-reduced-motion:reduce){ .bbt-app-icon{transition:none} .bbt-app:hover .bbt-app-icon{transform:none} }
+@media (max-width:991px){ .bbt-apps-grid{grid-template-columns:repeat(3,minmax(0,1fr))} .bbt-apps-foot{justify-content:center} }
+@media (max-width:575px){ .bbt-apps-grid{gap:28px 10px} .bbt-app-icon{width:68px; height:68px} .bbt-app-icon svg{width:42px; height:42px} .bbt-app-name{font-size:.82rem} }
 
 /* MARCAS */
 .bbt-brands-sec{background:var(--bbt-soft)}
@@ -224,3 +227,25 @@
 .bbt-cta-box .bbt-lead{color:#C9D3EE}
 @media (max-width:991px){ .bbt-brands--main{grid-template-columns:repeat(3,minmax(0,1fr))} .bbt-pillars{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:575px){ .bbt-brands--main{grid-template-columns:repeat(2,minmax(0,1fr))} .bbt-pillars{grid-template-columns:1fr} }
+
+/* ===================== ANIMACIÓN =====================
+   Se usa `translate`/`scale` (no `transform`) para no pisar los giros y efectos hover existentes. */
+@media (prefers-reduced-motion:no-preference){
+  /* Carrusel: el contenido del slide activo entra escalonado cada vez que cambia */
+  @keyframes bbt-rise{from{opacity:0; translate:0 28px} to{opacity:1; translate:0 0}}
+  @keyframes bbt-pop{from{opacity:0; translate:0 24px; scale:.95} to{opacity:1; translate:0 0; scale:1}}
+  @keyframes bbt-float{0%,100%{translate:0 0} 50%{translate:0 -10px}}
+  .bbt-slide.active .bbt-vct, .bbt-slide.active .bbt-tag, .bbt-slide.active .bbt-aniv-year{animation:bbt-rise .7s cubic-bezier(.2,.7,.2,1) both}
+  .bbt-slide.active h1{animation:bbt-rise .7s .08s cubic-bezier(.2,.7,.2,1) both}
+  .bbt-slide.active .bbt-sub{animation:bbt-rise .7s .18s cubic-bezier(.2,.7,.2,1) both}
+  .bbt-slide.active .bbt-ctas{animation:bbt-rise .7s .28s cubic-bezier(.2,.7,.2,1) both}
+  .bbt-slide.active .bbt-photo{animation:bbt-pop .9s .2s cubic-bezier(.2,.7,.2,1) both, bbt-float 6s 1.2s ease-in-out infinite}
+
+  /* Aparición al hacer scroll (clases puestas por babatsa_reveal.js) */
+  .bbt-js .bbt-rv{opacity:0; translate:0 24px; transition:opacity .6s cubic-bezier(.2,.7,.2,1), translate .6s cubic-bezier(.2,.7,.2,1), transform .2s, border-color .2s, box-shadow .2s}
+  .bbt-js .bbt-rv.is-in{opacity:1; translate:0 0; transition-delay:var(--bbt-d,0ms), var(--bbt-d,0ms), 0s, 0s, 0s}
+
+  /* Íconos: pequeño rebote al pasar el mouse */
+  .bbt-app:hover .bbt-app-icon svg{animation:bbt-wiggle .5s ease}
+  @keyframes bbt-wiggle{0%,100%{rotate:0deg} 30%{rotate:-8deg} 60%{rotate:6deg}}
+}
