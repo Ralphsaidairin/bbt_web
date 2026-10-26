@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Vacantes (app Reclutamiento de Odoo, website_hr_recruitment) con el diseño de Babatsa.
+        RH da de alta el puesto en Reclutamiento, le pone flyer y sucursal (pestaña "Sitio web Babatsa")
+        y lo publica. El candidato se postula con el formulario de Odoo (adjunta su CV) o por correo
+        si está configurado Sitio web > Ajustes > Babatsa > Correo de RH.
+    -->
+
+    <!-- Descripción con la que empieza cada vacante nueva (RH la reemplaza desde el editor) -->
+    <template id="job_default_description" name="Babatsa: Descripción inicial de vacante">
+        <section class="bbt bbt-sec bbt-job-desc">
+            <div class="container">
+                <div class="bbt-job-desc-grid">
+                    <div class="bbt-job-desc-col">
+                        <h2>Lo que harás</h2>
+                        <ul>
+                            <li>Escribe aquí las actividades principales del puesto.</li>
+                        </ul>
+                    </div>
+                    <div class="bbt-job-desc-col">
+                        <h2>Lo que buscamos</h2>
+                        <ul>
+                            <li>Escolaridad, experiencia y habilidades que pide el puesto.</li>
+                        </ul>
+                    </div>
+                    <div class="bbt-job-desc-col">
+                        <h2>Lo que ofrecemos</h2>
+                        <ul>
+                            <li>Sueldo, prestaciones, horario y lugar de trabajo.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!-- Tarjeta de vacante tipo flyer. Recibe job. -->
+    <template id="job_card" name="Babatsa: Tarjeta de vacante">
+        <t t-set="bbt_loc" t-value="job._bbt_location()"/>
+        <t t-set="bbt_job_url" t-value="'/jobs/%s' % slug(job)"/>
+        <article t-attf-class="bbt-job #{'bbt-job--off' if not job.website_published else ''}">
+            <a class="bbt-job-media" t-att-href="bbt_job_url" t-att-aria-label="'Ver vacante: %s' % job.name" tabindex="-1">
+                <img t-if="job.bbt_flyer" t-att-src="'/vacantes/%s/flyer?unique=%s' % (job.id, int(job.write_date.timestamp()))"
+                     t-att-alt="'Flyer de la vacante %s' % job.name" loading="lazy"/>
+                <span t-else="" class="bbt-job-poster" aria-hidden="true">
+                    <span class="bbt-job-poster-tag">Vacante</span>
+                    <strong t-esc="job.name"/>
+                    <span t-if="bbt_loc" class="bbt-job-poster-loc" t-esc="bbt_loc"/>
+                    <img class="bbt-job-poster-logo" src="/website_babatsa/static/src/img/logo-blanco.svg" alt=""/>
+                </span>
+            </a>
+            <div class="bbt-job-body">
+                <span t-if="not job.website_published" class="bbt-badge bbt-badge--off">No publicada</span>
+                <h3><a t-att-href="bbt_job_url" t-esc="job.name"/></h3>
+                <ul class="bbt-job-meta">
+                    <li t-if="bbt_loc">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+                        <t t-esc="bbt_loc"/>
+                    </li>
+                    <li t-if="job.contract_type_id">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2"/></svg>
+                        <span t-field="job.contract_type_id"/>
+                    </li>
+                    <li t-if="job.no_of_recruitment &gt; 1">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 20a6.5 6.5 0 0 0-2.5-5.1"/></svg>
+                        <t t-esc="job.no_of_recruitment"/> plazas
+                    </li>
+                </ul>
+                <t t-set="job_desc_edition_placeholder">Resumen del puesto en una o dos líneas...</t>
+                <div class="bbt-job-summary oe_empty" t-field="job.description" t-att-data-editor-message="job_desc_edition_placeholder"/>
+                <div class="bbt-job-ctas">
+                    <a class="bbt-btn bbt-btn--yellow bbt-btn--sm" t-attf-href="/jobs/apply/#{slug(job)}">Postularme</a>
+                    <a class="bbt-link" t-att-href="bbt_job_url">Ver detalle <span aria-hidden="true">→</span></a>
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <!-- Listado /jobs: portada, tarjetas tipo flyer y cómo postularse (sin la barra lateral de ejemplo de Odoo) -->
+    <template id="bbt_jobs_index" inherit_id="website_hr_recruitment.index" name="Babatsa: Vacantes">
+        <xpath expr="//div[@id='wrap']" position="before">
+            <t t-set="additional_title">Vacantes</t>
+        </xpath>
+        <xpath expr="//div[@id='oe_structure_hr_recruitment_index_top']" position="before">
+            <section class="bbt bbt-sec bbt-jobs-hero">
+                <div class="container">
+                    <div class="row align-items-end g-4">
+                        <div class="col-lg-8">
+                            <p class="bbt-eyebrow">Vacantes</p>
+                            <h1 class="bbt-h2">Trabaja <em>con nosotros</em></h1>
+                            <p class="bbt-lead mt-3">Consulta las vacantes disponibles en nuestras sucursales y postúlate en línea con tu CV.</p>
+                            <div class="bbt-ctas">
+                                <a t-if="jobs" class="bbt-btn bbt-btn--yellow" href="#bbt-vacantes">Ver vacantes</a>
+                                <a t-if="website.bbt_rh_email" class="bbt-btn bbt-btn--ghost-light" t-att-href="'mailto:%s?subject=CV' % website.bbt_rh_email">Envía tu CV por correo</a>
+                            </div>
+                        </div>
+                        <div t-if="search_count" class="col-lg-4">
+                            <div class="bbt-jobs-count">
+                                <strong t-esc="search_count"/>
+                                <span t-if="search_count == 1">vacante abierta</span>
+                                <span t-else="">vacantes abiertas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+        <xpath expr="//div[hasclass('oe_website_jobs')]" position="replace">
+            <section class="bbt bbt-sec bbt-jobs-sec" id="bbt-vacantes">
+                <div class="container">
+                    <div t-if="search and not jobs" class="bbt-alert">No encontramos vacantes para "<t t-esc="search"/>". <a href="/jobs">Ver todas</a></div>
+                    <div class="bbt-jobs-admin" groups="hr_recruitment.group_hr_recruitment_user">
+                        <b>Para publicar una vacante:</b> en Reclutamiento crea el puesto, agrega el flyer y la sucursal en la pestaña
+                        "Sitio web Babatsa" y publícalo. Las vacantes no publicadas solo las ve RH.
+                    </div>
+
+                    <div t-if="jobs" class="bbt-job-grid">
+                        <t t-foreach="jobs" t-as="job">
+                            <t t-call="website_babatsa.job_card"/>
+                        </t>
+                    </div>
+                    <div t-elif="not search" class="bbt-jobs-empty">
+                        <span class="bbt-jobs-empty-icon" aria-hidden="true">
+                            <svg viewBox="0 0 48 48"><rect x="6" y="14" width="36" height="26" rx="5" fill="#002475"/><path d="M17 14v-3a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3" stroke="#002475" stroke-width="4" fill="none"/><rect x="6" y="22" width="36" height="5" fill="#0847E9"/><rect x="20" y="20" width="8" height="9" rx="2" fill="#FFBE06"/></svg>
+                        </span>
+                        <div>
+                            <h2>Por ahora no tenemos vacantes abiertas</h2>
+                            <p t-if="website.bbt_rh_email">Envíanos tu CV a <a t-att-href="'mailto:%s?subject=CV' % website.bbt_rh_email" t-esc="website.bbt_rh_email"/> y te tomaremos en cuenta para futuras vacantes.</p>
+                            <p t-else="">Publicamos aquí las nuevas vacantes en cuanto se abren. Vuelve pronto.</p>
+                        </div>
+                    </div>
+
+                    <div t-if="pager and pager.get('page_count', 0) &gt; 1" class="navbar mt-4 w-100">
+                        <t t-call="website.pager">
+                            <t t-set="classname" t-valuef="mx-auto"/>
+                        </t>
+                    </div>
+
+                    <div class="bbt-jobs-steps">
+                        <h2 class="bbt-jobs-steps-title">¿Cómo postularte?</h2>
+                        <ol>
+                            <li><span>1</span><div><b>Elige una vacante</b>Revisa el puesto, la sucursal y lo que se necesita.</div></li>
+                            <li><span>2</span><div><b>Llena el formulario</b>Deja tus datos y adjunta tu CV.</div></li>
+                            <li><span>3</span><div><b>RH revisa tu solicitud</b>Te contactamos por teléfono o correo.</div></li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+
+    <!-- Detalle /jobs/<vacante>: portada con datos y flyer, y llamado a postularse al final -->
+    <template id="bbt_jobs_detail" inherit_id="website_hr_recruitment.detail" name="Babatsa: Detalle de vacante">
+        <xpath expr="//nav[hasclass('navbar')]" position="replace"/>
+        <xpath expr="//section[hasclass('pb32')]" position="replace">
+            <t t-set="bbt_loc" t-value="job._bbt_location()"/>
+            <section class="bbt bbt-sec bbt-jobs-hero bbt-job-hero">
+                <div class="container">
+                    <div class="row align-items-center g-5">
+                        <div t-attf-class="#{'col-lg-7' if job.bbt_flyer else 'col-lg-9'}">
+                            <a class="bbt-job-back" href="/jobs"><span aria-hidden="true">←</span> Todas las vacantes</a>
+                            <p class="bbt-eyebrow mt-4">Vacante</p>
+                            <h1 class="bbt-h2" t-field="job.name"/>
+                            <ul class="bbt-job-chips">
+                                <li t-if="bbt_loc" t-esc="bbt_loc"/>
+                                <li t-if="job.contract_type_id"><span t-field="job.contract_type_id"/></li>
+                                <li t-if="job.no_of_recruitment &gt; 1"><t t-esc="job.no_of_recruitment"/> plazas</li>
+                            </ul>
+                            <div class="bbt-ctas">
+                                <a class="bbt-btn bbt-btn--yellow" t-attf-href="/jobs/apply/#{slug(job)}">Postularme</a>
+                                <a t-if="website.bbt_rh_email" class="bbt-btn bbt-btn--ghost-light"
+                                   t-att-href="job._bbt_cv_mailto(website.bbt_rh_email)">Enviar CV por correo</a>
+                            </div>
+                        </div>
+                        <div t-if="job.bbt_flyer" class="col-lg-5">
+                            <img class="bbt-job-flyer" t-att-src="'/vacantes/%s/flyer?unique=%s' % (job.id, int(job.write_date.timestamp()))"
+                                 t-att-alt="'Flyer de la vacante %s' % job.name"/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+        <xpath expr="//section[hasclass('o_job_bottom_bar')]" position="replace">
+            <section class="bbt bbt-job-bottom">
+                <div class="container">
+                    <div class="bbt-cta-box">
+                        <div>
+                            <h2 class="bbt-h2">¿Te interesa <em>esta vacante?</em></h2>
+                            <p class="bbt-lead mt-2">Llena el formulario y adjunta tu CV.</p>
+                        </div>
+                        <a role="button" class="bbt-btn bbt-btn--yellow" t-attf-href="/jobs/apply/#{slug(job)}">Postularme</a>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+
+    <!-- Formulario /jobs/apply/<vacante>: portada compacta; el formulario sigue siendo el de Odoo (editable) -->
+    <template id="bbt_jobs_apply" inherit_id="website_hr_recruitment.apply" name="Babatsa: Postulación">
+        <xpath expr="//div[@id='wrap']" position="attributes">
+            <attribute name="class">bbt bbt-apply</attribute>
+        </xpath>
+        <xpath expr="//div[@id='wrap']/nav" position="replace">
+            <section class="bbt bbt-sec bbt-jobs-hero bbt-apply-hero">
+                <div class="container">
+                    <a class="bbt-job-back" t-attf-href="/jobs/#{slug(job)}"><span aria-hidden="true">←</span> Ver la vacante</a>
+                    <p class="bbt-eyebrow mt-4">Postulación</p>
+                    <h1 class="bbt-h2" t-esc="job.name"/>
+                    <p class="bbt-lead mt-3">Llena tus datos y adjunta tu CV. Tu solicitud llega directo a Recursos Humanos.</p>
+                </div>
+            </section>
+        </xpath>
+        <xpath expr="//div[@id='wrap']/h1" position="replace"/>
+        <!-- Columna derecha: sucursal en lugar de la dirección de Odoo ("Remoto" no aplica a Babatsa) -->
+        <xpath expr="//h6[@t-if='job.address_id']/.." position="replace">
+            <t t-set="bbt_loc" t-value="job._bbt_location()"/>
+            <div t-if="bbt_loc" class="d-flex flex-column align-items-baseline">
+                <span class="text-muted small">Sucursal</span>
+                <h6 t-esc="bbt_loc"/>
+            </div>
+        </xpath>
+        <xpath expr="//a[hasclass('o_apply_description_link')]" position="replace">
+            <a role="button" t-attf-href="/jobs/#{slug(job)}" class="btn btn-outline-primary mb16 o_apply_description_link">
+                <span aria-hidden="true">←</span> Ver la vacante
+            </a>
+        </xpath>
+        <xpath expr="//a[@id='apply-btn']" position="replace">
+            <a href="#" role="button" class="btn btn-primary btn-lg s_website_form_send" id="apply-btn">Enviar postulación</a>
+        </xpath>
+    </template>
+
+    <!-- Página de gracias (/job-thank-you) -->
+    <template id="bbt_jobs_thankyou" inherit_id="website_hr_recruitment.thankyou_ir_ui_view" name="Babatsa: Postulación enviada">
+        <xpath expr="//div[@id='jobs_thankyou']" position="replace">
+            <section class="bbt bbt-sec" id="jobs_thankyou">
+                <div class="container">
+                    <div class="bbt-thanks">
+                        <div class="bbt-check" aria-hidden="true">
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                        </div>
+                        <h1 class="bbt-h2">Recibimos tu <em>postulación</em></h1>
+                        <p t-if="job_sudo" class="bbt-lead">Gracias por tu interés en la vacante <b t-esc="job_sudo.name"/>. Recursos Humanos revisará tu solicitud.</p>
+                        <p t-else="" class="bbt-lead">Gracias por tu interés. Recursos Humanos revisará tu solicitud.</p>
+                        <div class="bbt-ctas justify-content-center">
+                            <a class="bbt-btn bbt-btn--yellow" href="/jobs">Ver más vacantes</a>
+                            <a class="bbt-btn bbt-btn--ghost" href="/">Volver al inicio</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+</odoo>

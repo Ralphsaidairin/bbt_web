@@ -225,3 +225,14 @@ class BabatsaBrands(http.Controller):
         if not brand or not brand.website_published or not brand.logo:
             raise NotFound()
         return request.env['ir.binary']._get_image_stream_from(brand, 'logo').get_response()
+
+
+class BabatsaJobs(http.Controller):
+
+    @http.route('/vacantes/<int:job_id>/flyer', type='http', auth='public', website=True, sitemap=False)
+    def vacante_flyer(self, job_id, **kw):
+        job = request.env['hr.job'].sudo().browse(job_id).exists()
+        can_preview = request.env.user.has_group('hr_recruitment.group_hr_recruitment_user')
+        if not job or not job.bbt_flyer or not (job.website_published or can_preview):
+            raise NotFound()
+        return request.env['ir.binary']._get_image_stream_from(job, 'bbt_flyer').get_response()

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Reclutamiento > Puesto de trabajo: pestaña con lo que usa la página /jobs de Babatsa -->
+    <record id="hr_job_form_bbt" model="ir.ui.view">
+        <field name="name">hr.job.form.inherit.website_babatsa</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='job_description_page']" position="before">
+                <page string="Sitio web Babatsa" name="bbt_website_page">
+                    <group>
+                        <group>
+                            <field name="bbt_warehouse_id" options="{'no_create': True}"/>
+                            <div colspan="2" class="text-muted small">
+                                El texto de la pestaña "Resumen" aparece en la tarjeta de /jobs.
+                                La descripción completa se edita desde el sitio web, en la página de la vacante.
+                            </div>
+                        </group>
+                        <group>
+                            <field name="bbt_flyer" widget="image" options="{'size': [0, 260]}"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

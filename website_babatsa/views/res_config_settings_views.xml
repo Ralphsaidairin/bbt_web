@@ -15,6 +15,10 @@
                              help="La tienda muestra los productos como referencia: sin precios, carrito ni pago; invita a visitar una sucursal o pedir cotización. Apágalo cuando quieran vender en línea.">
                         <field name="website_bbt_catalog_mode"/>
                     </setting>
+                    <setting id="bbt_rh_email" string="Correo de RH"
+                             help="Aparece en la página de vacantes (/jobs) para que los candidatos envíen su CV por correo. Las postulaciones hechas con el formulario llegan a la app Reclutamiento.">
+                        <field name="website_bbt_rh_email" placeholder="ej. rh@babatsa.com.mx"/>
+                    </setting>
                 </block>
             </xpath>
         </field>

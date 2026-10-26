@@ -9,11 +9,12 @@ Sitio web corporativo de Babatsa.
 - Página /contacto que crea oportunidades/iniciativas en CRM con etiqueta por motivo.
 - Página /marcas desde el modelo Marcas Babatsa (logo, nivel, líneas, centro de servicio, programa).
 - Pie de página con logo, enlaces, redes, vacantes (/jobs) y aviso de privacidad.
+- Vacantes (/jobs, app Reclutamiento) con tarjetas tipo flyer, sucursal y correo de RH.
 - Páginas Nosotros, Productos y Servicios; encabezado propio con 3 estilos.
 - Tienda (Comercio electrónico) en modo catálogo: sin precios ni carrito, invita a sucursal o cotización.
 - Paleta y tipografía de marca disponibles en el constructor del sitio web.
 """,
-    'version': '19.0.1.1.0',
+    'version': '19.0.1.2.0',
     'category': 'Website',
     'author': 'Babatsa · TI',
     'license': 'LGPL-3',
@@ -44,6 +45,8 @@ Sitio web corporativo de Babatsa.
         'views/website_sucursales_templates.xml',
         'views/website_contacto_templates.xml',
         'views/website_shop_templates.xml',
+        'views/hr_job_views.xml',
+        'views/website_jobs_templates.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [

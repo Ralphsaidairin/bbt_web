@@ -25,6 +25,11 @@ class Website(models.Model):
              'En su lugar invita a visitar una sucursal o pedir cotización. '
              'Apagarlo cuando se quiera vender en línea.',
     )
+    bbt_rh_email = fields.Char(
+        string='Correo de RH',
+        help='Se muestra en /jobs como opción para enviar el CV por correo. '
+             'Si se deja vacío, solo se ofrece el formulario de cada vacante.',
+    )
 
 
 class ResConfigSettings(models.TransientModel):
@@ -34,3 +39,5 @@ class ResConfigSettings(models.TransientModel):
         related='website_id.bbt_header_style', readonly=False)
     website_bbt_catalog_mode = fields.Boolean(
         related='website_id.bbt_catalog_mode', readonly=False)
+    website_bbt_rh_email = fields.Char(
+        related='website_id.bbt_rh_email', readonly=False)
