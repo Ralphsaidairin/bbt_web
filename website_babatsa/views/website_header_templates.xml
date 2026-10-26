@@ -16,8 +16,11 @@
         <xpath expr="//header" position="replace">
             <t t-set="bbt_nav_param" t-value="request.httprequest.args.get('navbar')"/>
             <t t-set="bbt_style" t-value="bbt_nav_param if bbt_nav_param in ('capsula', 'doble', 'completo') else (website.bbt_header_style or 'capsula')"/>
-            <header t-if="not no_header" id="top" data-anchor="true" t-attf-class="bbt bbt-nav-wrap bbt-nav--#{bbt_style}">
+            <header t-if="not no_header" id="top" data-anchor="true" t-attf-class="bbt bbt-nav-wrap bbt-nav--#{bbt_style} o_no_autohide_menu">
                 <t t-set="bbt_menus" t-value="website.menu_id.child_id.filtered('is_visible')"/>
+                <!-- website/.../auto_hide_menu.js da por hecho un .top_menu dentro de header#top (sin él lanza
+                     TypeError en cada página y rompe la carga del editor); esta lista vacía lo satisface. -->
+                <ul class="top_menu d-none" aria-hidden="true"/>
 
                 <!-- Doble barra: franja de contacto (mismos datos pendientes que el pie de página) -->
                 <div t-if="bbt_style == 'doble'" class="bbt-nav-strip">

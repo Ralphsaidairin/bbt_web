@@ -67,7 +67,35 @@
         update();
     }
 
+    // El editor quita data-bs-slide / data-bs-slide-to de los controles del carrusel mientras se edita
+    // y a veces se guardan así: Bootstrap falla al rotar y las flechas no responden. Se reponen al cargar.
+    function repairCarousels() {
+        if (document.body.classList.contains("editor_enable")) {
+            return;
+        }
+        document.querySelectorAll(".carousel").forEach(function (carousel) {
+            carousel.querySelectorAll(".carousel-indicators").forEach(function (el) {
+                el.classList.remove("o_we_no_overlay");
+            });
+            carousel.querySelectorAll(".carousel-indicators > *").forEach(function (el, i) {
+                if (!el.hasAttribute("data-bs-slide-to")) {
+                    el.setAttribute("data-bs-slide-to", i);
+                }
+                el.classList.remove("o_we_no_overlay");
+            });
+            [["prev", ".carousel-control-prev"], ["next", ".carousel-control-next"]].forEach(function (c) {
+                carousel.querySelectorAll(c[1]).forEach(function (el) {
+                    if (!el.hasAttribute("data-bs-slide")) {
+                        el.setAttribute("data-bs-slide", c[0]);
+                    }
+                    el.classList.remove("o_we_no_overlay");
+                });
+            });
+        });
+    }
+
     function init() {
+        repairCarousels();
         var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (reduce || !("IntersectionObserver" in window) || window.frameElement ||
             document.body.classList.contains("editor_enable")) {
