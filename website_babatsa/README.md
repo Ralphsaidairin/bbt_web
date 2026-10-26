@@ -3,9 +3,20 @@
 Sitio web corporativo de Babatsa: Inicio, Marcas (modelo propio), Sucursales (desde Inventario), Contacto (a CRM) y pie de página.
 
 ## Instalación
+Requiere Odoo 19 (Odoo.sh o servidor propio; no se puede en Odoo Online porque trae código Python).
 1. Copiar la carpeta `website_babatsa` al directorio de addons personalizados.
 2. Reiniciar Odoo y actualizar la lista de aplicaciones (modo desarrollador).
-3. Instalar **Sitio web Babatsa**. Depende de: website, website_crm, website_hr_recruitment, stock, crm.
+3. Instalar **Sitio web Babatsa**. Depende de: website, website_crm, website_hr_recruitment, stock, crm, website_sale.
+
+### En Odoo.sh
+1. Agregar la carpeta `website_babatsa` a la raíz del repositorio del proyecto (junto a los demás módulos)
+   y hacer push a una rama **staging** primero.
+2. Cuando el build termine: Aplicaciones > Actualizar lista de aplicaciones > instalar **Sitio web Babatsa**
+   (en staging y producción los módulos nuevos no se instalan solos).
+3. Cargar las sucursales desde la terminal del editor de esa rama, revisando antes que los códigos de
+   almacén del script coincidan con los almacenes reales (si no, crea almacenes nuevos):
+   `odoo-bin shell < scripts/cargar_sucursales.py`
+4. Seguir "Configuración después de instalar" (abajo); validar el sitio en staging y luego pasar la rama a producción.
 
 ## Configuración después de instalar
 1. **Almacenes** (Inventario > Configuración > Almacenes), pestaña **Sitio web** en cada uno:
