@@ -15,6 +15,7 @@
                         <p class="bbt-eyebrow">Tu pieza</p>
                         <h1 class="bbt-h2">Mídela aquí, <em>nosotros la buscamos</em></h1>
                         <p class="bbt-lead mt-3">Elige qué pieza es, anota sus medidas y mándala a tu sucursal. Si la tienes a la mano, tómale una foto.</p>
+                        <p class="bbt-pz-alt">¿No sabes qué pieza es? <a href="/tu-equipo">Explora tu equipo parte por parte →</a></p>
                         <ol class="bbt-pz-howto">
                             <li><span>1</span>Elige la pieza</li>
                             <li><span>2</span>Anota sus medidas</li>
@@ -35,7 +36,7 @@
                                 <fieldset class="bbt-pz-types">
                                     <legend>¿Qué pieza buscas?</legend>
                                     <label t-foreach="[('balero', 'Balero'), ('reten', 'Retén'), ('banda', 'Banda'), ('tornillo', 'Tornillo'), ('manguera', 'Manguera'), ('otra', 'Otra')]" t-as="tp" class="bbt-pz-type">
-                                        <input type="radio" name="tipo" t-att-value="tp[0]" t-att-checked="tp_first or None"/>
+                                        <input type="radio" name="tipo" t-att-value="tp[0]" t-att-checked="tp[0] == tipo or None"/>
                                         <span t-esc="tp[1]"/>
                                     </label>
                                 </fieldset>

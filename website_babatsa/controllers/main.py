@@ -246,6 +246,7 @@ class BabatsaTuPieza(http.Controller):
     solicitud queda en CRM (con fotos y folio); si la sucursal tiene WhatsApp, además se le abre
     el chat con el mensaje ya escrito y el folio para que el mostrador lo encuentre."""
 
+    TIPOS = ('balero', 'reten', 'banda', 'tornillo', 'manguera', 'otra')
     MAX_PIEZAS = 15
     MAX_FOTOS = 3
     MAX_FOTO_BYTES = 8 * 1024 * 1024
@@ -261,11 +262,28 @@ class BabatsaTuPieza(http.Controller):
         } for wh in warehouses]
 
     @http.route('/tu-pieza', type='http', auth='public', website=True, sitemap=True)
-    def tu_pieza(self, sucursal=None, **kw):
+    def tu_pieza(self, sucursal=None, tipo=None, **kw):
         return request.render('website_babatsa.tu_pieza_page', {
             'sucursales': self._bbt_sucursales(),
             'sucursal_id': int(sucursal) if str(sucursal or '').isdigit() else False,
+            'tipo': tipo if tipo in self.TIPOS else 'balero',
         })
+
+    @http.route('/tu-equipo', type='http', auth='public', website=True, sitemap=True)
+    def tu_equipo(self, **kw):
+        # Cada parte del despiece enlaza a su línea del catálogo (categorías de data/product_public_category_data.xml)
+        cats = {}
+        for code in ['rodamientos', 'transmision', 'hidraulica', 'tornilleria', 'lubricacion']:
+            # sudo: los visitantes solo leen categorías con productos publicados
+            cat = request.env.ref('website_babatsa.pcat_%s' % code, raise_if_not_found=False)
+            cat = cat and cat.sudo()
+            # Una categoría sin productos publicados da 404 en la tienda: entonces se manda a su línea en /productos
+            if cat and request.env['product.template'].sudo().search_count(
+                    [('public_categ_ids', 'child_of', cat.id), ('is_published', '=', True)], limit=1):
+                cats[code] = '/shop/category/%s' % request.env['ir.http']._slug(cat)
+            else:
+                cats[code] = '/productos#%s' % code
+        return request.render('website_babatsa.tu_equipo_page', {'cats': cats})
 
     @http.route('/tu-pieza/gracias', type='http', auth='public', website=True, sitemap=False)
     def tu_pieza_gracias(self, **kw):

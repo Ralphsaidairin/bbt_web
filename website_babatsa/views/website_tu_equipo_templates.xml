@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        "¿Qué lleva tu equipo?" (/tu-equipo): tres equipos dibujados con sus partes numeradas.
+        Cada parte enlaza a su línea del catálogo y a /tu-pieza con el tipo ya elegido.
+        Los textos de las partes se editan aquí o desde el constructor; el dibujo y la parte activa
+        los maneja static/src/js/babatsa_equipo.js (sin JS se ven todas las partes abiertas).
+    -->
+
+    <!-- Una parte de la lista. Recibe: n, key, name, desc, sign, cat (url), tipo (o False) -->
+    <template id="tu_equipo_part" name="Babatsa: Parte de equipo">
+        <li class="bbt-eq-part" t-att-data-part="key">
+            <button type="button" class="bbt-eq-item" t-att-aria-controls="'bbt-eq-d-%s' % key" aria-expanded="false">
+                <span class="bbt-eq-n" t-esc="n"/><span t-esc="name"/>
+            </button>
+            <div class="bbt-eq-detail" t-att-id="'bbt-eq-d-%s' % key">
+                <p t-esc="desc"/>
+                <p class="bbt-eq-sign"><b>Revísala si:</b> <t t-esc="sign"/></p>
+                <div class="bbt-eq-links">
+                    <a class="bbt-btn bbt-btn--blue bbt-btn--sm" t-att-href="cat">Ver en catálogo</a>
+                    <a t-if="tipo" class="bbt-btn bbt-btn--ghost bbt-btn--sm" t-att-href="'/tu-pieza?tipo=%s' % tipo">Mídela y pídela</a>
+                    <a t-else="" class="bbt-btn bbt-btn--ghost bbt-btn--sm" href="/tu-pieza?tipo=otra">Pídela con una foto</a>
+                </div>
+            </div>
+        </li>
+    </template>
+
+    <!-- Punto numerado sobre el dibujo -->
+    <template id="tu_equipo_hot" name="Babatsa: Punto de parte">
+        <g class="bbt-eq-hot" t-att-data-part="key" t-att-transform="'translate(%s %s)' % (x, y)" tabindex="0" role="button" t-att-aria-label="'%s. %s' % (n, name)">
+            <circle r="15"/>
+            <text y="5" text-anchor="middle" t-esc="n"/>
+        </g>
+    </template>
+
+    <template id="tu_equipo_page" name="Babatsa: Qué lleva tu equipo">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Tu equipo</t>
+            <div id="wrap">
+                <section class="bbt bbt-sec bbt-jobs-hero bbt-eq-hero">
+                    <div class="container">
+                        <p class="bbt-eyebrow">Tu equipo</p>
+                        <h1 class="bbt-h2">¿Qué lleva <em>tu equipo?</em></h1>
+                        <p class="bbt-lead mt-3">Elige un equipo y toca cada parte: te decimos para qué sirve, cuándo revisarla y dónde la encuentras en Babatsa.</p>
+                    </div>
+                </section>
+
+                <section class="bbt bbt-sec bbt-eq-sec">
+                    <div class="container">
+                        <div class="bbt-eq-tabs" role="tablist" aria-label="Equipos">
+                            <button type="button" role="tab" class="bbt-eq-tab is-on" data-eq="bomba" aria-selected="true">Bomba de riego</button>
+                            <button type="button" role="tab" class="bbt-eq-tab" data-eq="banda" aria-selected="false">Transmisión por banda</button>
+                            <button type="button" role="tab" class="bbt-eq-tab" data-eq="hidraulico" aria-selected="false">Cilindro hidráulico</button>
+                        </div>
+
+                        <!-- ============ BOMBA DE RIEGO ============ -->
+                        <div class="bbt-eq" data-eq="bomba">
+                            <div class="bbt-eq-stage">
+                                <p class="bbt-eq-tag">Campo · riego</p>
+                                <svg class="bbt-eq-svg" viewBox="0 0 640 360" aria-hidden="true">
+                                    <g data-part="tornillos"><rect x="60" y="282" width="520" height="22" rx="4" class="eq-navy"/>
+                                        <g class="eq-bolt"><rect x="92" y="270" width="16" height="12" rx="2"/><rect x="232" y="270" width="16" height="12" rx="2"/><rect x="372" y="270" width="16" height="12" rx="2"/><rect x="512" y="270" width="16" height="12" rx="2"/></g></g>
+                                    <!-- Motor -->
+                                    <rect x="62" y="150" width="24" height="120" rx="8" class="eq-metal"/>
+                                    <rect x="84" y="140" width="176" height="132" rx="14" class="eq-blue"/>
+                                    <g class="eq-fins"><path d="M108 150v112M128 150v112M148 150v112M168 150v112M188 150v112M208 150v112M228 150v112"/></g>
+                                    <rect x="130" y="118" width="70" height="24" rx="4" class="eq-navy"/>
+                                    <g data-part="balero"><circle cx="248" cy="207" r="16" class="eq-metal"/><circle cx="248" cy="207" r="9" class="eq-yellow"/></g>
+                                    <g data-part="grasa"><rect x="341" y="166" width="10" height="16" rx="2" class="eq-yellow"/><circle cx="346" cy="164" r="5" class="eq-yellow"/></g>
+                                    <rect x="260" y="200" width="36" height="14" class="eq-metal"/>
+                                    <g data-part="cople"><rect x="292" y="186" width="16" height="42" rx="3" class="eq-navy"/><rect x="308" y="192" width="8" height="30" class="eq-yellow"/><rect x="316" y="186" width="16" height="42" rx="3" class="eq-navy"/></g>
+                                    <!-- Bomba -->
+                                    <rect x="332" y="182" width="44" height="50" rx="6" class="eq-metal"/>
+                                    <g data-part="sello"><rect x="372" y="194" width="10" height="26" rx="2" class="eq-rubber"/></g>
+                                    <circle cx="450" cy="207" r="74" class="eq-camp"/>
+                                    <circle cx="450" cy="207" r="30" class="eq-navy"/>
+                                    <path d="M450 207l22-18M450 207l-8 27M450 207l-24-10" class="eq-vane"/>
+                                    <rect x="430" y="72" width="40" height="66" class="eq-camp"/>
+                                    <rect x="420" y="60" width="60" height="16" rx="3" class="eq-metal"/>
+                                    <rect x="520" y="186" width="40" height="40" class="eq-camp"/>
+                                    <rect x="556" y="180" width="14" height="52" rx="3" class="eq-metal"/>
+                                    <g data-part="manguera"><path d="M570 206h20q22 0 22 24v60" class="eq-hose"/><path d="M570 206h20q22 0 22 24v60" class="eq-hose-print"/></g>
+                                    <t t-foreach="[(1, 'balero', 'Baleros', 248, 170), (2, 'cople', 'Cople', 312, 160), (3, 'sello', 'Sello de la flecha', 377, 252), (4, 'manguera', 'Manguera de succión', 612, 318), (5, 'tornillos', 'Tornillos de anclaje', 100, 248), (6, 'grasa', 'Grasa', 346, 136)]" t-as="h">
+                                        <t t-call="website_babatsa.tu_equipo_hot"><t t-set="n" t-value="h[0]"/><t t-set="key" t-value="h[1]"/><t t-set="name" t-value="h[2]"/><t t-set="x" t-value="h[3]"/><t t-set="y" t-value="h[4]"/></t>
+                                    </t>
+                                </svg>
+                            </div>
+                            <ol class="bbt-eq-list">
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="1"/><t t-set="key" t-value="'balero'"/><t t-set="name" t-value="'Baleros del motor y de la bomba'"/>
+                                    <t t-set="desc" t-value="'Dejan girar la flecha con poca fricción.'"/><t t-set="sign" t-value="'hay zumbido, ruido metálico o la tapa del motor se calienta.'"/>
+                                    <t t-set="cat" t-value="cats['rodamientos']"/><t t-set="tipo" t-value="'balero'"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="2"/><t t-set="key" t-value="'cople'"/><t t-set="name" t-value="'Cople'"/>
+                                    <t t-set="desc" t-value="'Une la flecha del motor con la de la bomba y absorbe la desalineación.'"/><t t-set="sign" t-value="'golpetea al arrancar o el hule (araña) está gastado.'"/>
+                                    <t t-set="cat" t-value="cats['transmision']"/><t t-set="tipo" t-value="False"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="3"/><t t-set="key" t-value="'sello'"/><t t-set="name" t-value="'Sello o retén de la flecha'"/>
+                                    <t t-set="desc" t-value="'Evita que el agua se salga por donde pasa la flecha.'"/><t t-set="sign" t-value="'gotea agua por la flecha.'"/>
+                                    <t t-set="cat" t-value="cats['rodamientos']"/><t t-set="tipo" t-value="'reten'"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="4"/><t t-set="key" t-value="'manguera'"/><t t-set="name" t-value="'Manguera de succión'"/>
+                                    <t t-set="desc" t-value="'Lleva el agua del pozo o del canal hasta la bomba.'"/><t t-set="sign" t-value="'la bomba no ceba o la manguera está aplastada o agrietada.'"/>
+                                    <t t-set="cat" t-value="cats['hidraulica']"/><t t-set="tipo" t-value="'manguera'"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="5"/><t t-set="key" t-value="'tornillos'"/><t t-set="name" t-value="'Tornillos de anclaje'"/>
+                                    <t t-set="desc" t-value="'Fijan motor y bomba a la base para que no se desalineen.'"/><t t-set="sign" t-value="'el equipo vibra o hay tornillos flojos u oxidados.'"/>
+                                    <t t-set="cat" t-value="cats['tornilleria']"/><t t-set="tipo" t-value="'tornillo'"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="6"/><t t-set="key" t-value="'grasa'"/><t t-set="name" t-value="'Grasa para baleros'"/>
+                                    <t t-set="desc" t-value="'Protege los baleros del desgaste y del agua.'"/><t t-set="sign" t-value="'los baleros suenan secos o ya pasó el tiempo de engrase del fabricante.'"/>
+                                    <t t-set="cat" t-value="cats['lubricacion']"/><t t-set="tipo" t-value="False"/></t>
+                            </ol>
+                        </div>
+
+                        <!-- ============ TRANSMISIÓN POR BANDA ============ -->
+                        <div class="bbt-eq" data-eq="banda">
+                            <div class="bbt-eq-stage">
+                                <p class="bbt-eq-tag">Industria · taller</p>
+                                <svg class="bbt-eq-svg" viewBox="0 0 640 360" aria-hidden="true">
+                                    <rect x="30" y="300" width="580" height="14" rx="3" class="eq-navy"/>
+                                    <!-- Motor -->
+                                    <rect x="40" y="196" width="150" height="100" rx="14" class="eq-blue"/>
+                                    <g class="eq-fins"><path d="M62 206v80M82 206v80M102 206v80M122 206v80M142 206v80M162 206v80"/></g>
+                                    <rect x="190" y="238" width="22" height="12" class="eq-metal"/>
+                                    <!-- Estructura de la flecha -->
+                                    <rect x="430" y="196" width="18" height="104" class="eq-navy"/>
+                                    <rect x="572" y="196" width="18" height="104" class="eq-navy"/>
+                                    <rect x="404" y="146" width="210" height="10" class="eq-metal"/>
+                                    <g data-part="banda"><path d="M222 214L486 92A60 60 0 0 1 532 196L222 270A28 28 0 0 1 222 214Z" class="eq-belt"/></g>
+                                    <g data-part="polea">
+                                        <circle cx="222" cy="242" r="28" class="eq-metal"/><circle cx="222" cy="242" r="8" class="eq-navy"/>
+                                        <circle cx="500" cy="151" r="60" class="eq-metal"/><circle cx="500" cy="151" r="44" class="eq-camp"/><circle cx="500" cy="151" r="12" class="eq-navy"/>
+                                    </g>
+                                    <g data-part="chumacera">
+                                        <path d="M414 196h50v-14a25 25 0 0 0-50 0z" class="eq-yellow"/><rect x="408" y="192" width="62" height="10" rx="2" class="eq-navy"/>
+                                        <path d="M556 196h50v-14a25 25 0 0 0-50 0z" class="eq-yellow"/><rect x="550" y="192" width="62" height="10" rx="2" class="eq-navy"/>
+                                    </g>
+                                    <g data-part="grasa"><rect x="577" y="146" width="8" height="12" rx="2" class="eq-metal"/><circle cx="581" cy="144" r="4" class="eq-metal"/></g>
+                                    <g data-part="tornillos" class="eq-bolt"><rect x="412" y="186" width="10" height="8"/><rect x="456" y="186" width="10" height="8"/><rect x="554" y="186" width="10" height="8"/><rect x="598" y="186" width="10" height="8"/><rect x="60" y="290" width="12" height="10"/><rect x="160" y="290" width="12" height="10"/></g>
+                                    <t t-foreach="[(1, 'banda', 'Banda', 352, 140), (2, 'polea', 'Poleas', 500, 74), (3, 'chumacera', 'Chumaceras', 439, 236), (4, 'tornillos', 'Tornillería', 116, 336), (5, 'grasa', 'Grasa', 610, 126)]" t-as="h">
+                                        <t t-call="website_babatsa.tu_equipo_hot"><t t-set="n" t-value="h[0]"/><t t-set="key" t-value="h[1]"/><t t-set="name" t-value="h[2]"/><t t-set="x" t-value="h[3]"/><t t-set="y" t-value="h[4]"/></t>
+                                    </t>
+                                </svg>
+                            </div>
+                            <ol class="bbt-eq-list">
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="1"/><t t-set="key" t-value="'banda'"/><t t-set="name" t-value="'Banda'"/>
+                                    <t t-set="desc" t-value="'Transmite la fuerza del motor a la polea del equipo.'"/><t t-set="sign" t-value="'chilla al arrancar, se ve brillosa o tiene grietas.'"/>
+                                    <t t-set="cat" t-value="cats['transmision']"/><t t-set="tipo" t-value="'banda'"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="2"/><t t-set="key" t-value="'polea'"/><t t-set="name" t-value="'Poleas'"/>
+                                    <t t-set="desc" t-value="'Llevan la banda y, con su tamaño, definen la velocidad del equipo.'"/><t t-set="sign" t-value="'el canal está gastado y la banda se hunde o patina.'"/>
+                                    <t t-set="cat" t-value="cats['transmision']"/><t t-set="tipo" t-value="False"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="3"/><t t-set="key" t-value="'chumacera'"/><t t-set="name" t-value="'Chumaceras'"/>
+                                    <t t-set="desc" t-value="'Sostienen la flecha con un balero dentro de su caja.'"/><t t-set="sign" t-value="'hacen ruido, se calientan o la flecha tiene juego.'"/>
+                                    <t t-set="cat" t-value="cats['rodamientos']"/><t t-set="tipo" t-value="'balero'"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="4"/><t t-set="key" t-value="'tornillos'"/><t t-set="name" t-value="'Tornillería'"/>
+                                    <t t-set="desc" t-value="'Mantiene motor y chumaceras en su lugar y la banda bien tensada.'"/><t t-set="sign" t-value="'la banda se destensa sola o hay tornillos flojos.'"/>
+                                    <t t-set="cat" t-value="cats['tornilleria']"/><t t-set="tipo" t-value="'tornillo'"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="5"/><t t-set="key" t-value="'grasa'"/><t t-set="name" t-value="'Grasa para chumaceras'"/>
+                                    <t t-set="desc" t-value="'Se aplica por la grasera para que el balero no se seque.'"/><t t-set="sign" t-value="'la chumacera suena seca o ya pasó el tiempo de engrase.'"/>
+                                    <t t-set="cat" t-value="cats['lubricacion']"/><t t-set="tipo" t-value="False"/></t>
+                            </ol>
+                        </div>
+
+                        <!-- ============ CILINDRO HIDRÁULICO ============ -->
+                        <div class="bbt-eq" data-eq="hidraulico">
+                            <div class="bbt-eq-stage">
+                                <p class="bbt-eq-tag">Maquinaria · implementos</p>
+                                <svg class="bbt-eq-svg" viewBox="0 0 640 360" aria-hidden="true">
+                                    <!-- Unidad: tanque, bomba y válvula -->
+                                    <g data-part="aceite"><rect x="452" y="30" width="160" height="78" rx="10" class="eq-navy"/><rect x="470" y="46" width="46" height="46" rx="4" class="eq-camp"/><path d="M536 56h58M536 70h58M536 84h40" class="eq-fins"/></g>
+                                    <g data-part="filtro"><rect x="408" y="44" width="34" height="56" rx="8" class="eq-yellow"/><rect x="404" y="40" width="42" height="10" rx="3" class="eq-navy"/></g>
+                                    <g data-part="manguera">
+                                        <path d="M150 206V150q0-40 40-40h262" class="eq-hose"/><path d="M402 206v-30q0-26 26-26h52v-42" class="eq-hose"/>
+                                        <path d="M150 206V150q0-40 40-40h262" class="eq-hose-print"/>
+                                    </g>
+                                    <g data-part="conexiones"><rect x="138" y="196" width="24" height="18" rx="3" class="eq-metal"/><rect x="390" y="196" width="24" height="18" rx="3" class="eq-metal"/><rect x="446" y="100" width="20" height="18" rx="3" class="eq-yellow"/><rect x="470" y="100" width="20" height="18" rx="3" class="eq-yellow"/></g>
+                                    <!-- Cilindro -->
+                                    <rect x="112" y="210" width="322" height="64" rx="10" class="eq-blue"/>
+                                    <rect x="112" y="210" width="26" height="64" rx="6" class="eq-navy"/>
+                                    <rect x="434" y="230" width="150" height="24" class="eq-metal"/>
+                                    <g data-part="sellos"><rect x="426" y="216" width="14" height="52" rx="3" class="eq-rubber"/><rect x="430" y="226" width="6" height="32" class="eq-yellow"/></g>
+                                    <g data-part="pernos"><circle cx="78" cy="242" r="26" class="eq-metal"/><circle cx="78" cy="242" r="10" class="eq-navy"/><circle cx="604" cy="242" r="24" class="eq-metal"/><circle cx="604" cy="242" r="9" class="eq-navy"/>
+                                        <rect x="92" y="226" width="24" height="32" class="eq-metal"/></g>
+                                    <t t-foreach="[(1, 'manguera', 'Mangueras', 300, 88), (2, 'conexiones', 'Conexiones', 150, 176), (3, 'sellos', 'Sellos del cilindro', 433, 300), (4, 'aceite', 'Aceite hidráulico', 584, 128), (5, 'filtro', 'Filtro', 380, 72), (6, 'pernos', 'Pernos y pasadores', 78, 296)]" t-as="h">
+                                        <t t-call="website_babatsa.tu_equipo_hot"><t t-set="n" t-value="h[0]"/><t t-set="key" t-value="h[1]"/><t t-set="name" t-value="h[2]"/><t t-set="x" t-value="h[3]"/><t t-set="y" t-value="h[4]"/></t>
+                                    </t>
+                                </svg>
+                            </div>
+                            <ol class="bbt-eq-list">
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="1"/><t t-set="key" t-value="'manguera'"/><t t-set="name" t-value="'Mangueras hidráulicas'"/>
+                                    <t t-set="desc" t-value="'Llevan el aceite a presión hasta el cilindro y de regreso.'"/><t t-set="sign" t-value="'hay fugas, ampollas o se ve la malla por fuera.'"/>
+                                    <t t-set="cat" t-value="cats['hidraulica']"/><t t-set="tipo" t-value="'manguera'"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="2"/><t t-set="key" t-value="'conexiones'"/><t t-set="name" t-value="'Conexiones y coples rápidos'"/>
+                                    <t t-set="desc" t-value="'Unen mangueras, cilindro y tractor sin que se salga el aceite.'"/><t t-set="sign" t-value="'gotean al conectar o ya no amarran bien.'"/>
+                                    <t t-set="cat" t-value="cats['hidraulica']"/><t t-set="tipo" t-value="False"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="3"/><t t-set="key" t-value="'sellos'"/><t t-set="name" t-value="'Sellos del cilindro'"/>
+                                    <t t-set="desc" t-value="'Retienen el aceite dentro del cilindro para que haga fuerza.'"/><t t-set="sign" t-value="'el vástago sale con aceite o el cilindro se baja solo.'"/>
+                                    <t t-set="cat" t-value="cats['hidraulica']"/><t t-set="tipo" t-value="'reten'"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="4"/><t t-set="key" t-value="'aceite'"/><t t-set="name" t-value="'Aceite hidráulico'"/>
+                                    <t t-set="desc" t-value="'Transmite la fuerza y lubrica bomba, válvulas y cilindros.'"/><t t-set="sign" t-value="'se ve oscuro, espumoso o lechoso (con agua).'"/>
+                                    <t t-set="cat" t-value="cats['lubricacion']"/><t t-set="tipo" t-value="False"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="5"/><t t-set="key" t-value="'filtro'"/><t t-set="name" t-value="'Filtro hidráulico'"/>
+                                    <t t-set="desc" t-value="'Atrapa la suciedad antes de que dañe la bomba y las válvulas.'"/><t t-set="sign" t-value="'ya cumplió las horas que marca el fabricante del equipo.'"/>
+                                    <t t-set="cat" t-value="cats['lubricacion']"/><t t-set="tipo" t-value="False"/></t>
+                                <t t-call="website_babatsa.tu_equipo_part"><t t-set="n" t-value="6"/><t t-set="key" t-value="'pernos'"/><t t-set="name" t-value="'Pernos y pasadores'"/>
+                                    <t t-set="desc" t-value="'Sujetan los ojos del cilindro al equipo.'"/><t t-set="sign" t-value="'hay juego u holgura en los ojos del cilindro.'"/>
+                                    <t t-set="cat" t-value="cats['tornilleria']"/><t t-set="tipo" t-value="'tornillo'"/></t>
+                            </ol>
+                        </div>
+
+                        <p class="bbt-eq-note">Guía general: cada equipo es distinto. Si tienes duda, lleva la pieza a tu sucursal y la revisamos contigo.</p>
+                        <div class="bbt-cta-box bbt-eq-cta">
+                            <div>
+                                <h2 class="bbt-h2">¿Ya sabes cuál <em>es tu pieza?</em></h2>
+                                <p class="bbt-lead mt-2">Mídela, tómale una foto y mándala a tu sucursal.</p>
+                            </div>
+                            <a class="bbt-btn bbt-btn--yellow" href="/tu-pieza">Buscar mi pieza</a>
+                        </div>
+                    </div>
+                </section>
+                <div class="oe_structure" id="oe_structure_bbt_tu_equipo_bottom"/>
+            </div>
+        </t>
+    </template>
+</odoo>

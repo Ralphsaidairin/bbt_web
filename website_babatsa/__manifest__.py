@@ -10,6 +10,7 @@ Sitio web corporativo de Babatsa.
 - Página /marcas desde el modelo Marcas Babatsa (logo, nivel, líneas, centro de servicio, programa).
 - Pie de página con logo, enlaces, redes, vacantes (/jobs) y aviso de privacidad.
 - Tu pieza (/tu-pieza): medidas sobre un dibujo técnico, fotos y envío a la sucursal (CRM + WhatsApp).
+- Tu equipo (/tu-equipo): despiece de 3 equipos; cada parte lleva al catálogo y a Tu pieza.
 - Sucursales con "Abierta ahora" desde su horario de trabajo y botón de WhatsApp.
 - Vacantes (/jobs, app Reclutamiento) con tarjetas tipo flyer, sucursal y correo de RH.
 - Páginas Nosotros, Productos y Servicios; encabezado propio con 3 estilos.
@@ -51,6 +52,7 @@ Sitio web corporativo de Babatsa.
         'views/hr_job_views.xml',
         'views/website_jobs_templates.xml',
         'views/website_tu_pieza_templates.xml',
+        'views/website_tu_equipo_templates.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [
@@ -62,6 +64,7 @@ Sitio web corporativo de Babatsa.
             'website_babatsa/static/src/js/babatsa_nav.js',
             'website_babatsa/static/src/js/babatsa_open.js',
             'website_babatsa/static/src/js/babatsa_pieza.js',
+            'website_babatsa/static/src/js/babatsa_equipo.js',
         ],
     },
     'post_init_hook': 'post_init_hook',
