@@ -5,6 +5,15 @@
         El video se captura en Sitio web > Ajustes > Babatsa > Video del fundador; no se descarga
         hasta que el visitante le da play (static/src/js/babatsa_mostrador.js).
     -->
+    <!-- La mascota del logo como guía: el JS de cada herramienta cambia el texto según lo que hace
+         el cliente. Recibe bbt_guide_text (texto inicial) y opcionalmente bbt_guide_class. -->
+    <template id="mascot_guide" name="Babatsa: Guía con la mascota">
+        <div t-attf-class="bbt-guide #{bbt_guide_class or ''}">
+            <img class="bbt-guide-img" src="/website_babatsa/static/src/img/mascota-color.svg" alt="" width="64" height="88"/>
+            <p class="bbt-guide-text" aria-live="polite" t-esc="bbt_guide_text"/>
+        </div>
+    </template>
+
     <template id="founder_video_section" name="Babatsa: Historia del fundador">
         <t t-set="bbt_video" t-value="website._bbt_founder_video()"/>
         <section t-if="bbt_video" class="bbt bbt-sec bbt-founder">
@@ -89,7 +98,10 @@
                             </li>
                         </ul>
                         <div class="bbt-dic-none" hidden="hidden">
-                            <p><b>Esa todavía no está en nuestra lista.</b> Mándanos una foto y en el mostrador te decimos qué es.</p>
+                            <t t-call="website_babatsa.mascot_guide">
+                                <t t-set="bbt_guide_text">Esa todavía no me la sé… Mándanos una foto y en el mostrador te decimos qué es.</t>
+                                <t t-set="bbt_guide_class" t-value="'bbt-guide--sm'"/>
+                            </t>
                             <a class="bbt-btn bbt-btn--yellow bbt-btn--sm" href="/tu-pieza?tipo=otra">Mandar foto</a>
                         </div>
                         <p class="bbt-dic-foot">✂ - - - - - - - - - - - - - - - - - - - - - - -</p>

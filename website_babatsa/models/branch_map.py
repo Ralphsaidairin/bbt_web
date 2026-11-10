@@ -48,7 +48,7 @@ FERRY = ((24.14, -110.31), (25.60, -109.05))  # La Paz – Topolobampo (ruta de 
 
 LABELS = [
     # (texto, lat, lon, tipo, alineación, giro en grados)
-    ('Sonora', 30.0, -109.6, 'state', 'middle', 0), ('Sinaloa', 24.5, -105.6, 'state', 'middle', 0),
+    ('Sonora', 30.0, -109.6, 'state', 'middle', 0), ('Sinaloa', 24.15, -104.95, 'state', 'middle', 0),
     ('Nayarit', 22.3, -104.15, 'state', 'end', 0), ('Baja California Sur', 25.3, -114.5, 'state', 'middle', 0),
     ('Golfo de California', 27.4, -111.6, 'sea', 'middle', 50), ('Océano Pacífico', 22.0, -113.2, 'sea', 'middle', 0),
 ]

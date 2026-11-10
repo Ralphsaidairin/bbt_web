@@ -675,7 +675,7 @@ html.bbt-nav-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){ .bbt-open-dot{animation:none !important} }
 
 /* ===================== TU PIEZA (/tu-pieza, babatsa_pieza.js) ===================== */
-.bbt .bbt-pz-howto{display:flex; flex-wrap:wrap; gap:10px; margin-top:28px}
+.bbt .bbt-pz-howto{display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; list-style:none; padding:0}
 .bbt-pz-howto li{display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.08); border:1.5px solid rgba(255,255,255,.16); border-radius:999px; padding:6px 16px 6px 6px; font-weight:700; font-size:.92rem}
 .bbt-pz-howto span{width:30px; height:30px; border-radius:50%; background:var(--bbt-yellow); color:var(--bbt-navy); display:grid; place-items:center; font-weight:900; font-style:italic}
 .bbt-pz-sec{padding-top:clamp(32px,4vw,56px)}
@@ -845,7 +845,7 @@ html.bbt-nav-lock{overflow:hidden}
 .bbt-nmap-live b{font-weight:900; font-style:italic; font-size:1.2rem}
 .bbt-nmap-live[data-state="open"] .bbt-open-dot{background:#1E9E5A; animation:bbt-pulse 2s infinite}
 .bbt-nmap-live[data-state="closed"] .bbt-open-dot{background:#C62828}
-.bbt-nmap{display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:24px; align-items:start}
+.bbt-nmap{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:24px; align-items:start}
 .bbt-nmap-stage{border-radius:22px; overflow:hidden; border:1.5px solid var(--bbt-line); background:#fff}
 .bbt-nmap-svg{display:block; width:100%; height:auto}
 .bbt-nmap-svg .nm-sea{fill:#E6EEFF}
@@ -946,3 +946,19 @@ html.bbt-nav-lock{overflow:hidden}
 .bbt-dic-foot{margin-top:16px !important; font:700 .8rem ui-monospace, Menlo, Consolas, monospace; color:var(--bbt-line); white-space:nowrap; overflow:hidden}
 @media (max-width:991px){ .bbt-dic-grid{grid-template-columns:1fr} .bbt-dic-ticket{rotate:0deg} }
 @media (prefers-reduced-motion:reduce){ .bbt-dic-item.is-new{animation:none} }
+
+/* ===================== MASCOTA GUÍA (views/website_mostrador_templates.xml: mascot_guide) ===================== */
+.bbt-guide{display:flex; align-items:flex-end; gap:12px}
+.bbt .bbt-guide-img{flex:none; width:64px; height:auto; transform-origin:50% 100%}
+.bbt-guide-text{position:relative; flex:1; background:#fff; border:2px solid var(--bbt-navy); border-radius:16px 16px 16px 4px; padding:10px 14px; font-size:.9rem; font-weight:600; line-height:1.4; color:var(--bbt-navy); box-shadow:4px 4px 0 var(--bbt-yellow)}
+.bbt-guide-text::before{content:""; position:absolute; left:-9px; bottom:8px; width:14px; height:14px; background:#fff; border-left:2px solid var(--bbt-navy); border-bottom:2px solid var(--bbt-navy); transform:rotate(45deg)}
+.bbt-guide--sm .bbt-guide-img{width:48px}
+.bbt-guide--sm .bbt-guide-text{font-size:.86rem; box-shadow:none}
+.bbt-pz-guide{margin-top:16px}
+.bbt-eq-guide{max-width:640px; margin-bottom:22px}
+@media (prefers-reduced-motion:no-preference){
+  .bbt-guide.is-talking .bbt-guide-img{animation:bbt-guide-nod .6s cubic-bezier(.3,1.5,.5,1)}
+  .bbt-guide.is-talking .bbt-guide-text{animation:bbt-guide-pop .35s cubic-bezier(.2,.7,.2,1)}
+  @keyframes bbt-guide-nod{0%{rotate:0deg} 30%{rotate:-8deg; translate:0 -6px} 60%{rotate:5deg} 100%{rotate:0deg}}
+  @keyframes bbt-guide-pop{from{opacity:.3; translate:-6px 0; scale:.97}}
+}

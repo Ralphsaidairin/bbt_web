@@ -53,6 +53,10 @@
                             <button type="button" role="tab" class="bbt-eq-tab" data-eq="hidraulico" aria-selected="false">Cilindro hidráulico</button>
                         </div>
 
+                        <t t-call="website_babatsa.mascot_guide">
+                            <t t-set="bbt_guide_text">Toca un número del dibujo y te digo para qué sirve esa parte y cuándo revisarla.</t>
+                            <t t-set="bbt_guide_class" t-value="'bbt-eq-guide'"/>
+                        </t>
                         <!-- ============ BOMBA DE RIEGO ============ -->
                         <div class="bbt-eq" data-eq="bomba">
                             <div class="bbt-eq-stage">

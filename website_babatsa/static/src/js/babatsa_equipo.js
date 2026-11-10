@@ -8,8 +8,17 @@
         var items = eq.querySelectorAll(".bbt-eq-part");
         var parts = eq.querySelectorAll(".bbt-eq-svg [data-part]:not(.bbt-eq-hot)");
         var hots = eq.querySelectorAll(".bbt-eq-hot");
+        var told = false;
 
         function activate(key, scroll) {
+            if (scroll && !told) {
+                told = true;
+                var guide = document.querySelector(".bbt-eq-guide .bbt-guide-text");
+                if (guide) {
+                    guide.textContent = "¿Ya sabes cuál es? Dale en «Mídela y pídela» y la mandas a tu sucursal con sus medidas.";
+                    guide.parentNode.classList.add("is-talking");
+                }
+            }
             items.forEach(function (li) {
                 var on = li.getAttribute("data-part") === key;
                 li.classList.toggle("is-on", on);

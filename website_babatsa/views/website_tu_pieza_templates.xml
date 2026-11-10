@@ -47,8 +47,11 @@
                                         <button type="button" data-unit="in">pulg</button>
                                     </div>
                                     <div class="bbt-pz-draw" aria-hidden="true"/>
-                                    <p class="bbt-pz-hint">El dibujo cambia con tus medidas. Mide sobre la pieza, no sobre el equipo.</p>
                                 </div>
+                                <t t-call="website_babatsa.mascot_guide">
+                                    <t t-set="bbt_guide_text">El dibujo cambia con tus medidas. Mide sobre la pieza, no sobre el equipo.</t>
+                                    <t t-set="bbt_guide_class" t-value="'bbt-pz-guide'"/>
+                                </t>
 
                                 <div class="bbt-pz-fields">
                                     <div class="bbt-pz-dims"/>

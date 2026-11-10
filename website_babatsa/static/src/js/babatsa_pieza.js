@@ -40,6 +40,16 @@
         otra: { name: "Otra pieza", dims: [] },
     };
 
+    // Lo que dice la mascota al elegir cada tipo de pieza
+    var TIPS = {
+        balero: "Mide el hueco del centro (d), el diámetro de afuera (D) y el ancho (B). Si trae un número grabado en la cara, anótalo: dice casi todo.",
+        reten: "Mide el eje donde va, el diámetro de afuera y el ancho. Muchos retenes traen las medidas grabadas, por ejemplo 35-52-7.",
+        banda: "Busca el número impreso en la banda (por ejemplo A-42): con eso basta. Si ya no se lee, mide el ancho de arriba y el largo por fuera.",
+        tornillo: "Mide el grueso de la rosca, no de la cabeza. El largo se toma desde abajo de la cabeza hasta la punta.",
+        manguera: "Mide por dentro, no por fuera. La presión casi siempre viene impresa en la manguera.",
+        otra: "Tómale una foto junto a una regla o una moneda para que se vea el tamaño, y cuéntanos de qué equipo es.",
+    };
+
     // ---------------------------------------------------------------- números y unidades
     function parseNum(str) {
         var s = String(str || "").trim().replace(",", ".");
@@ -259,6 +269,17 @@
         var sucursal = form.querySelector('select[name="sucursal"]');
         var waBtn = form.querySelector("button.bbt-pz-wa");
         var errorEl = form.querySelector(".bbt-pz-error");
+        var guide = form.querySelector(".bbt-guide");
+
+        function say(text) {
+            if (!guide) {
+                return;
+            }
+            guide.querySelector(".bbt-guide-text").textContent = text;
+            guide.classList.remove("is-talking");
+            void guide.offsetWidth; // reinicia la animación
+            guide.classList.add("is-talking");
+        }
 
         var state = { type: "balero", unit: "mm", values: {}, list: [], focus: null };
         Object.keys(TYPES).forEach(function (t) {
@@ -342,11 +363,14 @@
             });
         }
 
-        function setType(type) {
+        function setType(type, quiet) {
             state.type = type;
             form.setAttribute("data-type", type);
             renderFields();
             render();
+            if (!quiet) {
+                say(TIPS[type]);
+            }
         }
 
         // Cambiar de unidad convierte lo ya capturado
@@ -363,6 +387,7 @@
                 });
             });
             state.unit = unit;
+            say(unit === "in" ? "En pulgadas puedes escribir fracciones: 3/4 o 1 1/2. Yo lo convierto a milímetros." : "Listo, en milímetros. Te muestro la conversión a pulgadas debajo de cada medida.");
             form.querySelectorAll(".bbt-pz-units button").forEach(function (b) {
                 b.classList.toggle("is-on", b.getAttribute("data-unit") === unit);
             });
@@ -421,6 +446,7 @@
             render();
             renderList();
             listEl.lastElementChild.classList.add("is-new");
+            say(state.list.length > 1 ? "Van " + state.list.length + " piezas en tu lista. Cuando acabes, elige tu sucursal y mándala." : "¡Va! Ya está en tu lista. Agrega otra o mándala a tu sucursal.");
             return true;
         }
 
@@ -451,6 +477,7 @@
         }
 
         function fail(msg) {
+            say(msg);
             errorEl.textContent = msg;
             errorEl.hidden = false;
             errorEl.scrollIntoView({ block: "nearest", behavior: "smooth" });
@@ -550,7 +577,7 @@
         sucursal.addEventListener("change", updateWhatsapp);
 
         var checked = form.querySelector('input[name="tipo"]:checked');
-        setType(checked ? checked.value : "balero");
+        setType(checked ? checked.value : "balero", !new URLSearchParams(window.location.search).get("tipo"));
         renderList();
         updateWhatsapp();
     }
