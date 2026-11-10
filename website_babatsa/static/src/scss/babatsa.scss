@@ -889,3 +889,60 @@ html.bbt-nav-lock{overflow:hidden}
 .bbt-nmap-hint{font-size:.8rem; color:var(--bbt-muted); margin-top:14px !important}
 .bbt-nmap-sec:not(.is-ready) .bbt-nmap-hint{display:none}
 @media (max-width:991px){ .bbt-nmap{grid-template-columns:1fr} .bbt-nmap-panel{position:static} }
+
+/* ===================== HISTORIA DEL FUNDADOR (Nosotros, babatsa_mostrador.js) ===================== */
+.bbt-founder{background:var(--bbt-navy); color:#fff}
+.bbt-founder .bbt-eyebrow{color:var(--bbt-yellow)}
+.bbt-founder .bbt-h2{color:#fff}
+.bbt-founder .bbt-h2 em{color:var(--bbt-yellow)}
+.bbt-founder .bbt-lead{color:#C9D3EE}
+.bbt-founder-grid{display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:clamp(28px,5vw,56px); align-items:center}
+.bbt-founder-media{position:relative; aspect-ratio:16/9; border-radius:20px; overflow:hidden; background:#001A57; box-shadow:0 30px 60px -30px rgba(0,0,0,.7); border:6px solid #fff}
+.bbt-founder-play{position:absolute; inset:0; border:0; padding:0; background:none; cursor:pointer}
+.bbt .bbt-founder-play img{width:100%; height:100%; object-fit:cover}
+.bbt-founder-poster{position:absolute; inset:0; display:grid; place-items:center; background:var(--bbt-blue-camp)}
+.bbt-founder-poster b{font-weight:900; font-style:italic; font-size:clamp(4rem,10vw,7rem); color:var(--bbt-yellow); letter-spacing:-.04em}
+.bbt-founder-btn{position:absolute; left:50%; top:50%; translate:-50% -50%; width:84px; height:84px; border-radius:50%; background:var(--bbt-yellow); color:var(--bbt-navy); display:grid; place-items:center; box-shadow:0 12px 30px rgba(0,0,0,.35); transition:scale .2s}
+.bbt-founder-btn svg{width:38px; height:38px; margin-left:5px}
+.bbt-founder-play:hover .bbt-founder-btn, .bbt-founder-play:focus-visible .bbt-founder-btn{scale:1.08}
+.bbt-founder-frame, .bbt-founder-file{position:absolute; inset:0; width:100%; height:100%; border:0; background:#000}
+.bbt-founder-caption{margin-top:18px !important; font-weight:700; color:#fff; border-left:3px solid var(--bbt-yellow); padding-left:12px}
+.bbt-founder-admin{padding:24px 0}
+@media (max-width:991px){ .bbt-founder-grid{grid-template-columns:1fr} }
+
+/* ===================== ¿CÓMO LE DICES TÚ? (Inicio, babatsa_mostrador.js) ===================== */
+.bbt-dic{background:var(--bbt-yellow); position:relative; overflow:hidden}
+.bbt-dic .bbt-eyebrow{color:var(--bbt-navy)}
+.bbt-dic .bbt-h2 em{color:var(--bbt-blue)}
+.bbt-dic .bbt-lead{color:#3B3200}
+.bbt-dic-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(28px,5vw,64px); align-items:center}
+.bbt-dic-try{margin-top:26px !important; font-weight:800; font-size:.85rem; color:var(--bbt-navy)}
+.bbt-dic-chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+.bbt-dic-chip{border:2px solid var(--bbt-navy); background:transparent; border-radius:999px; padding:.4rem .95rem; font:800 .9rem var(--bbt-font); color:var(--bbt-navy); cursor:pointer; transition:background .15s, color .15s}
+.bbt-dic-chip:hover, .bbt-dic-chip:focus-visible{background:var(--bbt-navy); color:#fff}
+.bbt-dic:not(.is-ready) .bbt-dic-chips, .bbt-dic:not(.is-ready) .bbt-dic-try{display:none}
+/* El ticket */
+.bbt-dic-ticket{position:relative; background:#fff; border-radius:6px 6px 0 0; padding:22px 24px 14px; box-shadow:0 30px 50px -30px rgba(60,40,0,.6); rotate:1.2deg;
+  -webkit-mask:radial-gradient(circle 7px at 50% 100%, transparent 98%, #000) bottom / 18px 100% repeat-x; mask:radial-gradient(circle 7px at 50% 100%, transparent 98%, #000) bottom / 18px 100% repeat-x}
+.bbt-dic-head{display:flex; justify-content:space-between; gap:12px; font:700 .72rem ui-monospace, Menlo, Consolas, monospace; letter-spacing:.12em; color:var(--bbt-muted); border-bottom:2px dashed var(--bbt-line); padding-bottom:10px; margin-bottom:14px}
+.bbt-dic-label{display:block; font-weight:800; font-size:.85rem; color:var(--bbt-navy); margin-bottom:6px}
+.bbt .bbt-dic-input{width:100%; min-height:56px; border:2px solid var(--bbt-navy); border-radius:12px; padding:.7rem 1rem; font:800 1.2rem var(--bbt-font); color:var(--bbt-navy); background:#FFFBEA}
+.bbt-dic-input:focus{outline:none; box-shadow:0 0 0 4px rgba(8,71,233,.2)}
+.bbt .bbt-dic-results{display:grid; gap:10px; margin-top:16px}
+.bbt-dic:not(.is-ready) .bbt-dic-results{max-height:340px; overflow-y:auto}
+.bbt-dic-item{border-top:1px dashed var(--bbt-line); padding-top:12px}
+.bbt-dic-item:first-child{border-top:0; padding-top:0}
+.bbt-dic-item.is-new{animation:bbt-pz-in .35s cubic-bezier(.2,.7,.2,1)}
+.bbt-dic-said{font:700 .85rem ui-monospace, Menlo, Consolas, monospace; color:var(--bbt-muted)}
+.bbt-dic.is-example .bbt-dic-said::before{content:"Ejemplo: "}
+.bbt-dic-is{margin-top:2px !important; font-size:1.25rem; line-height:1.2; color:var(--bbt-navy)}
+.bbt-dic-is span{display:block; font-size:.75rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--bbt-blue)}
+.bbt-dic-is b{font-weight:900; font-style:italic}
+.bbt-dic-desc{font-size:.9rem; color:var(--bbt-muted); margin-top:4px !important}
+.bbt-dic-links{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+.bbt .bbt-dic-links .bbt-btn--sm, .bbt .bbt-dic-none .bbt-btn--sm{min-height:36px; padding:.45rem .95rem; font-size:.8rem}
+.bbt-dic-none{margin-top:16px; font-size:.92rem; color:var(--bbt-muted)}
+.bbt-dic-none .bbt-btn{margin-top:10px}
+.bbt-dic-foot{margin-top:16px !important; font:700 .8rem ui-monospace, Menlo, Consolas, monospace; color:var(--bbt-line); white-space:nowrap; overflow:hidden}
+@media (max-width:991px){ .bbt-dic-grid{grid-template-columns:1fr} .bbt-dic-ticket{rotate:0deg} }
+@media (prefers-reduced-motion:reduce){ .bbt-dic-item.is-new{animation:none} }

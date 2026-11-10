@@ -44,6 +44,8 @@
                     </div>
                 </section>
 
+                <t t-call="website_babatsa.founder_video_section"/>
+
                 <!-- ===================== LÍNEA DEL TIEMPO ===================== -->
                 <section class="bbt bbt-sec bbt-tl-sec">
                     <div class="container">

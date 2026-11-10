@@ -275,18 +275,9 @@ class BabatsaTuPieza(http.Controller):
 
     @http.route('/tu-equipo', type='http', auth='public', website=True, sitemap=True)
     def tu_equipo(self, **kw):
-        # Cada parte del despiece enlaza a su línea del catálogo (categorías de data/product_public_category_data.xml)
-        cats = {}
-        for code in ['rodamientos', 'transmision', 'hidraulica', 'tornilleria', 'lubricacion']:
-            # sudo: los visitantes solo leen categorías con productos publicados
-            cat = request.env.ref('website_babatsa.pcat_%s' % code, raise_if_not_found=False)
-            cat = cat and cat.sudo()
-            # Una categoría sin productos publicados da 404 en la tienda: entonces se manda a su línea en /productos
-            if cat and request.env['product.template'].sudo().search_count(
-                    [('public_categ_ids', 'child_of', cat.id), ('is_published', '=', True)], limit=1):
-                cats[code] = '/shop/category/%s' % request.env['ir.http']._slug(cat)
-            else:
-                cats[code] = '/productos#%s' % code
+        # Cada parte del despiece enlaza a su línea del catálogo (o a /productos si aún no tiene productos)
+        cats = {code: request.website._bbt_line_url(code)
+                for code in ['rodamientos', 'transmision', 'hidraulica', 'tornilleria', 'lubricacion']}
         return request.render('website_babatsa.tu_equipo_page', {'cats': cats})
 
     @http.route('/tu-pieza/gracias', type='http', auth='public', website=True, sitemap=False)

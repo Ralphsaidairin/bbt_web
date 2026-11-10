@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Historia contada por el fundador (Nosotros) y "¿Cómo le dices tú?" (Inicio).
+        El video se captura en Sitio web > Ajustes > Babatsa > Video del fundador; no se descarga
+        hasta que el visitante le da play (static/src/js/babatsa_mostrador.js).
+    -->
+    <template id="founder_video_section" name="Babatsa: Historia del fundador">
+        <t t-set="bbt_video" t-value="website._bbt_founder_video()"/>
+        <section t-if="bbt_video" class="bbt bbt-sec bbt-founder">
+            <div class="container">
+                <div class="bbt-founder-grid">
+                    <div class="bbt-founder-media">
+                        <t t-if="bbt_video['kind'] == 'embed'">
+                            <button type="button" class="bbt-founder-play" t-att-data-embed="bbt_video['src']" aria-label="Reproducir el video de la historia de Babatsa">
+                                <img t-if="bbt_video['thumb']" t-att-src="bbt_video['thumb']" alt="" loading="lazy"/>
+                                <span t-else="" class="bbt-founder-poster" aria-hidden="true"><b>1968</b></span>
+                                <span class="bbt-founder-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
+                            </button>
+                            <noscript><a t-att-href="bbt_video['url']" target="_blank" rel="noopener">Ver el video</a></noscript>
+                        </t>
+                        <video t-else="" class="bbt-founder-file" t-att-src="bbt_video['src']" preload="none" controls="controls" playsinline="playsinline"/>
+                    </div>
+                    <div>
+                        <p class="bbt-eyebrow">Nuestra historia</p>
+                        <h2 class="bbt-h2">Contada <em>por nuestro fundador</em></h2>
+                        <p class="bbt-lead mt-3">Escucha cómo empezó Babatsa, en sus propias palabras.</p>
+                        <p t-if="website.bbt_founder_caption" class="bbt-founder-caption" t-esc="website.bbt_founder_caption"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section t-else="" class="bbt bbt-founder-admin" groups="website.group_website_designer">
+            <div class="container">
+                <p class="bbt-jobs-admin mb-0"><b>Historia del fundador:</b> pega el enlace del video en Sitio web › Ajustes › Babatsa › Video del fundador y aquí aparece. Solo los administradores ven este aviso.</p>
+            </div>
+        </section>
+    </template>
+
+    <!-- "¿Cómo le dices tú?": cada término lleva sus nombres de mostrador (separados por |),
+         cómo se pide, qué es, la línea del catálogo y el tipo para /tu-pieza. -->
+    <template id="mostrador_dictionary" name="Babatsa: Cómo le dices tú">
+        <t t-set="lines" t-value="website._bbt_line_urls()"/>
+        <t t-set="terms" t-value="[
+            ('perica', 'perica|perico|llave perica', 'Llave ajustable', 'La llave que abre y cierra con un tornillito para agarrar distintas medidas.', 'herramientas', 'Herramientas', 'otra'),
+            ('alemite', 'alemite|alemites|grasera|graseras', 'Grasera', 'La boquilla por donde se le mete grasa a baleros y chumaceras.', 'lubricacion', 'Lubricación', 'otra'),
+            ('rondana', 'rondana|rondanas|roldana|arandela', 'Arandela', 'El anillo que va entre la tuerca y la pieza; la hay plana y de presión.', 'tornilleria', 'Tornillería', 'tornillo'),
+            ('pija', 'pija|pijas|tornillo de lamina|autorroscante', 'Tornillo autorroscante', 'Tornillo que hace su propia rosca en lámina, madera o plástico.', 'tornilleria', 'Tornillería', 'tornillo'),
+            ('matraca', 'matraca|trinquete|llave de trinquete', 'Llave de trinquete', 'El maneral que gira en un solo sentido y al que se le ponen dados.', 'herramientas', 'Herramientas', 'otra'),
+            ('copa', 'copa|copas|dado|dados', 'Dado para matraca', 'La pieza que se le pone a la matraca según la medida de la tuerca.', 'herramientas', 'Herramientas', 'otra'),
+            ('estopero', 'estopero|reten|retén|sello', 'Retén (sello de aceite)', 'El sello de hule que no deja salir el aceite o la grasa por la flecha.', 'rodamientos', 'Rodamientos', 'reten'),
+            ('chicote', 'chicote|chicotes', 'Manguera o cable de control', 'Así le dicen a mangueras cortas y a cables de acelerador o freno.', 'hidraulica', 'Hidráulica', 'manguera'),
+            ('balero', 'balero|baleros|cojinete|rodamiento', 'Rodamiento', 'Lo que deja girar la flecha; puede ser de bolas, de rodillos o de agujas.', 'rodamientos', 'Rodamientos', 'balero'),
+            ('taquete', 'taquete|taquetes|ancla|anclas', 'Taquete o ancla', 'Lo que se mete en la pared o el concreto para que el tornillo agarre.', 'tornilleria', 'Tornillería', 'tornillo'),
+            ('cincho', 'cincho|cinchos|cinturon|amarre', 'Cinturón plástico', 'La tira plástica para amarrar cables y mangueras.', 'ferreteria', 'Ferretería', 'otra'),
+            ('teflón', 'teflon|teflón|cinta teflon', 'Cinta selladora para roscas', 'La cinta blanca que se enreda en las roscas para que no goteen.', 'ferreteria', 'Ferretería', 'otra'),
+            ('piedra', 'piedra|esmeril|disco|disco de corte', 'Disco abrasivo', 'El disco del esmeril o la pulidora, para cortar o desbastar.', 'abrasivos', 'Abrasivos', 'otra'),
+            ('pata de cabra', 'pata de cabra|barreta', 'Barreta', 'La barra de acero para hacer palanca o sacar clavos.', 'herramientas', 'Herramientas', 'otra'),
+            ('cola de rata', 'cola de rata|lima redonda', 'Lima redonda', 'La lima delgada para agrandar o pulir agujeros.', 'herramientas', 'Herramientas', 'otra'),
+            ('liga', 'liga|banda|bandas|correa', 'Banda (correa en V)', 'La que pasa el movimiento del motor a la polea.', 'transmision', 'Transmisión', 'banda'),
+            ('chumacera', 'chumacera|chumaceras|soporte de balero', 'Chumacera', 'La caja con un balero adentro que sostiene la flecha.', 'rodamientos', 'Rodamientos', 'balero'),
+            ('cople', 'cople|coples|acople|acoplamiento', 'Cople', 'Une dos flechas, como la del motor y la de la bomba.', 'transmision', 'Transmisión', 'otra'),
+        ]"/>
+        <section class="bbt bbt-sec bbt-dic">
+            <div class="container">
+                <div class="bbt-dic-grid">
+                    <div>
+                        <p class="bbt-eyebrow">Como en el mostrador</p>
+                        <h2 class="bbt-h2">¿Cómo le <em>dices tú?</em></h2>
+                        <p class="bbt-lead mt-3">Escribe cómo le llamas a la pieza y te decimos cómo se pide y en qué línea la encuentras.</p>
+                        <p class="bbt-dic-try">Prueba con:</p>
+                        <div class="bbt-dic-chips">
+                            <button t-foreach="terms[:8]" t-as="t" type="button" class="bbt-dic-chip" t-att-data-q="t[0]" t-esc="t[0]"/>
+                        </div>
+                    </div>
+                    <div class="bbt-dic-ticket">
+                        <div class="bbt-dic-head"><span>BABATSA · MOSTRADOR</span><span class="bbt-dic-no">N.º 1968</span></div>
+                        <label class="bbt-dic-label" for="bbt-dic-q">Tú le dices…</label>
+                        <input id="bbt-dic-q" class="bbt-dic-input" type="search" autocomplete="off" placeholder="Ej. perica, alemite, rondana"/>
+                        <ul class="bbt-dic-results" aria-live="polite">
+                            <li t-foreach="terms" t-as="t" class="bbt-dic-item" t-att-data-aliases="t[1]">
+                                <p class="bbt-dic-said">«<t t-esc="t[0]"/>»</p>
+                                <p class="bbt-dic-is"><span>Se pide como</span> <b t-esc="t[2]"/></p>
+                                <p class="bbt-dic-desc" t-esc="t[3]"/>
+                                <div class="bbt-dic-links">
+                                    <a class="bbt-btn bbt-btn--blue bbt-btn--sm" t-att-href="lines[t[4]]">Ver en <t t-esc="t[5]"/></a>
+                                    <a class="bbt-btn bbt-btn--ghost bbt-btn--sm" t-att-href="'/tu-pieza?tipo=%s' % t[6]">Pedirla</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="bbt-dic-none" hidden="hidden">
+                            <p><b>Esa todavía no está en nuestra lista.</b> Mándanos una foto y en el mostrador te decimos qué es.</p>
+                            <a class="bbt-btn bbt-btn--yellow bbt-btn--sm" href="/tu-pieza?tipo=otra">Mandar foto</a>
+                        </div>
+                        <p class="bbt-dic-foot">✂ - - - - - - - - - - - - - - - - - - - - - - -</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

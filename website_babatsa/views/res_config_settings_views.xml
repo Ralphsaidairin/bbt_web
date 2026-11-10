@@ -19,6 +19,13 @@
                              help="Aparece en la página de vacantes (/jobs) para que los candidatos envíen su CV por correo. Las postulaciones hechas con el formulario llegan a la app Reclutamiento.">
                         <field name="website_bbt_rh_email" placeholder="ej. rh@babatsa.com.mx"/>
                     </setting>
+                    <setting id="bbt_founder_video" string="Video del fundador"
+                             help="Enlace de YouTube, Vimeo o Facebook (o de un archivo .mp4). Aparece en la página Nosotros; el video no se descarga hasta que el visitante le da play.">
+                        <div class="w-100">
+                            <field name="website_bbt_founder_video_url" placeholder="https://www.youtube.com/watch?v=..."/>
+                            <field name="website_bbt_founder_caption" placeholder="Pie del video, ej. nombre del fundador"/>
+                        </div>
+                    </setting>
                 </block>
             </xpath>
         </field>
