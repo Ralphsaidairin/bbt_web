@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Mapa ilustrado del noroeste en /sucursales (datos de models/branch_map.py).
+        Al tocar una ciudad se ven sus sucursales con "Abierta ahora", WhatsApp y cómo llegar.
+        Lo maneja static/src/js/babatsa_map.js; sin JS se ven todas las ciudades en lista.
+    -->
+    <template id="sucursales_mapa" name="Babatsa: Mapa de sucursales">
+        <t t-set="m" t-value="branch_map"/>
+        <section t-if="m and m['cities']" class="bbt bbt-sec bbt-nmap-sec">
+            <div class="container">
+                <div class="bbt-head">
+                    <div>
+                        <p class="bbt-eyebrow">Mapa</p>
+                        <h2 class="bbt-h2">Encuentra tu <em>sucursal</em></h2>
+                    </div>
+                    <p class="bbt-nmap-live" aria-live="polite" hidden="hidden"><span class="bbt-open-dot" aria-hidden="true"/><b>0</b> de <t t-esc="m['total']"/> abiertas ahora</p>
+                </div>
+                <div class="bbt-nmap">
+                    <div class="bbt-nmap-stage">
+                        <svg class="bbt-nmap-svg" t-att-viewBox="'0 0 %s %s' % (m['w'], m['h'])" role="img" aria-label="Mapa de sucursales Babatsa en el noroeste de México">
+                            <defs>
+                                <pattern id="bbt-nmap-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" class="nm-grid"/></pattern>
+                            </defs>
+                            <rect width="100%" height="100%" class="nm-sea"/>
+                            <rect width="100%" height="100%" fill="url(#bbt-nmap-grid)"/>
+                            <path t-att-d="m['mainland']" class="nm-land"/>
+                            <path t-att-d="m['peninsula']" class="nm-land"/>
+                            <text t-foreach="m['labels']" t-as="l" t-att-x="l['x']" t-att-y="l['y']" t-att-class="'nm-label nm-label--%s' % l['kind']"
+                                  t-att-text-anchor="l['anchor']" t-att-transform="l['transform']" t-esc="l['text']"/>
+                            <path t-foreach="m['routes']" t-as="r" t-att-d="r['d']" class="nm-route" t-att-data-city="r['key']"/>
+                            <g t-if="m['ferry']" class="nm-ferry">
+                                <path t-att-d="m['ferry']"/>
+                            </g>
+                            <g t-foreach="m['cities']" t-as="c" t-att-class="'bbt-nmap-pin %s' % ('is-hub' if c['hub'] else '')" t-att-data-city="c['key']"
+                               t-att-transform="'translate(%s %s)' % (c['x'], c['y'])" tabindex="0" role="button"
+                               t-att-aria-label="'%s: %s sucursal%s' % (c['name'], len(c['branches']), 'es' if len(c['branches']) > 1 else '')">
+                                <circle class="nm-pulse" r="14"/>
+                                <circle class="nm-dot" t-att-r="11 if c['hub'] else 8"/>
+                                <g t-if="len(c['branches']) &gt; 1" class="nm-count" transform="translate(11 -11)">
+                                    <circle r="10"/><text y="4" text-anchor="middle" t-esc="len(c['branches'])"/>
+                                </g>
+                                <text t-att-class="'nm-city nm-city--%s' % c['side']" t-att-x="-16 if c['side'] == 'left' else 16" y="5"
+                                      t-att-text-anchor="'end' if c['side'] == 'left' else 'start'" t-esc="c['name']"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="bbt-nmap-panel">
+                        <div t-foreach="m['cities']" t-as="c" class="bbt-nmap-city" t-att-data-city="c['key']">
+                            <p class="bbt-eyebrow" t-if="c['hub']">Matriz y Centro de Distribución</p>
+                            <p class="bbt-eyebrow" t-else="">Sucursal</p>
+                            <h3><t t-esc="c['name']"/> <small t-if="len(c['branches']) &gt; 1"><t t-esc="len(c['branches'])"/> puntos</small></h3>
+                            <ul class="bbt-nmap-branches">
+                                <li t-foreach="c['branches']" t-as="s">
+                                    <div class="bbt-nmap-bhead">
+                                        <b t-esc="s['name']"/>
+                                        <p t-if="s['schedule_json']" class="bbt-open" t-att-data-schedule="s['schedule_json']">
+                                            <span class="bbt-open-dot" aria-hidden="true"/><span class="bbt-open-text">Horario</span>
+                                        </p>
+                                    </div>
+                                    <p t-if="s['street']" class="bbt-nmap-addr" t-esc="s['street']"/>
+                                    <div class="bbt-nmap-ctas">
+                                        <a t-if="s['whatsapp_url']" class="bbt-btn bbt-btn--wa bbt-btn--sm" t-att-href="s['whatsapp_url']" target="_blank" rel="noopener">WhatsApp</a>
+                                        <a t-elif="s['phone']" class="bbt-btn bbt-btn--blue bbt-btn--sm" t-att-href="'tel:' + s['phone_link']">Llamar</a>
+                                        <a t-if="s['directions_url']" class="bbt-btn bbt-btn--ghost bbt-btn--sm" t-att-href="s['directions_url']" target="_blank" rel="noopener">Cómo llegar</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <p class="bbt-nmap-hint">Toca una ciudad del mapa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

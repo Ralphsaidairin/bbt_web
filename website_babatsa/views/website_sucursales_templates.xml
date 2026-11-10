@@ -26,6 +26,7 @@
                     </div>
                 </section>
 
+                <t t-call="website_babatsa.sucursales_mapa"/>
                 <section class="bbt bbt-sec">
                     <div class="container">
                         <!-- Todas las sucursales juntas; arriba la foto de fachada si la hay, si no un mapa -->

@@ -13,6 +13,8 @@ from odoo.http import request
 from odoo.addons.website_sale.controllers.cart import Cart
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 
+from ..models import branch_map
+
 MOTIVOS = [
     'Cotización',
     'Información de producto',
@@ -40,8 +42,10 @@ class BabatsaWebsite(http.Controller):
     def sucursales(self, **kw):
         # Todas juntas, en el orden de "Orden en sitio web" (la matriz va primero)
         warehouses = self._bbt_published_warehouses()
+        branches = [wh._bbt_website_card() for wh in warehouses]
         values = {
-            'branches': [wh._bbt_website_card() for wh in warehouses],
+            'branches': branches,
+            'branch_map': branch_map.build(branches),
             'count_sucursales': len(warehouses.filtered(lambda w: w.bbt_type == 'sucursal')),
             'count_cedis': len(warehouses.filtered(lambda w: w.bbt_type == 'cedis')),
         }
