@@ -131,6 +131,7 @@
         </section>
 
                 </div>
+                <t t-call="website_babatsa.tu_pieza_home_teaser"/>
                 <t t-call="website_babatsa.brand_home_section"/>
                 <div class="oe_structure" id="oe_structure_bbt_home_bottom">
 

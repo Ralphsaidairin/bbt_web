@@ -38,6 +38,9 @@
                                 <div class="bbt-branch-body">
                                     <span t-if="s['type'] == 'cedis'" class="bbt-badge">Centro de Distribución</span>
                                     <h3 t-esc="s['name']"/>
+                                    <p t-if="s['schedule_json']" class="bbt-open" t-att-data-schedule="s['schedule_json']" aria-live="polite">
+                                        <span class="bbt-open-dot" aria-hidden="true"/><span class="bbt-open-text">Horario</span>
+                                    </p>
                                     <p t-if="s['note']" class="bbt-branch-note" t-esc="s['note']"/>
                                     <ul class="bbt-branch-info">
                                         <li t-if="s['street'] or s['city_line']">
@@ -49,8 +52,9 @@
                                         <li t-if="s['hours']" class="bbt-hours" t-esc="s['hours']"/>
                                     </ul>
                                     <div class="bbt-branch-ctas">
+                                        <a t-if="s['whatsapp_url']" class="bbt-btn bbt-btn--wa bbt-btn--sm" t-att-href="s['whatsapp_url']" target="_blank" rel="noopener">WhatsApp</a>
                                         <a t-if="s['directions_url']" class="bbt-btn bbt-btn--blue bbt-btn--sm" t-att-href="s['directions_url']" target="_blank" rel="noopener">Cómo llegar</a>
-                                        <a class="bbt-btn bbt-btn--ghost bbt-btn--sm" t-att-href="s['contact_url']">Contactar</a>
+                                        <a class="bbt-btn bbt-btn--ghost bbt-btn--sm" t-att-href="'/tu-pieza?sucursal=%s' % s['id']">Busco una pieza</a>
                                     </div>
                                 </div>
                             </article>

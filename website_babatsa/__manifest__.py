@@ -9,17 +9,20 @@ Sitio web corporativo de Babatsa.
 - Página /contacto que crea oportunidades/iniciativas en CRM con etiqueta por motivo.
 - Página /marcas desde el modelo Marcas Babatsa (logo, nivel, líneas, centro de servicio, programa).
 - Pie de página con logo, enlaces, redes, vacantes (/jobs) y aviso de privacidad.
+- Tu pieza (/tu-pieza): medidas sobre un dibujo técnico, fotos y envío a la sucursal (CRM + WhatsApp).
+- Sucursales con "Abierta ahora" desde su horario de trabajo y botón de WhatsApp.
 - Vacantes (/jobs, app Reclutamiento) con tarjetas tipo flyer, sucursal y correo de RH.
 - Páginas Nosotros, Productos y Servicios; encabezado propio con 3 estilos.
 - Tienda (Comercio electrónico) en modo catálogo: sin precios ni carrito, invita a sucursal o cotización.
 - Paleta y tipografía de marca disponibles en el constructor del sitio web.
 """,
-    'version': '19.0.1.2.0',
+    'version': '19.0.1.3.0',
     'category': 'Website',
     'author': 'Babatsa · TI',
     'license': 'LGPL-3',
     'depends': [
         'website',
+        'resource',
         'website_crm',
         'website_hr_recruitment',
         'stock',
@@ -47,6 +50,7 @@ Sitio web corporativo de Babatsa.
         'views/website_shop_templates.xml',
         'views/hr_job_views.xml',
         'views/website_jobs_templates.xml',
+        'views/website_tu_pieza_templates.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [
@@ -56,6 +60,8 @@ Sitio web corporativo de Babatsa.
             'website_babatsa/static/src/scss/babatsa.scss',
             'website_babatsa/static/src/js/babatsa_reveal.js',
             'website_babatsa/static/src/js/babatsa_nav.js',
+            'website_babatsa/static/src/js/babatsa_open.js',
+            'website_babatsa/static/src/js/babatsa_pieza.js',
         ],
     },
     'post_init_hook': 'post_init_hook',

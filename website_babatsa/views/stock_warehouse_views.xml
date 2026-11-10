@@ -15,13 +15,17 @@
                             <field name="bbt_sequence"/>
                             <field name="bbt_maps_url" widget="url" placeholder="https://maps.app.goo.gl/..."/>
                             <field name="bbt_mobile" placeholder="668 174 2737"/>
+                            <field name="bbt_whatsapp" invisible="not bbt_mobile"/>
                             <field name="bbt_note" placeholder="Ej. Centro de servicio Makita, Urrea..."/>
                         </group>
                         <group string="Foto de fachada">
                             <field name="bbt_image" widget="image" nolabel="1" colspan="2"/>
                         </group>
                     </group>
-                    <group string="Horario de atención">
+                    <group string="Horario estructurado (Abierta ahora)">
+                        <field name="bbt_calendar_id" options="{'no_quick_create': True}"/>
+                    </group>
+                    <group string="Horario de atención (texto)">
                         <field name="bbt_hours" nolabel="1" colspan="2"
                                placeholder="Lunes a viernes: 8:00 a 18:00&#10;Sábado: 8:00 a 14:00"/>
                     </group>

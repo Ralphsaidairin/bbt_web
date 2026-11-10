@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        "Tu pieza" (/tu-pieza): el cliente elige qué pieza busca, captura sus medidas sobre un dibujo
+        que cambia con ellas, agrega fotos y la manda a su sucursal. La solicitud queda en CRM
+        (etiqueta "Tu pieza", con fotos y folio) y, si la sucursal tiene WhatsApp, se abre el chat
+        con el mensaje ya escrito. El dibujo y la lista los maneja static/src/js/babatsa_pieza.js.
+    -->
+    <template id="tu_pieza_page" name="Babatsa: Tu pieza">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Tu pieza</t>
+            <div id="wrap">
+                <section class="bbt bbt-sec bbt-jobs-hero bbt-pz-hero">
+                    <div class="container">
+                        <p class="bbt-eyebrow">Tu pieza</p>
+                        <h1 class="bbt-h2">Mídela aquí, <em>nosotros la buscamos</em></h1>
+                        <p class="bbt-lead mt-3">Elige qué pieza es, anota sus medidas y mándala a tu sucursal. Si la tienes a la mano, tómale una foto.</p>
+                        <ol class="bbt-pz-howto">
+                            <li><span>1</span>Elige la pieza</li>
+                            <li><span>2</span>Anota sus medidas</li>
+                            <li><span>3</span>Mándala a tu sucursal</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section class="bbt bbt-sec bbt-pz-sec">
+                    <div class="container">
+                        <form class="bbt-pz" action="/tu-pieza/enviar" method="post" enctype="multipart/form-data" novalidate="novalidate">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <input type="hidden" name="piezas" value="[]"/>
+                            <input type="hidden" name="accion" value="whatsapp"/>
+                            <input class="bbt-hp" type="text" name="website_url" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+
+                            <div class="bbt-pz-main">
+                                <fieldset class="bbt-pz-types">
+                                    <legend>¿Qué pieza buscas?</legend>
+                                    <label t-foreach="[('balero', 'Balero'), ('reten', 'Retén'), ('banda', 'Banda'), ('tornillo', 'Tornillo'), ('manguera', 'Manguera'), ('otra', 'Otra')]" t-as="tp" class="bbt-pz-type">
+                                        <input type="radio" name="tipo" t-att-value="tp[0]" t-att-checked="tp_first or None"/>
+                                        <span t-esc="tp[1]"/>
+                                    </label>
+                                </fieldset>
+
+                                <div class="bbt-pz-stage">
+                                    <div class="bbt-pz-units" role="group" aria-label="Unidades">
+                                        <button type="button" class="is-on" data-unit="mm">mm</button>
+                                        <button type="button" data-unit="in">pulg</button>
+                                    </div>
+                                    <div class="bbt-pz-draw" aria-hidden="true"/>
+                                    <p class="bbt-pz-hint">El dibujo cambia con tus medidas. Mide sobre la pieza, no sobre el equipo.</p>
+                                </div>
+
+                                <div class="bbt-pz-fields">
+                                    <div class="bbt-pz-dims"/>
+                                    <div class="bbt-field">
+                                        <label for="bbt-pz-codigo">Número o marca grabada <small>(si se lee)</small></label>
+                                        <input id="bbt-pz-codigo" type="text" maxlength="60" autocomplete="off" placeholder="Ej. 6205-2RS, A-42, SKF"/>
+                                    </div>
+                                    <div class="bbt-field">
+                                        <label for="bbt-pz-equipo">¿De qué equipo es?</label>
+                                        <input id="bbt-pz-equipo" type="text" maxlength="80" placeholder="Ej. bomba de riego, tractor, compresor"/>
+                                    </div>
+                                    <button type="button" class="bbt-btn bbt-btn--blue bbt-pz-add">+ Agregar a mi lista</button>
+                                </div>
+                            </div>
+
+                            <aside class="bbt-pz-side">
+                                <h2>Tu lista para el mostrador</h2>
+                                <ul class="bbt-pz-list"/>
+                                <p class="bbt-pz-empty">Todavía no agregas piezas. Puedes mandar varias en un solo mensaje.</p>
+
+                                <div class="bbt-pz-photos">
+                                    <label class="bbt-pz-photo-btn">
+                                        <input type="file" name="fotos" accept="image/*" multiple="multiple"/>
+                                        <span>📷 Agregar fotos</span>
+                                        <small>Hasta 3. Ayuda mucho una foto con una regla o cinta al lado.</small>
+                                    </label>
+                                    <div class="bbt-pz-thumbs"/>
+                                </div>
+
+                                <div class="bbt-field">
+                                    <label for="bbt-pz-sucursal">Sucursal</label>
+                                    <select id="bbt-pz-sucursal" name="sucursal" required="required">
+                                        <option value="">Elige tu sucursal</option>
+                                        <option t-foreach="sucursales" t-as="s" t-att-value="s['id']"
+                                                t-att-data-whatsapp="'1' if s['whatsapp'] else '0'"
+                                                t-att-selected="s['id'] == sucursal_id or None"
+                                                t-esc="s['name'] + (' · ' + s['city'] if s['city'] and s['city'] not in s['name'] else '')"/>
+                                    </select>
+                                </div>
+                                <div class="bbt-pz-row">
+                                    <div class="bbt-field">
+                                        <label for="bbt-pz-nombre">Tu nombre</label>
+                                        <input id="bbt-pz-nombre" name="nombre" type="text" maxlength="80" autocomplete="name" required="required"/>
+                                    </div>
+                                    <div class="bbt-field">
+                                        <label for="bbt-pz-tel">Teléfono</label>
+                                        <input id="bbt-pz-tel" name="telefono" type="tel" maxlength="30" autocomplete="tel" inputmode="tel" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="bbt-field">
+                                    <label for="bbt-pz-nota">Comentarios <small>(opcional)</small></label>
+                                    <textarea id="bbt-pz-nota" name="nota" rows="2" maxlength="1000" placeholder="Cantidad, urgencia, lo que quieras agregar"/>
+                                </div>
+                                <p class="bbt-alert bbt-pz-error" hidden="hidden"/>
+                                <div class="bbt-pz-send">
+                                    <button type="submit" class="bbt-btn bbt-pz-wa" data-accion="whatsapp">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+                                        Enviar por WhatsApp
+                                    </button>
+                                    <button type="submit" class="bbt-btn bbt-btn--ghost bbt-pz-call" data-accion="llamada">Mejor que me llamen</button>
+                                </div>
+                                <p class="bbt-form-note">Tu solicitud llega al mostrador de la sucursal con un folio. <a href="/aviso-de-privacidad">Aviso de privacidad</a></p>
+                            </aside>
+
+                            <div class="bbt-pz-done" hidden="hidden" tabindex="-1">
+                                <div class="bbt-check" aria-hidden="true">
+                                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                                </div>
+                                <h2 class="bbt-h2">Listo, <em>ya la estamos buscando</em></h2>
+                                <p class="bbt-lead bbt-pz-done-text"/>
+                                <div class="bbt-ctas justify-content-center">
+                                    <a class="bbt-btn bbt-pz-wa bbt-pz-done-wa" href="#" hidden="hidden">Abrir WhatsApp</a>
+                                    <a class="bbt-btn bbt-btn--ghost" href="/tu-pieza">Buscar otra pieza</a>
+                                </div>
+                            </div>
+                        </form>
+                        <noscript>
+                            <p class="bbt-empty mt-4">Para medir tu pieza aquí se necesita JavaScript. También puedes <a href="/contacto?motivo=Cotización">escribirnos</a> o visitar tu <a href="/sucursales">sucursal</a>.</p>
+                        </noscript>
+                    </div>
+                </section>
+                <div class="oe_structure" id="oe_structure_bbt_tu_pieza_bottom"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="tu_pieza_gracias" name="Babatsa: Tu pieza enviada">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Tu pieza</t>
+            <div id="wrap">
+                <section class="bbt bbt-sec">
+                    <div class="container">
+                        <div class="bbt-thanks">
+                            <div class="bbt-check" aria-hidden="true">
+                                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                            </div>
+                            <h1 class="bbt-h2">Listo, <em>ya la estamos buscando</em></h1>
+                            <p class="bbt-lead">Tu sucursal recibió la solicitud y te contactará al teléfono que dejaste.</p>
+                            <a class="bbt-btn bbt-btn--yellow" href="/">Volver al inicio</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+
+    <!-- Inicio: acceso a "Tu pieza" debajo de las categorías -->
+    <template id="tu_pieza_home_teaser" name="Babatsa: Acceso a Tu pieza en inicio">
+        <section class="bbt bbt-pz-teaser">
+            <div class="container">
+                <a class="bbt-pz-teaser-box" href="/tu-pieza">
+                    <span class="bbt-pz-teaser-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="#0847E9"/><circle cx="32" cy="32" r="17" fill="#fff"/><g fill="#FFBE06"><circle cx="32" cy="19.5" r="4.4"/><circle cx="44.5" cy="32" r="4.4"/><circle cx="32" cy="44.5" r="4.4"/><circle cx="19.5" cy="32" r="4.4"/></g><circle cx="32" cy="32" r="7" fill="#002475"/><path d="M4 60h56" stroke="#002475" stroke-width="3"/><path d="M6 56v8M58 56v8" stroke="#002475" stroke-width="3"/></svg>
+                    </span>
+                    <span class="bbt-pz-teaser-text">
+                        <b>¿No sabes cómo se llama tu pieza?</b>
+                        Mídela aquí, tómale una foto y mándala a tu sucursal por WhatsApp.
+                    </span>
+                    <span class="bbt-btn bbt-btn--yellow">Buscar mi pieza →</span>
+                </a>
+            </div>
+        </section>
+    </template>
+</odoo>
