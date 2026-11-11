@@ -158,20 +158,23 @@
         </t>
     </template>
 
-    <!-- Inicio: acceso a "Tu pieza" debajo de las categorías -->
+    <!-- Inicio: acceso a "Tu pieza" y "Tu equipo" debajo de las categorías -->
     <template id="tu_pieza_home_teaser" name="Babatsa: Acceso a Tu pieza en inicio">
         <section class="bbt bbt-pz-teaser">
             <div class="container">
-                <a class="bbt-pz-teaser-box" href="/tu-pieza">
+                <div class="bbt-pz-teaser-box">
                     <span class="bbt-pz-teaser-icon" aria-hidden="true">
                         <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="#0847E9"/><circle cx="32" cy="32" r="17" fill="#fff"/><g fill="#FFBE06"><circle cx="32" cy="19.5" r="4.4"/><circle cx="44.5" cy="32" r="4.4"/><circle cx="32" cy="44.5" r="4.4"/><circle cx="19.5" cy="32" r="4.4"/></g><circle cx="32" cy="32" r="7" fill="#002475"/><path d="M4 60h56" stroke="#002475" stroke-width="3"/><path d="M6 56v8M58 56v8" stroke="#002475" stroke-width="3"/></svg>
                     </span>
                     <span class="bbt-pz-teaser-text">
                         <b>¿No sabes cómo se llama tu pieza?</b>
-                        Mídela aquí, tómale una foto y mándala a tu sucursal por WhatsApp.
+                        Mídela aquí, tómale una foto y mándala a tu sucursal por WhatsApp. ¿No sabes ni qué pieza es? Explora tu equipo parte por parte.
                     </span>
-                    <span class="bbt-btn bbt-btn--yellow">Buscar mi pieza →</span>
-                </a>
+                    <span class="bbt-pz-teaser-ctas">
+                        <a class="bbt-btn bbt-btn--yellow" href="/tu-pieza">Buscar mi pieza →</a>
+                        <a class="bbt-btn bbt-btn--ghost-light" href="/tu-equipo">Explora tu equipo</a>
+                    </span>
+                </div>
             </div>
         </section>
     </template>
