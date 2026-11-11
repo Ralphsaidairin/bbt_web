@@ -19,16 +19,22 @@
         <section t-if="bbt_video" class="bbt bbt-sec bbt-founder">
             <div class="container">
                 <div class="bbt-founder-grid">
-                    <div class="bbt-founder-media">
-                        <t t-if="bbt_video['kind'] == 'embed'">
-                            <button type="button" class="bbt-founder-play" t-att-data-embed="bbt_video['src']" aria-label="Reproducir el video de la historia de Babatsa">
+                    <div t-attf-class="bbt-founder-media #{'bbt-founder-media--vertical' if bbt_video.get('vertical') else ''}">
+                        <!-- Archivo subido en Ajustes: corre en gris y sin sonido como vista previa; al dar play,
+                             a color, desde el inicio y con audio. Enlace (YouTube/Vimeo/Facebook): se carga al dar play. -->
+                        <video t-if="bbt_video['kind'] == 'file'" class="bbt-founder-preview" t-att-data-src="bbt_video['src']"
+                               muted="muted" loop="loop" playsinline="playsinline" preload="none" aria-hidden="true"/>
+                        <button type="button" t-attf-class="bbt-founder-play #{'bbt-founder-play--preview' if bbt_video['kind'] == 'file' else ''}"
+                                t-att-data-embed="bbt_video['src'] if bbt_video['kind'] == 'embed' else None"
+                                t-att-data-video="bbt_video['kind'] == 'file' or None" aria-label="Ver el video de la historia de Babatsa con sonido">
+                            <t t-if="bbt_video['kind'] == 'embed'">
                                 <img t-if="bbt_video['thumb']" t-att-src="bbt_video['thumb']" alt="" loading="lazy"/>
                                 <span t-else="" class="bbt-founder-poster" aria-hidden="true"><b>1968</b></span>
-                                <span class="bbt-founder-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
-                            </button>
-                            <noscript><a t-att-href="bbt_video['url']" target="_blank" rel="noopener">Ver el video</a></noscript>
-                        </t>
-                        <video t-else="" class="bbt-founder-file" t-att-src="bbt_video['src']" preload="none" controls="controls" playsinline="playsinline"/>
+                            </t>
+                            <span class="bbt-founder-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
+                            <span class="bbt-founder-cta" aria-hidden="true">Ver con sonido</span>
+                        </button>
+                        <noscript><a t-att-href="bbt_video['url']" target="_blank" rel="noopener">Ver el video</a></noscript>
                     </div>
                     <div>
                         <p class="bbt-eyebrow">Nuestra historia</p>

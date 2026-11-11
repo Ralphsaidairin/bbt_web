@@ -59,10 +59,10 @@
     }
 
     function init() {
-        var root = document.querySelector(".bbt-eq-sec");
-        if (!root || window.frameElement || document.body.classList.contains("editor_enable")) {
-            return;
-        }
+        window.bbtMount(document.querySelector(".bbt-eq-sec"), setup);
+    }
+
+    function setup(root) {
         root.classList.add("is-ready");
         var tabs = root.querySelectorAll(".bbt-eq-tab");
         var equipos = root.querySelectorAll(".bbt-eq");

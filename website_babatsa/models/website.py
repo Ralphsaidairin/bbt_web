@@ -41,6 +41,11 @@ class Website(models.Model):
         help='Enlace de YouTube, Vimeo o Facebook, o de un archivo .mp4. Aparece en Nosotros; '
              'el video no se descarga hasta que el visitante le da play. Vacío: la sección no se muestra.',
     )
+    bbt_founder_video_file = fields.Binary(
+        string='Archivo del video', attachment=True,
+        help='Si no está en YouTube ni Facebook, sube aquí el .mp4. Tiene prioridad sobre el enlace.',
+    )
+    bbt_founder_video_filename = fields.Char(string='Nombre del archivo del video')
     bbt_founder_caption = fields.Char(
         string='Pie del video',
         help='Ej. el nombre del fundador y el año de la entrevista.',
@@ -64,6 +69,10 @@ class Website(models.Model):
     def _bbt_founder_video(self):
         """Cómo reproducir el video del fundador: {kind, src, thumb} o False."""
         self.ensure_one()
+        if self.sudo().bbt_founder_video_file:
+            # El archivo subido se sirve desde /nosotros/video (controllers/main.py)
+            return {'kind': 'file', 'src': '/nosotros/video?unique=%s' % int(self.write_date.timestamp()),
+                    'thumb': False, 'url': '/nosotros/video'}
         url = (self.bbt_founder_video_url or '').strip()
         if not url:
             return False
@@ -76,8 +85,9 @@ class Website(models.Model):
         if m:
             return {'kind': 'embed', 'src': 'https://player.vimeo.com/video/%s?autoplay=1' % m.group(1), 'thumb': False, 'url': url}
         if 'facebook.com' in url or 'fb.watch' in url:
+            # Los reels son verticales: el marco se acomoda a 9:16
             return {'kind': 'embed', 'src': 'https://www.facebook.com/plugins/video.php?href=%s&show_text=false&autoplay=1' % quote(url, safe=''),
-                    'thumb': False, 'url': url}
+                    'thumb': False, 'url': url, 'vertical': '/reel/' in url}
         return {'kind': 'file', 'src': url, 'thumb': False, 'url': url}
 
 
@@ -92,5 +102,9 @@ class ResConfigSettings(models.TransientModel):
         related='website_id.bbt_rh_email', readonly=False)
     website_bbt_founder_video_url = fields.Char(
         related='website_id.bbt_founder_video_url', readonly=False)
+    website_bbt_founder_video_file = fields.Binary(
+        related='website_id.bbt_founder_video_file', readonly=False)
+    website_bbt_founder_video_filename = fields.Char(
+        related='website_id.bbt_founder_video_filename', readonly=False)
     website_bbt_founder_caption = fields.Char(
         related='website_id.bbt_founder_caption', readonly=False)

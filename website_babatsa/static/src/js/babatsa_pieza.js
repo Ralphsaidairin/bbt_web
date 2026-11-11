@@ -253,10 +253,10 @@
 
     // ---------------------------------------------------------------- herramienta
     function init() {
-        var form = document.querySelector("form.bbt-pz");
-        if (!form || window.frameElement || document.body.classList.contains("editor_enable")) {
-            return;
-        }
+        window.bbtMount(document.querySelector("form.bbt-pz"), setup);
+    }
+
+    function setup(form) {
         form.classList.add("is-ready");
         var draw = form.querySelector(".bbt-pz-draw");
         var dimsBox = form.querySelector(".bbt-pz-dims");

@@ -5,10 +5,10 @@
     "use strict";
 
     function init() {
-        var sec = document.querySelector(".bbt-nmap-sec");
-        if (!sec || window.frameElement || document.body.classList.contains("editor_enable")) {
-            return;
-        }
+        window.bbtMount(document.querySelector(".bbt-nmap-sec"), setup);
+    }
+
+    function setup(sec) {
         sec.classList.add("is-ready");
         var pins = sec.querySelectorAll(".bbt-nmap-pin");
         var panels = sec.querySelectorAll(".bbt-nmap-city");

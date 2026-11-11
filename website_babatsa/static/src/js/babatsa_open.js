@@ -81,6 +81,11 @@
     function init() {
         var items = [];
         document.querySelectorAll(".bbt-open[data-schedule]").forEach(function (el) {
+            window.bbtMount(el, function () {
+                track(el);
+            });
+        });
+        function track(el) {
             try {
                 var schedule = JSON.parse(el.getAttribute("data-schedule"));
                 schedule.closed = schedule.closed || [];
@@ -88,7 +93,7 @@
             } catch (e) {
                 el.hidden = true;
             }
-        });
+        }
         if (!items.length) {
             return;
         }

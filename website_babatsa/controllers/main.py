@@ -415,3 +415,16 @@ class BabatsaTuPieza(http.Controller):
             text.append('Soy %s. Folio %s.' % (nombre, folio))
             whatsapp_url = 'https://wa.me/%s?text=%s' % (number, quote('\n'.join(text)))
         return reply(True, folio=folio, whatsapp_url=whatsapp_url, sucursal=sucursal_name)
+
+
+class BabatsaNosotros(http.Controller):
+
+    @http.route('/nosotros/video', type='http', auth='public', website=True, sitemap=False)
+    def nosotros_video(self, **kw):
+        """Video del fundador subido en Ajustes (admite saltar a cualquier minuto)."""
+        site = request.website.sudo()
+        if not site.bbt_founder_video_file:
+            raise NotFound()
+        stream = request.env['ir.binary']._get_stream_from(
+            site, 'bbt_founder_video_file', filename=site.bbt_founder_video_filename or 'historia.mp4')
+        return stream.get_response(as_attachment=False)
