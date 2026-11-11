@@ -2,8 +2,8 @@
 <odoo>
     <!--
         Página /nosotros (website.page): el texto se edita directo en el constructor.
-        Texto del documento "Página Web Babatsa". En la línea del tiempo solo 1968 y "Hoy" están
-        confirmados; los hitos intermedios llevan [por confirmar] hasta que nos pasen años y datos.
+        Texto del documento "Página Web Babatsa". La línea del tiempo cuenta la historia del fundador
+        (entrevista publicada por Babatsa en febrero de 2026).
     -->
     <template id="nosotros_view" name="Babatsa: Nosotros">
         <t t-call="website.layout">
@@ -46,12 +46,15 @@
 
                 <t t-call="website_babatsa.founder_video_section"/>
 
-                <!-- ===================== LÍNEA DEL TIEMPO ===================== -->
+                <!-- ===================== LÍNEA DEL TIEMPO =====================
+                     Historia contada por el fundador en la entrevista que Babatsa publicó en febrero de 2026.
+                     Las frases entre comillas son suyas; la redacción del resto es nuestra. -->
                 <section class="bbt bbt-sec bbt-tl-sec">
                     <div class="container">
                         <div class="bbt-center">
                             <p class="bbt-eyebrow">Nuestra historia</p>
-                            <h2 class="bbt-h2">Más de cinco décadas <em>en movimiento</em></h2>
+                            <h2 class="bbt-h2">De un local rentado <em>a cuatro estados</em></h2>
+                            <p class="bbt-lead bbt-tl-intro">Babatsa viene de <b>Ba</b>leros, <b>Ba</b>ndas y <b>T</b>ornillos, <b>S.A.</b>: las tres piezas con las que empezó todo el 15 de febrero de 1968. Así lo cuenta don Francisco Ruiz Serrano, nuestro fundador.</p>
                         </div>
                         <div class="bbt-tl">
                             <span class="bbt-tl-line" aria-hidden="true"><span class="bbt-tl-fill"/></span>
@@ -59,53 +62,85 @@
                                 <li class="bbt-tl-item">
                                     <span class="bbt-tl-dot" aria-hidden="true"/>
                                     <div class="bbt-tl-card">
+                                        <span class="bbt-tl-chapter">Capítulo 1</span>
                                         <span class="bbt-tl-year">1968</span>
-                                        <h3>Nace Babatsa</h3>
-                                        <p>Empezamos a ofrecer soluciones para el campo, la industria, los talleres y los negocios del noroeste de México.</p>
+                                        <h3>Todo empezó con tornillos</h3>
+                                        <p>Don Francisco rentó un local pequeño frente al Hotel El Dorado, en Los Mochis, para vender lo que más le gustaba: tornillos.</p>
+                                        <blockquote class="bbt-tl-quote">«Empecé contra esquina del hotel El Dorado. Renté un departamentito y ahí empecé.»</blockquote>
+                                    </div>
+                                    <div class="bbt-tl-art" aria-hidden="true">
+                                        <svg viewBox="0 0 120 120"><rect x="14" y="44" width="92" height="62" rx="6" fill="#fff" stroke="#002475" stroke-width="4"/><path d="M10 44h100l-8-20H18z" fill="#FFBE06" stroke="#002475" stroke-width="4" stroke-linejoin="round"/><path d="M30 24v20M50 24v20M70 24v20M90 24v20" stroke="#002475" stroke-width="3"/><rect x="26" y="62" width="26" height="44" fill="#0847E9"/><rect x="62" y="60" width="32" height="22" rx="3" fill="#DCE3F2" stroke="#002475" stroke-width="3"/><g transform="translate(78 64) rotate(25)"><rect x="-5" y="-2" width="10" height="7" rx="1" fill="#002475"/><rect x="-2" y="5" width="4" height="10" fill="#002475"/></g></svg>
                                     </div>
                                 </li>
                                 <li class="bbt-tl-item">
                                     <span class="bbt-tl-dot" aria-hidden="true"/>
                                     <div class="bbt-tl-card">
-                                        <span class="bbt-tl-year">[Año]</span>
-                                        <h3>Ampliamos nuestra presencia</h3>
-                                        <p>Nuevas sucursales para estar más cerca de nuestros clientes. [Ciudades y año por confirmar]</p>
+                                        <span class="bbt-tl-chapter">Capítulo 2</span>
+                                        <span class="bbt-tl-year">Los primeros años</span>
+                                        <h3>La primera sucursal</h3>
+                                        <p>Al negocio le fue bien. Compró un terreno sobre el bulevar Macario Gaxiola, abrió ahí una sucursal y siguió creciendo.</p>
+                                        <blockquote class="bbt-tl-quote">«Me vendieron un solar por la Macario Gaxiola. Puse una sucursal. Y así fui abriendo negocios.»</blockquote>
+                                    </div>
+                                    <div class="bbt-tl-art" aria-hidden="true">
+                                        <svg viewBox="0 0 120 120"><path d="M10 96h100" stroke="#002475" stroke-width="4" stroke-linecap="round"/><path d="M60 92s-24-26-24-44a24 24 0 0 1 48 0c0 18-24 44-24 44z" fill="#0847E9" stroke="#002475" stroke-width="4"/><circle cx="60" cy="48" r="9" fill="#FFBE06"/><path d="M88 96V58" stroke="#002475" stroke-width="4"/><path d="M88 58h20l-6 8 6 8H88" fill="#FFBE06" stroke="#002475" stroke-width="3" stroke-linejoin="round"/></svg>
                                     </div>
                                 </li>
                                 <li class="bbt-tl-item">
                                     <span class="bbt-tl-dot" aria-hidden="true"/>
                                     <div class="bbt-tl-card">
-                                        <span class="bbt-tl-year">[Año]</span>
-                                        <h3>Más líneas y experiencia técnica</h3>
-                                        <p>Ampliamos nuestras líneas de producto y la experiencia de nuestro equipo. [Hito por confirmar]</p>
+                                        <span class="bbt-tl-chapter">Capítulo 3</span>
+                                        <span class="bbt-tl-year">SKF</span>
+                                        <h3>Un viaje a la Ciudad de México</h3>
+                                        <p>Fue a pedir la distribución de SKF y le dijeron que en Los Mochis ya había dos distribuidores. A su regreso, el dueño de una de esas tiendas le ofreció venderle el negocio.</p>
+                                        <blockquote class="bbt-tl-quote">«Me dijo que él me vendía el negocio. Y acepté. Y así abrimos la SKF.»</blockquote>
+                                    </div>
+                                    <div class="bbt-tl-art" aria-hidden="true">
+                                        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="44" fill="#0847E9" stroke="#002475" stroke-width="4"/><circle cx="60" cy="60" r="30" fill="#fff"/><g fill="#FFBE06" stroke="#002475" stroke-width="2"><circle cx="60" cy="37" r="7"/><circle cx="83" cy="60" r="7"/><circle cx="60" cy="83" r="7"/><circle cx="37" cy="60" r="7"/><circle cx="76" cy="44" r="7"/><circle cx="76" cy="76" r="7"/><circle cx="44" cy="76" r="7"/><circle cx="44" cy="44" r="7"/></g><circle cx="60" cy="60" r="13" fill="#002475"/></svg>
                                     </div>
                                 </li>
                                 <li class="bbt-tl-item">
                                     <span class="bbt-tl-dot" aria-hidden="true"/>
                                     <div class="bbt-tl-card">
-                                        <span class="bbt-tl-year">[Año]</span>
-                                        <h3>Centro de Distribución Poseidón</h3>
-                                        <p>Nuestro CEDIS nos permite atender a clientes locales y foráneos. [Año por confirmar]</p>
+                                        <span class="bbt-tl-chapter">Capítulo 4</span>
+                                        <span class="bbt-tl-year">Gates</span>
+                                        <h3>Treinta mil pesos en efectivo</h3>
+                                        <p>Al principio Gates no le quería dar la distribución y él conseguía las bandas por un negocio en Sonora. Después de varias visitas a su almacén en Hermosillo, el director le puso una condición: comprarle 30 mil pesos en efectivo.</p>
+                                        <blockquote class="bbt-tl-quote">«Conseguí los 30 mil pesos. Ya lo llevé. Y desde entonces soy distribuidor de Gates.»</blockquote>
+                                    </div>
+                                    <div class="bbt-tl-art" aria-hidden="true">
+                                        <svg viewBox="0 0 120 120"><rect x="16" y="34" width="88" height="52" rx="8" fill="#2BB673" stroke="#002475" stroke-width="4"/><circle cx="60" cy="60" r="15" fill="#fff" stroke="#002475" stroke-width="3"/><text x="60" y="67" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="900" font-size="19" fill="#002475">$</text><text x="60" y="108" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="900" font-style="italic" font-size="20" fill="#002475">30 mil</text><circle cx="30" cy="48" r="4" fill="#002475"/><circle cx="90" cy="72" r="4" fill="#002475"/></svg>
                                     </div>
                                 </li>
                                 <li class="bbt-tl-item">
                                     <span class="bbt-tl-dot" aria-hidden="true"/>
                                     <div class="bbt-tl-card">
-                                        <span class="bbt-tl-year">[Año]</span>
-                                        <h3>Servicio y programas especializados</h3>
-                                        <p>Centros de servicio autorizado y programas junto con marcas líderes. [Año por confirmar]</p>
+                                        <span class="bbt-tl-chapter">Capítulo 5</span>
+                                        <span class="bbt-tl-year">Hoy</span>
+                                        <h3>11 sucursales y un Centro de Distribución</h3>
+                                        <p>Cinco puntos en Los Mochis, con el Centro de Distribución en el Parque Industrial Ecológico, y sucursales en Guasave, Culiacán, Mazatlán, Hermosillo, Ciudad Obregón, Tepic y La Paz. Productos de marcas líderes, asesoría especializada y el respaldo de las marcas que representamos.</p>
+                                        <blockquote class="bbt-tl-quote">«Todos los días he sido feliz por la ferretería. Y poco a poco lo fui haciendo.»</blockquote>
+                                    </div>
+                                    <div class="bbt-tl-art" aria-hidden="true">
+                                        <svg viewBox="0 0 120 120"><path d="M20 20l30 14 22 24 14 36" fill="none" stroke="#9FB0D9" stroke-width="3" stroke-dasharray="4 6" stroke-linecap="round"/><g stroke="#002475" stroke-width="3"><circle cx="20" cy="20" r="8" fill="#0847E9"/><circle cx="50" cy="34" r="8" fill="#0847E9"/><circle cx="72" cy="58" r="12" fill="#FFBE06"/><circle cx="86" cy="94" r="8" fill="#0847E9"/><circle cx="30" cy="80" r="8" fill="#0847E9"/></g><text x="72" y="63" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="900" font-size="13" fill="#002475">5</text></svg>
                                     </div>
                                 </li>
                                 <li class="bbt-tl-item bbt-tl-item--now">
                                     <span class="bbt-tl-dot" aria-hidden="true"/>
                                     <div class="bbt-tl-card">
-                                        <span class="bbt-tl-year">Hoy</span>
-                                        <h3>11 sucursales y un Centro de Distribución</h3>
-                                        <p>Productos de marcas líderes, asesoría especializada y el respaldo de las marcas que representamos.</p>
+                                        <span class="bbt-tl-chapter">Capítulo 6</span>
+                                        <span class="bbt-tl-year">2026 · 58 años</span>
+                                        <h3>Y vamos con todo</h3>
+                                        <p>Celebramos el aniversario con una Expo Venta, capacitación de las marcas y más de 100 descuentos, y estrenamos una división de hidráulica Parker. La historia sigue.</p>
+                                        <blockquote class="bbt-tl-quote">«Darle las gracias a todo el pueblo de Los Mochis, que me ha tratado bien.»</blockquote>
+                                        <a class="bbt-btn bbt-btn--yellow bbt-btn--sm mt-3" href="/tu-pieza">¿Qué pieza ocupas?</a>
+                                    </div>
+                                    <div class="bbt-tl-art" aria-hidden="true">
+                                        <svg viewBox="0 0 120 120"><circle cx="60" cy="56" r="42" fill="#FFBE06" stroke="#002475" stroke-width="4"/><circle cx="60" cy="56" r="32" fill="none" stroke="#002475" stroke-width="2" stroke-dasharray="3 5"/><text x="60" y="68" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="900" font-style="italic" font-size="34" fill="#002475">58</text><path d="M36 92l-8 22 14-6 8 10 4-24M84 92l8 22-14-6-8 10-4-24" fill="#0847E9" stroke="#002475" stroke-width="3" stroke-linejoin="round"/></svg>
                                     </div>
                                 </li>
                             </ol>
                         </div>
+                        <p class="bbt-tl-source">Frases de la entrevista a nuestro fundador que Babatsa publicó en febrero de 2026.</p>
                     </div>
                 </section>
 
